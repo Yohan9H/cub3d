@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/08 12:17:59 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/08 13:55:45 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBS = -L libft -lft -I libft/includes/
 CFLAGS = -Wall -Werror -Wextra -I$(MLX) -I$(INCLUDES) -g
 MLXFLAGS = -L$(MLX) -lmlx -lmlx_Linux -lXext -lm -lbsd -lX11
 
-SRC = 
+SRC = src/main.c
 
 OBJS = $(SRC:.c=.o)
 
