@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/09 13:56:59 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/09 14:00:07 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-re: fclean
-	make all
+re: fclean all
 
 .PHONY: all, clean, fclean, re
