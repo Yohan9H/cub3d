@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/09 14:00:07 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/09 14:11:58 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,23 +30,28 @@ SRC = src/main.c \
 	src/utils/utils.c \
 	src/game/game.c
 
-OBJS = $(SRC:.c=.o)
+OBJ_DIR = .obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
-$(NAME): ${OBJS}
-	$(MAKE) -C $(MLX)
+$(NAME): $(OBJS)
+	$(MAKE) -C $(MLX) all
 	$(MAKE) -C $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
 
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)/$(dir $<)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -rf $(SRC:.c=.o)
-	$(MAKE) -C ./mlx clean
-	$(MAKE) -C ./libft clean
+	rm -rf $(OBJ_DIR)
+	$(MAKE) -C $(MLX) clean
+	$(MAKE) -C $(LIBFT) clean
 
 fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+.PHONY: all clean fclean re

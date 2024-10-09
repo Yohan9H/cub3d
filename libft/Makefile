@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 15:45:29 by yohan.h           #+#    #+#              #
-#    Updated: 2024/10/08 13:51:47 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/09 14:21:20 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,9 @@ SRCS_BONUS = \
 	ft_lstiter_bonus.c \
 	ft_lstmap_bonus.c
 
-OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+OBJ_DIR = obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS_BONUS = $(addprefix $(OBJ_DIR)/, $(SRCS_BONUS:.c=.o))
 
 all: $(NAME)
 
@@ -75,8 +76,13 @@ $(NAME): $(OBJS)
 bonus: $(OBJS_BONUS)
 	ar rcs $(NAME) $(OBJS_BONUS)
 
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -rf $(OBJ_DIR)
+	rm -f $(OBJS_BONUS)
 
 fclean: clean
 	rm -f $(NAME)
