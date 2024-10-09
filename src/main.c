@@ -6,13 +6,42 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/08 13:57:28 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:42:03 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main()
+void	init_struct(t_data *data)
 {
-	return (0);
+	int	pixel_bits;
+	int	line_bytes;
+	int	endian;
+
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		exit_clean(data, EXIT_FAILURE);
+	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
+	if (!data->mlx_win)
+		exit_clean(data, EXIT_FAILURE);
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->img)
+		exit_clean(data, EXIT_FAILURE);
+	data->addr = mlx_get_data_addr(data->img, &pixel_bits,
+		&line_bytes, &endian);
+	data->pixel_bits = pixel_bits;
+	data->line_bytes = line_bytes;
+}
+
+int	main(void)
+{
+	t_data	data;
+
+	init_struct(&data);
+	game(&data);
+	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
+	mlx_hook(data.mlx_win, 2, 1L << 0, handle_key, &data);
+	mlx_hook(data.mlx_win, 17, 0, handle_close, &data);
+	mlx_loop(data.mlx);
+	exit_clean(&data, EXIT_SUCCESS);
 }
