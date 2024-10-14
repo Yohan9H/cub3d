@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 15:45:29 by yohan.h           #+#    #+#              #
-#    Updated: 2024/10/09 14:21:20 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/10 14:08:23 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = \
 	ft_split.c \
 	ft_strchr.c \
 	ft_strdup.c \
+	ft_strdup_esc.c \
 	ft_striteri.c \
 	ft_strjoin.c \
 	ft_strlcat.c \
@@ -51,6 +52,8 @@ SRCS = \
 	ft_tolower.c \
 	ft_fprintf.c \
 	ft_fprintf_utils.c \
+	get_next_line.c \
+	ft_isspace.c \
 	ft_toupper.c 
 
 SRCS_BONUS = \

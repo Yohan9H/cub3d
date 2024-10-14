@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   ft_strdup_esc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/09 14:24:26 by yohurteb         ###   ########.fr       */
+/*   Created: 2024/10/10 14:03:30 by yohurteb          #+#    #+#             */
+/*   Updated: 2024/10/10 14:08:41 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	game(t_data *data)
+char	*ft_strdup_esc(const char *s1)
 {
-	(void)data;
+	char	*cpy;
+	size_t	len_s1;
+	size_t	i;
+
+	i = 0;
+	len_s1 = ft_strlen(s1);
+	cpy = (char *)malloc((len_s1 + 1) * sizeof(char));
+	if (!cpy)
+		return (NULL);
+	while (s1[i] && ft_isspace(s1[i]) != 1)
+	{
+		cpy[i] = s1[i];
+		i++;
+	}
+	cpy[i] = '\0';
+	return (cpy);
 }

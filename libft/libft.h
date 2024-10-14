@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:23:30 by yohan.h           #+#    #+#             */
-/*   Updated: 2024/10/08 13:52:40 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/10 14:09:02 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,16 @@ void	ft_putchar_fd(char c, int fd);
 int		verif_nil(unsigned long nb, char *base, unsigned long size_b);
 
 int		ft_fprintf(const char *format, ...);
+
+char	*get_next_line(int fd);
+
+int		ft_isspace(char c);
+
+char	*ft_strdup_esc(const char *s1);
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 64
+# endif
 
 typedef struct s_list
 {

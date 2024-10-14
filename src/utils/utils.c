@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/09 11:27:29 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:50:25 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ void	put_pxl(t_data *fcl, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	exit_clean(t_data *fcl, int code)
+void	exit_clean(t_data *data, int code)
 {
-	if (fcl->img)
-		mlx_destroy_image(fcl->mlx, fcl->img);
-	if (fcl->mlx_win)
-		mlx_destroy_window(fcl->mlx, fcl->mlx_win);
-	if (fcl->mlx)
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	if (data->mlx_win)
+		mlx_destroy_window(data->mlx, data->mlx_win);
+	if (data->mlx)
 	{
-		mlx_destroy_display(fcl->mlx);
-		free(fcl->mlx);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
 	}
+	if (data->pars)
+		free(data->pars);
 	if (code == EXIT_FAILURE)
 		exit(1);
 	if (code == EXIT_SUCCESS)
