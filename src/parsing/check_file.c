@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:52:45 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/14 13:04:25 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:25:17 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	check_line(t_data *data, char *line)
 	int		i;
 
 	i = 0;
+	if (line == NULL)
+		return ;
 	while (line[i] && ft_isalpha(line[i]) != 1)
 		i++;
 	id = ft_strdup_esc(&line[i]);
@@ -81,15 +83,24 @@ void	check_line(t_data *data, char *line)
 	str = ft_strdup_esc(&line[i]);
 	if (!str)
 		exit_clean(data, EXIT_FAILURE);
-	verif_line(data, id, &str[i]);
+	verif_line(data, id, str);
 }
 
-void	check_file(t_data *data)
+void	check_file(t_data *data, char *file)
 {
-	char	*line;
-	int		fd;
-
-	fd = open(data->pars->file, O_RDONLY);
-	line = get_next_line(fd); // need while and 1 gnl before
-	check_line(data, line);
+	data->pars->fd = open(file, O_RDONLY);
+	if (data->pars->fd == -1)
+	{
+		ft_fprintf("Error : file not find\n");
+		exit_clean(data, EXIT_FAILURE);
+	}
+	data->pars->line = get_next_line(data->pars->fd);
+	check_line(data, data->pars->line);
+	while (data->pars->line != NULL || check_find(data->pars) != 1)
+	{
+		free(data->pars->line);
+		data->pars->line = get_next_line(data->pars->fd);
+		check_line(data, data->pars->line);
+		free(data->pars->line);
+	}
 }

@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/14 13:00:52 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/14 14:10:48 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC = src/main.c \
 	src/utils/utils.c \
 	src/game/game.c \
 	src/parsing/parsing.c \
-	src/parsing/check_file.c
+	src/parsing/check_file.c \
+	src/parsing/check_find.c
 
 OBJ_DIR = .obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

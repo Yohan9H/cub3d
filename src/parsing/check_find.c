@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   check_find.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/14 14:10:33 by yohurteb         ###   ########.fr       */
+/*   Created: 2024/10/14 13:34:19 by yohurteb          #+#    #+#             */
+/*   Updated: 2024/10/14 14:09:25 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
 #include "cub3d.h"
 
-typedef struct s_data t_data;
-
-typedef struct s_pars
+int	check_find(t_pars *pars)
 {
-	char	*line;
-	int		fd;
-	int		no;
-	int		so;
-	int		we;
-	int		ea;
-	int		f;
-	int		c;
-}	t_pars;
-
-int		check_find(t_pars *pars);
-
-void	check_file(t_data *data, char *file);
-
-void	parsing(t_data *data, int ac, char **av);
-
-#endif
+	if ((pars->c + pars->f + pars->no + pars->we + pars->so + pars->ea) == 6)
+		return (1);
+	else
+		return (0);
+}

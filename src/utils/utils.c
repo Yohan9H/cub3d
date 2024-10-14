@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/10 10:50:25 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:09:21 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ void	put_pxl(t_data *fcl, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	clean_pars(t_pars *pars)
+{
+	if (pars->line)
+		free(pars->line);
+	free(pars);
+}
+
 void	exit_clean(t_data *data, int code)
 {
 	if (data->img)
@@ -39,8 +46,7 @@ void	exit_clean(t_data *data, int code)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	if (data->pars)
-		free(data->pars);
+	clean_pars(data->pars);
 	if (code == EXIT_FAILURE)
 		exit(1);
 	if (code == EXIT_SUCCESS)
