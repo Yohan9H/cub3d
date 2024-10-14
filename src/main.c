@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/09 13:42:03 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:51:55 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(void)
 	game(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
 	mlx_hook(data.mlx_win, 2, 1L << 0, handle_key, &data);
+	mlx_hook(data.mlx_win, 2, 1L << 0, handle_keys, &data);
 	mlx_hook(data.mlx_win, 17, 0, handle_close, &data);
 	mlx_loop(data.mlx);
 	exit_clean(&data, EXIT_SUCCESS);

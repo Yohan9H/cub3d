@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
+#    By: apernot <apernot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/09 14:11:58 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/14 15:25:11 by apernot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ MLXFLAGS = -L$(MLX) -lmlx -lmlx_Linux -lXext -lm -lbsd -lX11
 SRC = src/main.c \
 	src/hook/handle.c \
 	src/utils/utils.c \
-	src/game/game.c
+	src/game/game.c \
+	src/raycasting/raycasting.c
 
 OBJ_DIR = .obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

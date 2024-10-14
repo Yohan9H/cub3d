@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/11 15:42:09 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/14 19:04:37 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_data
 	char	*addr;
 	int		line_bytes;
 	int		pixel_bits;
-}	t_data;
+	t_game	*game;
+}			t_data;
 
 //	---- GAME ----
 void	game(t_data *data);
