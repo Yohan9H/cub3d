@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_find.c                                       :+:      :+:    :+:   */
+/*   check_all_found.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	check_find(t_pars *pars)
+int	check_all_found(t_pars *pars)
 {
 	if ((pars->c + pars->f + pars->no + pars->we + pars->so + pars->ea) == 6)
 		return (1);

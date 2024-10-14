@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:23:30 by yohan.h           #+#    #+#             */
-/*   Updated: 2024/10/10 14:09:02 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:43:26 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		ft_isspace(char c);
 char	*ft_strdup_esc(const char *s1);
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 64
+#  define BUFFER_SIZE 1
 # endif
 
 typedef struct s_list

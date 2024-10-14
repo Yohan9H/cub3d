@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/14 14:10:33 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:12:40 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_data t_data;
 typedef struct s_pars
 {
 	char	*line;
+	char	*id;
 	int		fd;
 	int		no;
 	int		so;
@@ -28,7 +29,11 @@ typedef struct s_pars
 	int		c;
 }	t_pars;
 
-int		check_find(t_pars *pars);
+void	verif_id_colors(t_data *data, char *id, char *str);
+
+void	verif_str_colors(t_data *data, char *str);
+
+int		check_all_found(t_pars *pars);
 
 void	check_file(t_data *data, char *file);
 
