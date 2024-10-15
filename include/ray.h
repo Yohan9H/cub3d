@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/15 13:52:16 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/15 14:21:21 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_game
 {
 	t_player	*player;
 	t_ray		*ray;
-	t_map		*map;
+	int			**map;
 }				t_game;
 
 typedef struct s_vector
@@ -53,12 +53,12 @@ typedef struct s_ray
 	int			map_y;
 }				t_ray;
 
-typedef struct s_map
-{
-	int		witdh;
-	int		height;
-	int		**grid;
-}			t_map;
+// typedef struct s_map
+// {
+// 	int		witdh;
+// 	int		height;
+// 	int		**grid;
+// }			t_map;
 
 typedef struct s_color
 {
