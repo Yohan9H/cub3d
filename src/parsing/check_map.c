@@ -5,86 +5,77 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 14:23:50 by yohurteb         ###   ########.fr       */
+/*   Created: 2024/10/15 14:55:35 by yohurteb          #+#    #+#             */
+/*   Updated: 2024/10/15 16:40:17 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	found_map(char *line)
+void	fill(char **tab, t_point *size, t_point *cur, char to_fill)
 {
-	int		i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '0' || line[i] == '1' || line[i] == 'N'
-			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
-			return (1);
-		i++;
-	}
-	return (0);
+	if (cur->x < 0 || cur->x >= size->x || cur->y < 0 || cur->y >= size->y || tab[cur->y][cur->x] != to_fill)
+		return ;
+	tab[cur->y][cur->x] = 'F';
+	fill(tab, size, (t_point *){cur->x - 1, cur->y}, to_fill);
+	fill(tab, size, (t_point *){cur->x + 1, cur->y}, to_fill);
+	fill(tab, size, (t_point *){cur->x, cur->y - 1}, to_fill);
+	fill(tab, size, (t_point *){cur->x, cur->y + 1}, to_fill);
 }
 
-// char	**my_env_to_tab(t_map *env)
-// {
-// 	t_env	*lst;
-// 	char	**tab;
-// 	size_t	size;
-// 	int		i;
-
-// 	lst = env;
-// 	size = ft_lstsize_env(env);
-// 	tab = (char **)malloc(sizeof(char *) * (size + 1));
-// 	if (!tab)
-// 		return (NULL);
-// 	i = 0;
-// 	while (lst)
-// 	{
-// 		tab[i] = ft_strdup(lst->line);
-// 		if (!tab[i])
-// 		{
-// 			freetab(tab);
-// 			return (NULL);
-// 		}
-// 		i++;
-// 		lst = lst->next;
-// 	}
-// 	tab[i] = NULL;
-// 	return (tab);
-// }
-
-void	create_linked_list_map(t_data *data)
+void	flood_fill(char **tab, t_point *size, t_point *begin)
 {
-	t_map *node;
-	int		len_lst;
-
-	node = ft_lstnew(data->pars->line);
-	ft_lstadd_back(&data->pars->head_map, node);
-	while (data->pars->line != NULL)
-	{
-		free(data->pars->line);
-		data->pars->line = get_next_line(data->pars->fd);
-		node = ft_lstnew(data->pars->line);
-		ft_lstadd_back(&data->pars->head_map, node);
-	}
-	len_lst = ft_lstsize(data->pars->head_map);
-	data->game->map = (t_map **)malloc(sizeof(t_map *) * len_lst);
+	fill(tab, size, begin, tab[begin->y][begin->x]);
 }
 
-void	check_map(t_data *data)
+void	take_value_and_verif(t_data *data, char c)
 {
-	while (data->pars->line != NULL && found_map(data->pars->line) != 1)
+	if (c == 'N')
+		(data->pars->no)++;
+	if (c == 'S')
+		(data->pars->so)++;
+	if (c == 'E')
+		(data->pars->ea)++;
+	if (c == 'W')
+		(data->pars->we)++;
+	if ((data->pars->no + data->pars->so + data->pars->we + data->pars->ea) \
+		> 1)
 	{
-		free(data->pars->line);
-		data->pars->line = get_next_line(data->pars->fd);
-	}
-	if (data->pars->line == NULL)
-	{
-		ft_fprintf("Error : map not found in your file\n");
+		ft_fprintf("Error : too many N, S, E or W in your map\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
-	create_linked_list_map(data);
-	create_double_array(data);
+	if (c == ' ')
+		c = 1;
+}
+
+void	reset_value_map(t_data *data)
+{
+	data->pars->no = 0;
+	data->pars->so = 0;
+	data->pars->we = 0;
+	data->pars->ea = 0;
+}
+
+void	verif_good_map(t_data *data)
+{
+	char	**cpy_map;
+	int		j;
+	int		i;
+
+	j = 0;
+	reset_value_map(data);
+	while (data->game->map[j])
+	{
+		i = 0;
+		while (data->game->map[j][i])
+		{
+			take_value_and_verif(data, data->game->map[j][i]);
+			i++;
+		}
+		j++;
+	}
+	cpy_map = ft_strdup(data->game->map);
+	if (!cpy_map)
+		exit_clean(data, EXIT_FAILURE);
+	flood_fill(cpy_map, data->pars->size_tab, data->pars->begin);
 }

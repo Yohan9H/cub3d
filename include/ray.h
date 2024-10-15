@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/15 14:21:21 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:56:58 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_game
 {
 	t_player	*player;
 	t_ray		*ray;
-	int			**map;
+	char		**map;
 }				t_game;
 
 typedef struct s_vector
