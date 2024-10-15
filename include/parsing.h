@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 15:04:08 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/15 16:44:16 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,16 @@ typedef struct s_map
 	t_map	*next;
 }	t_map;
 
+typedef struct 	s_point {
+	int 		x;
+	int 		y;
+}	t_point;
+
 typedef struct s_pars
 {
 	t_map	*head_map;
+	t_point	*begin;
+	t_point	*size_tab;
 	char	*line;
 	char	*id;
 	int		fd;
@@ -35,8 +42,13 @@ typedef struct s_pars
 	int		ea;
 	int		f;
 	int		c;
-	
 }	t_pars;
+
+void	verif_good_map(t_data *data);
+
+int		found_map(char *line);
+
+void	freetab(char **com);
 
 void	verif_id_colors(t_data *data, char *id, char *str);
 

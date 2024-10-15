@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apernot <apernot@student.42.fr>            +#+  +:+       +#+         #
+#    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/15 15:35:51 by apernot          ###   ########.fr        #
+#    Updated: 2024/10/15 16:46:50 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,10 @@ SRC = src/main.c \
 	src/game/game.c \
 	src/parsing/parsing.c \
 	src/parsing/check_file.c \
-	src/parsing/check_map.c \
 	src/parsing/check_file_two.c \
-	src/parsing/check_all_found.c \
+	src/parsing/create_map.c \
+	src/parsing/check_map.c \
+	src/parsing/utils_parsing/utils.c \
 	src/raycasting/raycasting.c
 
 OBJ_DIR = .obj

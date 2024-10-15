@@ -19,3 +19,31 @@ int	check_all_found(t_pars *pars)
 	else
 		return (0);
 }
+
+void	freetab(char **com)
+{
+	int	i;
+
+	i = 0;
+	while (com[i])
+	{
+		free(com[i]);
+		i++;
+	}
+	free(com);
+}
+
+int	found_map(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '0' || line[i] == '1' || line[i] == 'N'
+			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+			return (1);
+		i++;
+	}
+	return (0);
+}

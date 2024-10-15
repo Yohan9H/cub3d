@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 10:40:57 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:34:06 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_parsing(t_data *data)
 {
+	data->game->map = NULL;
 	data->addr = NULL;
 	data->img = NULL;
 	data->mlx = NULL;
@@ -22,6 +23,14 @@ void	init_parsing(t_data *data)
 	if (!data->pars)
 		exit_clean(data, EXIT_FAILURE);
 	ft_memset(data->pars, 0, sizeof(t_pars));
+	data->pars->begin = (t_point *)malloc(sizeof(t_point) * 1);
+	if (!data->pars->begin)
+		exit_clean(data, EXIT_FAILURE);
+	ft_memset(data->pars->begin, 0, sizeof(t_point));
+	data->pars->size_tab = (t_point *)malloc(sizeof(t_point) * 1);
+	if (!data->pars->size_tab)
+		exit_clean(data, EXIT_FAILURE);
+	ft_memset(data->pars->size_tab, 0, sizeof(t_point));
 }
 
 void	check_args(t_data *data, int ac, char *file)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/15 16:36:58 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/15 16:44:59 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 # include "cub3d.h"
 
 typedef struct s_data	t_data;
+
+typedef struct s_game
+{
+	t_player	*player;
+	t_ray		*ray;
+	char		**map;
+}				t_game;
 
 typedef struct s_vector
 {
