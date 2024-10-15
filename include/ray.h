@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/14 19:05:08 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/15 11:48:49 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ typedef struct s_data	t_data;
 
 typedef struct s_game
 {
-	t_player	player;
-	t_ray		ray;
-	t_map		map;
+	t_player	*player;
+	t_ray		*ray;
+	t_map		*map;
 }				t_game;
 
 typedef struct s_vector
@@ -39,15 +39,15 @@ typedef struct s_vector
 
 typedef struct s_player
 {
-	t_vector	pos;
-	t_vector	dir;
-	t_vector	plane;
+	t_vector	*pos;
+	t_vector	*dir;
+	t_vector	*plane;
 }				t_player;
 
 typedef struct s_ray
 {
-	t_vector	dir;
-	t_vector	delta_dist;
+	t_vector	*dir;
+	t_vector	*delta_dist;
 	double		dist;
 	int			map_x;
 	int			map_y;
