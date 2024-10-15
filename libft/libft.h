@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:23:30 by yohan.h           #+#    #+#             */
-/*   Updated: 2024/10/15 11:48:53 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:16:55 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include "cub3d.h"
+# include "../include/cub3d.h"
 
 int		ft_atoi(const char *str);
 
@@ -99,28 +99,22 @@ char	*ft_strdup_esc(const char *s1);
 #  define BUFFER_SIZE 1
 # endif
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+t_map	*ft_lstnew(char *str);
 
-t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_map **lst, t_map *new);
 
-void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_map *lst);
 
-int		ft_lstsize(t_list *lst);
+t_map	*ft_lstlast(t_map *lst);
 
-t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_map **lst, t_map *new);
 
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstdelone(t_map *lst);
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstclear(t_map **lst);
 
-void	ft_lstclear(t_list **lst);
+void	ft_lstiter(t_map *lst);
 
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_map	*ft_lstmap(t_map *lst);
 
 #endif

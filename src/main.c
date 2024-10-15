@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 13:41:02 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/15 16:32:20 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ void	init_struct(t_data *data)
 		&line_bytes, &endian);
 	data->pixel_bits = pixel_bits;
 	data->line_bytes = line_bytes;
+
+
+	data->game = malloc(sizeof(t_game));
+	if (!data->game)
+		exit_clean(data, EXIT_FAILURE);
+	data->game->map = malloc(sizeof(t_map));
+	data->game->player = malloc(sizeof(t_player));
+	data->game->ray = malloc(sizeof(t_ray));
+	
 }
 
 int	main(int ac, char **av)
@@ -39,6 +48,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	ac--;
+	(void)av;
 	parsing(&data, ac, av);
 	init_struct(&data);
 	game(&data);

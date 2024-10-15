@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 14:28:58 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/15 15:35:03 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "ray.h"
 # define WIDTH 900
 # define HEIGHT 900
+
+
 
 typedef struct s_data
 {
