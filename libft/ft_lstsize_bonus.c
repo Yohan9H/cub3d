@@ -6,15 +6,15 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:29:17 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/05/23 13:45:37 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:07:32 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_map *lst)
 {
-	t_list	*ptr;
+	t_map	*ptr;
 	int		count;
 
 	count = 0;
