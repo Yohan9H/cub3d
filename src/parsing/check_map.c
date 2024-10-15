@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 14:23:50 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:20:12 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,7 @@ int	found_map(char *line)
 
 void	create_linked_list_map(t_data *data)
 {
-	t_map *node;
-	int		len_lst;
-
-	node = ft_lstnew(data->pars->line);
-	ft_lstadd_back(&data->pars->head_map, node);
-	while (data->pars->line != NULL)
-	{
-		free(data->pars->line);
-		data->pars->line = get_next_line(data->pars->fd);
-		node = ft_lstnew(data->pars->line);
-		ft_lstadd_back(&data->pars->head_map, node);
-	}
-	len_lst = ft_lstsize(data->pars->head_map);
-	data->game->map = (t_map **)malloc(sizeof(t_map *) * len_lst);
+	(void)data;
 }
 
 void	check_map(t_data *data)
@@ -86,5 +73,4 @@ void	check_map(t_data *data)
 		exit_clean(data, EXIT_FAILURE);
 	}
 	create_linked_list_map(data);
-	create_double_array(data);
 }

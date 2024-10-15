@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/15 14:21:21 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:36:58 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,11 @@
 # define RIGHT 100
 # define ROT_LEFT 65361
 # define ROT_RIGHT 65363
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.03
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.05
 # include "cub3d.h"
 
 typedef struct s_data	t_data;
-
-typedef struct s_game
-{
-	t_player	*player;
-	t_ray		*ray;
-	int			**map;
-}				t_game;
 
 typedef struct s_vector
 {
@@ -39,19 +32,40 @@ typedef struct s_vector
 
 typedef struct s_player
 {
-	t_vector	*pos;
-	t_vector	*dir;
-	t_vector	*plane;
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	plane;
 }				t_player;
 
 typedef struct s_ray
 {
-	t_vector	*dir;
-	t_vector	*delta_dist;
-	double		dist;
-	int			map_x;
-	int			map_y;
+	t_vector	Dir;
+	t_vector	sideDist;
+	t_vector	deltaDist;
+	double		perpWallDist;
+	int			mapX;
+	int			mapY;
+	int			stepX;
+	int			stepY;
+	int			hit;
+	int			side;
+	int			lineHeight;
+	int			drawStart;
+	int 		drawEnd;
 }				t_ray;
+
+typedef struct s_game
+{
+	t_player	*player;
+	t_ray		*ray;
+	int			**map;
+}				t_game;
+
+
+
+
+
+
 
 // typedef struct s_map
 // {
@@ -68,6 +82,6 @@ typedef struct s_color
 } 		t_color;
 
 void	raycasting(t_data *data, t_player *player);
-void	handle_keys(int keycode, t_data *img, t_player *player);
+int		handle_keys(int keycode, t_data *data);
 
 #endif

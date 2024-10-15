@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:46:33 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/05/24 11:29:37 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:16:07 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_map *lst)
 {
-	if (!lst || !f)
+	if (!lst)
 		return ;
 	while (lst != NULL)
 	{
-		f(lst->content);
+		free(lst->line);
 		lst = lst->next;
 	}
 }
