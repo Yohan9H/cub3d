@@ -6,15 +6,15 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:51:04 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/05/23 14:19:35 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:37:18 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_map **lst, t_map *new)
 {
-	t_list	*ptr;
+	t_map	*ptr;
 
 	if (!lst || !new)
 		return ;

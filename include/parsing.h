@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/14 18:12:40 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:32:57 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,15 @@
 
 typedef struct s_data t_data;
 
+typedef struct s_map
+{
+	char	*line;
+	t_map	*next;
+}	t_map;
+
 typedef struct s_pars
 {
+	t_map	*head_map;
 	char	*line;
 	char	*id;
 	int		fd;
@@ -27,6 +34,7 @@ typedef struct s_pars
 	int		ea;
 	int		f;
 	int		c;
+	
 }	t_pars;
 
 void	verif_id_colors(t_data *data, char *id, char *str);

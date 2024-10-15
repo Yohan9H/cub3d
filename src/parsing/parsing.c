@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/14 18:56:32 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 10:40:57 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	parsing(t_data *data, int ac, char **av)
 	init_parsing(data);
 	check_args(data, ac, av[1]);
 	check_file(data, av[1]); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
+	check_map(data);
 	// LEAKS sur gnl voir si elle est toujours la apres la fin du parsing
 }

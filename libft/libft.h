@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:23:30 by yohan.h           #+#    #+#             */
-/*   Updated: 2024/10/14 18:43:26 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:48:53 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include "cub3d.h"
 
 int		ft_atoi(const char *str);
 
@@ -116,7 +117,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 
-void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst);
 
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 

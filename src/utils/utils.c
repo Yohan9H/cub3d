@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/14 18:34:08 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:46:09 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	put_pxl(t_data *fcl, int x, int y, int color)
 
 void	clean_pars(t_pars *pars)
 {
+	if (pars->head_map)
+		ft_lstclear(&pars->head_map, free);
 	if (pars->line)
 		free(pars->line);
 	if (pars->id)

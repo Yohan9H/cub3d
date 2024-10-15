@@ -6,20 +6,20 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:39:05 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/05/23 11:15:31 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:36:33 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+t_map	*ft_lstnew(char *str)
 {
-	t_list	*list;
+	t_map	*list;
 
-	list = (t_list *)malloc(sizeof(t_list));
+	list = (t_map *)malloc(sizeof(t_map));
 	if (!list)
 		return (NULL);
-	list->content = content;
+	list->line = str;
 	list->next = NULL;
 	return (list);
 }
