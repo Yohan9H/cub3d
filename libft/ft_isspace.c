@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 16:39:05 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 11:36:33 by yohurteb         ###   ########.fr       */
+/*   Created: 2024/10/10 14:05:36 by yohurteb          #+#    #+#             */
+/*   Updated: 2024/10/10 14:07:41 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_map	*ft_lstnew(char *str)
+int	ft_isspace(char c)
 {
-	t_map	*list;
-
-	list = (t_map *)malloc(sizeof(t_map));
-	if (!list)
-		return (NULL);
-	list->line = str;
-	list->next = NULL;
-	return (list);
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	else
+		return (0);
 }
-
-// #include <stdio.h>
-// int	main()
-// {
-// 	char 	content[] = "lorem ipsum dolor sit";
-// 	t_list	*lst;
-
-// 	lst = ft_lstnew(content);
-// 	printf("Test 1 : %s\n", (char *)lst->content);
-// 	free(lst);
-// 	return (0);
-// }

@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_strdup_esc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 16:39:05 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 11:36:33 by yohurteb         ###   ########.fr       */
+/*   Created: 2024/10/10 14:03:30 by yohurteb          #+#    #+#             */
+/*   Updated: 2024/10/10 14:08:41 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_map	*ft_lstnew(char *str)
+char	*ft_strdup_esc(const char *s1)
 {
-	t_map	*list;
+	char	*cpy;
+	size_t	len_s1;
+	size_t	i;
 
-	list = (t_map *)malloc(sizeof(t_map));
-	if (!list)
+	i = 0;
+	len_s1 = ft_strlen(s1);
+	cpy = (char *)malloc((len_s1 + 1) * sizeof(char));
+	if (!cpy)
 		return (NULL);
-	list->line = str;
-	list->next = NULL;
-	return (list);
+	while (s1[i] && ft_isspace(s1[i]) != 1)
+	{
+		cpy[i] = s1[i];
+		i++;
+	}
+	cpy[i] = '\0';
+	return (cpy);
 }
-
-// #include <stdio.h>
-// int	main()
-// {
-// 	char 	content[] = "lorem ipsum dolor sit";
-// 	t_list	*lst;
-
-// 	lst = ft_lstnew(content);
-// 	printf("Test 1 : %s\n", (char *)lst->content);
-// 	free(lst);
-// 	return (0);
-// }

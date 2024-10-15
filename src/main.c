@@ -6,9 +6,10 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/14 18:51:55 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/15 13:41:02 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -33,10 +34,12 @@ void	init_struct(t_data *data)
 	data->line_bytes = line_bytes;
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data	data;
 
+	ac--;
+	parsing(&data, ac, av);
 	init_struct(&data);
 	game(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);

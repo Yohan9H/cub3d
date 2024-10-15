@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 15:45:29 by yohan.h           #+#    #+#              #
-#    Updated: 2024/10/09 14:21:20 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/15 10:02:33 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = \
 	ft_split.c \
 	ft_strchr.c \
 	ft_strdup.c \
+	ft_strdup_esc.c \
 	ft_striteri.c \
 	ft_strjoin.c \
 	ft_strlcat.c \
@@ -51,9 +52,9 @@ SRCS = \
 	ft_tolower.c \
 	ft_fprintf.c \
 	ft_fprintf_utils.c \
-	ft_toupper.c 
-
-SRCS_BONUS = \
+	get_next_line.c \
+	ft_isspace.c \
+	ft_toupper.c \
 	ft_lstnew_bonus.c \
 	ft_lstadd_front_bonus.c \
 	ft_lstsize_bonus.c \
@@ -66,15 +67,11 @@ SRCS_BONUS = \
 
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-OBJS_BONUS = $(addprefix $(OBJ_DIR)/, $(SRCS_BONUS:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
-
-bonus: $(OBJS_BONUS)
-	ar rcs $(NAME) $(OBJS_BONUS)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
@@ -82,11 +79,10 @@ $(OBJ_DIR)/%.o: %.c
 
 clean:
 	rm -rf $(OBJ_DIR)
-	rm -f $(OBJS_BONUS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

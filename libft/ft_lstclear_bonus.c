@@ -6,22 +6,22 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:32:43 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/05/23 16:19:24 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:48:03 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_map **lst)
 {
-	t_list	*tmp;
+	t_map	*tmp;
 
-	if (!*lst || !del)
+	if (!*lst)
 		return ;
 	while (*lst)
 	{
 		tmp = (*lst)->next;
-		del((*lst)->content);
+		free((*lst)->line);
 		free(*lst);
 		*lst = tmp;
 	}

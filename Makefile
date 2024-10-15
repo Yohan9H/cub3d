@@ -6,9 +6,10 @@
 #    By: apernot <apernot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/14 15:25:11 by apernot          ###   ########.fr        #
+#    Updated: 2024/10/15 13:40:27 by apernot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = cub3d
 
@@ -28,6 +29,11 @@ MLXFLAGS = -L$(MLX) -lmlx -lmlx_Linux -lXext -lm -lbsd -lX11
 SRC = src/main.c \
 	src/hook/handle.c \
 	src/utils/utils.c \
+	src/game/game.c \
+	src/parsing/parsing.c \
+	src/parsing/check_file.c \
+	src/parsing/check_file_two.c \
+	src/parsing/check_all_found.c
 	src/game/game.c \
 	src/raycasting/raycasting.c
 
