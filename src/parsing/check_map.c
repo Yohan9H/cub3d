@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 18:24:13 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:25:44 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	fill(char **tab, t_point *size, t_point *cur, char to_fill)
 
 void	flood_fill(char **tab, t_point *size, t_point *begin)
 {
-	printf("%c", tab[begin->y][begin->x]);
 	fill(tab, size, begin, tab[begin->y][begin->x]);
 }
 
