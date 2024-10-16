@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 18:27:08 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:54:40 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	verif_good_map(t_data *data)
 	}
 	cpy_map = ft_strdup_double_array(data, data->game->map);
 	flood_fill(cpy_map, data->pars->size_tab, data->pars->begin);
+	freetab(cpy_map);
 }

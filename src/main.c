@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 17:33:37 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:02:44 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,8 @@ void	init_struct(t_data *data)
 		&line_bytes, &endian);
 	data->pixel_bits = pixel_bits;
 	data->line_bytes = line_bytes;
-	data->game = malloc(sizeof(t_game));
-	if (!data->game)
-		exit_clean(data, EXIT_FAILURE);
-	data->game->map = malloc(sizeof(t_map)); //not need i did in pars
-	data->game->player = malloc(sizeof(t_player));
-	data->game->ray = malloc(sizeof(t_ray));
-	
+	// data->game->player = malloc(sizeof(t_player));
+	// data->game->ray = malloc(sizeof(t_ray));
 }
 
 int	main(int ac, char **av)

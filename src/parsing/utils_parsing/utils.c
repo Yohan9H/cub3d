@@ -58,7 +58,7 @@ char	**ft_strdup_double_array(t_data *data, char **s1)
 	j = 0;
 	while (s1[j])
 		j++;
-	cpy = (char **)malloc(sizeof(char *) * j);
+	cpy = (char **)malloc(sizeof(char *) * (j + 1));
 	if (!cpy)
 		exit_clean(data, EXIT_FAILURE);
 	j = 0;

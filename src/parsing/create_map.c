@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 18:22:50 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:00:39 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	create_double_array(t_data *data)
 	lst = data->pars->head_map;
 	size = ft_lstsize(lst);
 	data->pars->size_tab->y = size - 1;
-	data->game->map = (char **)malloc(sizeof(char *) * (size + 1));
+	data->game->map = (char **)malloc(sizeof(char *) * size);
 	if (!data->game->map)
 		exit_clean(data, EXIT_FAILURE);
 	i = 0;
@@ -55,9 +55,6 @@ void	create_linked_list_map(t_data *data)
 		ft_lstadd_back(&data->pars->head_map, node);
 	}
 	len_lst = ft_lstsize(data->pars->head_map);
-	data->game->map = (char **)malloc(sizeof(char *) * len_lst);
-	if (!data->game->map)
-		exit_clean(data, EXIT_FAILURE);
 }
 
 void	check_map(t_data *data)

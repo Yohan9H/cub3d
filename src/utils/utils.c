@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 17:25:31 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:54:06 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,13 @@ void	clean_pars(t_pars *pars)
 {
 	if (pars->begin)
 		free(pars->begin);
+	if (pars->size_tab)
+		free(pars->size_tab);
 	if (pars->head_map)
+	{
 		ft_lstclear(&pars->head_map);
+		pars->head_map = NULL;
+	}
 	if (pars->line)
 		free(pars->line);
 	if (pars->id)
@@ -45,6 +50,8 @@ void	clean_game(t_game *game)
 {
 	if (game->map)
 		freetab(game->map);
+	if (game)
+		free(game);
 }
 
 void	exit_clean(t_data *data, int code)
