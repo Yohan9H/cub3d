@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 17:58:10 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:24:13 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,26 @@ void	take_value_and_verif(t_data *data, char c, int j, int i)
 	if (c == 'N')
 	{
 		(data->pars->no)++;
-		data->pars->begin->x = j;
-		data->pars->begin->y = i;
+		data->pars->begin->y = j;
+		data->pars->begin->x = i;
 	}
 	if (c == 'S')
 	{
 		(data->pars->so)++;
-		data->pars->begin->x = j;
-		data->pars->begin->y = i;
+		data->pars->begin->y = j;
+		data->pars->begin->x = i;
 	}
 	if (c == 'E')
 	{
 		(data->pars->ea)++;
-		data->pars->begin->x = j;
-		data->pars->begin->y = i;
+		data->pars->begin->y = j;
+		data->pars->begin->x = i;
 	}
 	if (c == 'W')
 	{
 		(data->pars->we)++;
-		data->pars->begin->x = j;
-		data->pars->begin->y = i;
+		data->pars->begin->y = j;
+		data->pars->begin->x = i;
 	}
 	if ((data->pars->no + data->pars->so + data->pars->we + data->pars->ea) \
 		> 1)
@@ -98,7 +98,5 @@ void	verif_good_map(t_data *data)
 		printf("%s", cpy_map[i]);
 		i++;
 	}
-	printf("\n%d %d\n", data->pars->begin->x, data->pars->begin->y);
-	printf("\n%d %d\n", data->pars->size_tab->x, data->pars->size_tab->y);
 	flood_fill(cpy_map, data->pars->size_tab, data->pars->begin);
 }
