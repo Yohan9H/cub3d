@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 16:44:16 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:12:19 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_pars
 	int		c;
 }	t_pars;
 
+char	**ft_strdup_double_array(t_data *data, char **s1);
+
 void	verif_good_map(t_data *data);
 
 int		found_map(char *line);
@@ -61,5 +63,7 @@ void	check_file(t_data *data, char *file);
 void	parsing(t_data *data, int ac, char **av);
 
 void	check_map(t_data *data);
+
+void	print_data(t_data *data);
 
 #endif

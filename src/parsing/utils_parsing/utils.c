@@ -38,6 +38,8 @@ int	found_map(char *line)
 	int		i;
 
 	i = 0;
+	if (line[0] == '\n')
+		return (0);
 	while (line[i])
 	{
 		if (line[i] == '0' || line[i] == '1' || line[i] == 'N'
@@ -46,4 +48,30 @@ int	found_map(char *line)
 		i++;
 	}
 	return (0);
+}
+
+char	**ft_strdup_double_array(t_data *data, char **s1)
+{
+	char	**cpy;
+	int		j;
+
+	j = 0;
+	while (s1[j])
+		j++;
+	cpy = (char **)malloc(sizeof(char *) * j);
+	if (!cpy)
+		exit_clean(data, EXIT_FAILURE);
+	j = 0;
+	while (s1[j])
+	{
+		cpy[j] = ft_strdup(s1[j]);
+		if (!cpy[j])
+		{
+			freetab(cpy);
+			exit_clean(data, EXIT_FAILURE);
+		}
+		j++;
+	}
+	cpy[j] = NULL;
+	return (cpy);
 }

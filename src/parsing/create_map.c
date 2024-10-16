@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 16:32:11 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:12:42 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,24 @@ void	create_double_array(t_data *data)
 {
 	t_map	*lst;
 	size_t	size;
+	int		len_str;
 	int		i;
 
 	lst = data->pars->head_map;
 	size = ft_lstsize(lst);
-	data->pars->begin->x = size;
+	data->pars->size_tab->x = size - 1;
 	data->game->map = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!data->game->map)
 		exit_clean(data, EXIT_FAILURE);
 	i = 0;
-	while (lst)
+	while (lst->line != NULL)
 	{
 		data->game->map[i] = ft_strdup(lst->line);
 		if (!data->game->map[i])
 			exit_clean(data, EXIT_FAILURE);
+		len_str = ft_strlen(data->game->map[i]);
+		if (data->pars->size_tab->y < len_str)
+			data->pars->size_tab->y = len_str;
 		i++;
 		lst = lst->next;
 	}
@@ -51,9 +55,7 @@ void	create_linked_list_map(t_data *data)
 		ft_lstadd_back(&data->pars->head_map, node);
 	}
 	len_lst = ft_lstsize(data->pars->head_map);
-	if (data->pars->begin->y < len_lst)
-		data->pars->begin->y = len_lst;
-	data->game->map = (t_map **)malloc(sizeof(t_map *) * len_lst);
+	data->game->map = (char **)malloc(sizeof(char *) * len_lst);
 	if (!data->game->map)
 		exit_clean(data, EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:39:05 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 11:36:33 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:37:30 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_map	*ft_lstnew(char *str)
 	list = (t_map *)malloc(sizeof(t_map));
 	if (!list)
 		return (NULL);
-	list->line = str;
+	if (str)
+		list->line = ft_strdup(str);
+	else
+		list->line = NULL;
 	list->next = NULL;
 	return (list);
 }

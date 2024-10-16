@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 16:32:20 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:33:37 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ void	init_struct(t_data *data)
 		&line_bytes, &endian);
 	data->pixel_bits = pixel_bits;
 	data->line_bytes = line_bytes;
-
-
 	data->game = malloc(sizeof(t_game));
 	if (!data->game)
 		exit_clean(data, EXIT_FAILURE);
-	data->game->map = malloc(sizeof(t_map));
+	data->game->map = malloc(sizeof(t_map)); //not need i did in pars
 	data->game->player = malloc(sizeof(t_player));
 	data->game->ray = malloc(sizeof(t_ray));
 	
@@ -48,13 +46,13 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	ac--;
-	(void)av;
 	parsing(&data, ac, av);
 	init_struct(&data);
-	game(&data);
+	print_data(&data); // test
+	// game(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
 	mlx_hook(data.mlx_win, 2, 1L << 0, handle_key, &data);
-	mlx_hook(data.mlx_win, 2, 1L << 0, handle_keys, &data);
+	// mlx_hook(data.mlx_win, 2, 1L << 0, handle_keys, &data);
 	mlx_hook(data.mlx_win, 17, 0, handle_close, &data);
 	mlx_loop(data.mlx);
 	exit_clean(&data, EXIT_SUCCESS);

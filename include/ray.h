@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/15 16:44:59 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:14:37 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@
 # include "cub3d.h"
 
 typedef struct s_data	t_data;
-
-typedef struct s_game
-{
-	t_player	*player;
-	t_ray		*ray;
-	char		**map;
-}				t_game;
 
 typedef struct s_vector
 {
@@ -65,8 +58,15 @@ typedef struct s_game
 {
 	t_player	*player;
 	t_ray		*ray;
-	int			**map;
+	char		**map;
 }				t_game;
+
+// typedef struct s_game
+// {
+// 	t_player	*player;
+// 	t_ray		*ray;
+// 	int			**map;
+// }				t_game;
 
 
 

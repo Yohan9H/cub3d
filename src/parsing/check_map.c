@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 16:45:29 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:58:10 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,44 @@ void	fill(char **tab, t_point *size, t_point *cur, char to_fill)
 	if (cur->x < 0 || cur->x >= size->x || cur->y < 0 || cur->y >= size->y || tab[cur->y][cur->x] != to_fill)
 		return ;
 	tab[cur->y][cur->x] = 'F';
-	fill(tab, size, (t_point *){cur->x - 1, cur->y}, to_fill);
-	fill(tab, size, (t_point *){cur->x + 1, cur->y}, to_fill);
-	fill(tab, size, (t_point *){cur->x, cur->y - 1}, to_fill);
-	fill(tab, size, (t_point *){cur->x, cur->y + 1}, to_fill);
+	fill(tab, size, &((t_point){cur->x - 1, cur->y}), to_fill);
+	fill(tab, size, &((t_point){cur->x + 1, cur->y}), to_fill);
+	fill(tab, size, &((t_point){cur->x, cur->y - 1}), to_fill);
+	fill(tab, size, &((t_point){cur->x, cur->y + 1}), to_fill);
 }
 
 void	flood_fill(char **tab, t_point *size, t_point *begin)
 {
+	printf("%c", tab[begin->y][begin->x]);
 	fill(tab, size, begin, tab[begin->y][begin->x]);
 }
 
-void	take_value_and_verif(t_data *data, char c)
+void	take_value_and_verif(t_data *data, char c, int j, int i)
 {
 	if (c == 'N')
+	{
 		(data->pars->no)++;
+		data->pars->begin->x = j;
+		data->pars->begin->y = i;
+	}
 	if (c == 'S')
+	{
 		(data->pars->so)++;
+		data->pars->begin->x = j;
+		data->pars->begin->y = i;
+	}
 	if (c == 'E')
+	{
 		(data->pars->ea)++;
+		data->pars->begin->x = j;
+		data->pars->begin->y = i;
+	}
 	if (c == 'W')
+	{
 		(data->pars->we)++;
+		data->pars->begin->x = j;
+		data->pars->begin->y = i;
+	}
 	if ((data->pars->no + data->pars->so + data->pars->we + data->pars->ea) \
 		> 1)
 	{
@@ -69,13 +86,19 @@ void	verif_good_map(t_data *data)
 		i = 0;
 		while (data->game->map[j][i])
 		{
-			take_value_and_verif(data, data->game->map[j][i]);
+			take_value_and_verif(data, data->game->map[j][i], j, i);
 			i++;
 		}
 		j++;
 	}
-	cpy_map = ft_strdup(data->game->map);
-	if (!cpy_map)
-		exit_clean(data, EXIT_FAILURE);
+	cpy_map = ft_strdup_double_array(data, data->game->map);
+	i = 0;
+	while (cpy_map[i])
+	{
+		printf("%s", cpy_map[i]);
+		i++;
+	}
+	printf("\n%d %d\n", data->pars->begin->x, data->pars->begin->y);
+	printf("\n%d %d\n", data->pars->size_tab->x, data->pars->size_tab->y);
 	flood_fill(cpy_map, data->pars->size_tab, data->pars->begin);
 }

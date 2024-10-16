@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 16:34:06 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:39:13 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_parsing(t_data *data)
 {
+	data->game = (t_game *)malloc(sizeof(t_game) * 1);
 	data->game->map = NULL;
 	data->addr = NULL;
 	data->img = NULL;
@@ -66,5 +67,4 @@ void	parsing(t_data *data, int ac, char **av)
 	check_args(data, ac, av[1]);
 	check_file(data, av[1]); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
 	check_map(data);
-	// LEAKS sur gnl voir si elle est toujours la apres la fin du parsing
 }

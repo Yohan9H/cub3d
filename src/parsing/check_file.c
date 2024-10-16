@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:52:45 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 10:40:26 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:49:08 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	take_and_verif_str(t_data *data, char *line, char *word)
 
 void	check_line(t_data *data, char *id, char *line)
 {
+	if (line[0] == '\n')
+		return ;
 	if (ft_strncmp(id, "NO", 3) == 0)
 	{
 		take_and_verif_str(data, line, "north");
@@ -91,7 +93,7 @@ void	take_id(t_data *data, char *line)
 	int		i;
 
 	i = 0;
-	if (line == NULL)
+	if (line == NULL || line[i] == '\n')
 		return ;
 	while (line[i] && ft_isalpha(line[i]) != 1)
 		i++;
@@ -125,4 +127,6 @@ void	check_file(t_data *data, char *file)
 		ft_fprintf("Error : miss value in your file\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
+	free(data->pars->line);
+	data->pars->line = get_next_line(data->pars->fd);
 }
