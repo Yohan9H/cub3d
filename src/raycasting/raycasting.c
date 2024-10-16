@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/15 17:48:59 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/16 19:03:15 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,84 @@ void	verLine(t_data *data, double x, int drawStart, int drawEnd, int color)
 		i++;
 	}
 }
+void	drawbuffer(t_data *data, int buffer[WIDTH][HEIGHT], int drawStart, int drawEnd)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	while (i <= WIDTH)
+	{
+		j = 0;
+		while (i <= HEIGHT)
+		{
+			if (i < drawStart)
+				my_pixel_put(data, i, j, 0x3F3F3F);
+			else if (i > drawEnd)
+				my_pixel_put(data, i, j, 0x7D7D7D);
+			else
+				my_pixel_put(data, i, j, buffer[i][j]);
+			j++;
+		}
+	}
+}
+
+int load_textures(t_data *data, t_game *game)
+{
+    // Liste des chemins vers les fichiers XPM
+    const char *texture_files[8] = {
+        "textures/eagle.xpm",
+        "textures/redbrick.xpm",
+        "textures/purplestone.xpm",
+        "textures/greystone.xpm",
+		"textures/bluestone.xpm",
+		"textures/mossy.xpm",
+		"textures/wood.xpm",
+		"textures/colorstone.xpm"
+    };
+    
+    for (int i = 0; i < 8; i++)
+    {
+		int width;
+		int	height;
+        game->textures[i] = mlx_xpm_file_to_image(data->mlx, (char *)texture_files[i], &width, &height);
+        if (!game->textures[i])
+        {
+            fprintf(stderr, "Erreur : Impossible de charger la texture %s\n", texture_files[i]);
+            return (0);
+        }
+        game->tex_width[i] = width;
+        game->tex_height[i] = height;
+    }
+    return (1);
+}
 
 void	raycasting(t_data *data, t_player *player)
 {
 	int		i;
+	int		j;
 	double	cameraX;
-	int		color;
+	// int		color2;
 	t_ray	*ray;
+	int		texNum;
+	int		f;
+	double	fwallX;
 	double	wallX;
+	int		texX;
+	int		texWidth = 64;
+	int		texHeight = 64;
+	double 	step;
+	double 	texPos;
+	int 	texY;
+	//int		texture[TEX_WIDTH][TEX_HEIGHT];
+	int		buffer[WIDTH][HEIGHT];
+	int		pixel_bits;
+	int		line_bytes;
+	int		endian;
+	char	*texture_data;
+	int		offset;
+	int		pixel_offset;
+	__uint32_t color;
 	// double time = 0;
 	// double old_time = 0;
 	// double moveSpeed;
@@ -136,6 +206,7 @@ void	raycasting(t_data *data, t_player *player)
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 	i = 0;
+	load_textures(data, data->game);
 	while (i < WIDTH)
 	{
 		cameraX = 2 * i / (double)WIDTH -1;
@@ -213,23 +284,64 @@ void	raycasting(t_data *data, t_player *player)
 		ray->drawEnd = ray->lineHeight / 2 + HEIGHT / 2;
 		if (ray->drawEnd >= HEIGHT)
 			ray->drawEnd = HEIGHT - 1;
-		//choose wall color
-		switch(map[ray->mapX][ray->mapY])
-		{
-			case 1:  color = 0xFF0000; break; //red
-			case 2:  color = 0x00FF00; break; //green
-			case 3:  color = 0x0000FF; break; //blue
-			case 4:  color = 0xFFFFFF; break; //white
-			default: color = 0xFFFF00; break; //yellow
-		}
+		// //choose wall color
+		// switch(map[ray->mapX][ray->mapY])
+		// {
+		// 	case 1:  color2 = 0xFF0000; break; //red
+		// 	case 2:  color2 = 0x00FF00; break; //green
+		// 	case 3:  color2 = 0x0000FF; break; //blue
+		// 	case 4:  color2 = 0xFFFFFF; break; //white
+		// 	default: color2 = 0xFFFF00; break; //yellow
+		// }
+		// 		//give x and y sides different brightness
+		// if (ray->side == 1) 
+		// 	color2 = color2 / 2;
+		// verLine(data, i, ray->drawStart, ray->drawEnd, color2);
+		// i++;
+		
+		texNum = map[ray->mapX][ray->mapY] - 1;
 		if (ray->side == 0)
 			wallX = player->pos.y + ray->perpWallDist * ray->Dir.y;
 		else
 			wallX = player->pos.x + ray->perpWallDist * ray->Dir.x;
-		//give x and y sides different brightness
-		if (ray->side == 1) 
-			color = color / 2;
-		verLine(data, i, ray->drawStart, ray->drawEnd, color);
+		f = (int)wallX;
+		fwallX = (double)f;
+		wallX -= fwallX;
+		texX = (int)(wallX * (double)texWidth);
+		if ((ray->side == 0 && ray->Dir.y > 0) || (ray->side == 1 && ray->Dir.y < 0))
+			texX = texWidth - texX - 1;
+		texture_data = mlx_get_data_addr(data->game->textures[texNum], &pixel_bits, &line_bytes, &endian);
+		step = 1.0 * texHeight / ray->lineHeight;
+		texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
+		j = ray->drawStart;
+
+		while(j < ray->drawEnd)
+		{
+			texY = (int)texPos & (texHeight -1);
+			texPos += step;
+			offset = (texY * line_bytes + texX * (pixel_bits / 8));
+			color = *(__uint32_t *)(texture_data + offset);
+			//color = texture[texNum][texHeight * texY + texX];
+			if (ray->side == 1)
+				color = (color >> 1) & 0x7F7F7F;
+			//buffer[i][j] = color;
+			pixel_offset = (j * line_bytes + i * (pixel_bits / 8));
+        	*(__uint32_t *)(data->addr + pixel_offset) = color;
+			j++;
+		}
 		i++;
 	}
+	//drawbuffer(data, buffer, ray->drawStart, ray->drawEnd);
+	i =  0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while(j < HEIGHT)
+		{
+			buffer[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+
 }

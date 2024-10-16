@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 16:32:11 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:26:02 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	create_linked_list_map(t_data *data)
 	len_lst = ft_lstsize(data->pars->head_map);
 	if (data->pars->begin->y < len_lst)
 		data->pars->begin->y = len_lst;
-	data->game->map = (t_map **)malloc(sizeof(t_map *) * len_lst);
+	data->game->map = (char **)malloc(sizeof(char *) * len_lst);
 	if (!data->game->map)
 		exit_clean(data, EXIT_FAILURE);
 }

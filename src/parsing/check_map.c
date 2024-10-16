@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/15 16:45:29 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:29:02 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	fill(char **tab, t_point *size, t_point *cur, char to_fill)
 	if (cur->x < 0 || cur->x >= size->x || cur->y < 0 || cur->y >= size->y || tab[cur->y][cur->x] != to_fill)
 		return ;
 	tab[cur->y][cur->x] = 'F';
-	fill(tab, size, (t_point *){cur->x - 1, cur->y}, to_fill);
-	fill(tab, size, (t_point *){cur->x + 1, cur->y}, to_fill);
-	fill(tab, size, (t_point *){cur->x, cur->y - 1}, to_fill);
-	fill(tab, size, (t_point *){cur->x, cur->y + 1}, to_fill);
+	fill(tab, size, &((t_point){cur->x - 1, cur->y}), to_fill);
+	fill(tab, size, &((t_point){cur->x + 1, cur->y}), to_fill);
+	fill(tab, size, &((t_point){cur->x, cur->y - 1}), to_fill);
+	fill(tab, size, &((t_point){cur->x, cur->y + 1}), to_fill);
 }
 
 void	flood_fill(char **tab, t_point *size, t_point *begin)
@@ -58,7 +58,7 @@ void	reset_value_map(t_data *data)
 
 void	verif_good_map(t_data *data)
 {
-	char	**cpy_map;
+	// char	**cpy_map;
 	int		j;
 	int		i;
 
@@ -74,8 +74,8 @@ void	verif_good_map(t_data *data)
 		}
 		j++;
 	}
-	cpy_map = ft_strdup(data->game->map);
-	if (!cpy_map)
-		exit_clean(data, EXIT_FAILURE);
-	flood_fill(cpy_map, data->pars->size_tab, data->pars->begin);
+	// cpy_map = ft_strdup(data->game->map);
+	// if (!cpy_map)
+	// 	exit_clean(data, EXIT_FAILURE);
+	// flood_fill(cpy_map, data->pars->size_tab, data->pars->begin);
 }
