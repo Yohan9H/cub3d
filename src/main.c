@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 15:28:31 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/17 16:01:32 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	init_struct(t_data *data)
 	data->game->map = malloc(sizeof(t_map));
 	data->game->player = malloc(sizeof(t_player));
 	data->game->ray = malloc(sizeof(t_ray));
-	
+	for (int i = 0; i < 8; i++)
+	{
+		data->game->textures[i] = malloc(sizeof(t_img));
+	}
 }
-
 int	main(int ac, char **av)
 {
 	t_data	data;

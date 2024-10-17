@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/16 17:37:19 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/17 15:07:58 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }			t_vector;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		line_bytes;
+	int		pixel_bits;
+	int		endian;
+}			t_img;
+
 
 typedef struct s_player
 {
@@ -61,7 +71,7 @@ typedef struct s_game
 	t_player	*player;
 	t_ray		*ray;
 	char		**map;
-	void		*textures[8];
+	t_img		*textures[8];
 	int			tex_width[8];
 	int			tex_height[8];
 }				t_game;

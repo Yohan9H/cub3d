@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/16 19:03:15 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/17 16:04:29 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,14 @@ void	my_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+unsigned int get_pixel(t_data *data, int x, int y)
+{
+	char *dst;
+
+	dst = data->addr + (y * data->line_bytes + x * (data->pixel_bits / 8));
+	return (*(unsigned int *)dst);
+}
+
 void	verLine(t_data *data, double x, int drawStart, int drawEnd, int color)
 {
 	int	i;
@@ -131,16 +139,19 @@ int load_textures(t_data *data, t_game *game)
 		"textures/colorstone.xpm"
     };
     
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 7; i++)
     {
 		int width;
 		int	height;
-        game->textures[i] = mlx_xpm_file_to_image(data->mlx, (char *)texture_files[i], &width, &height);
+        game->textures[i]->img = mlx_xpm_file_to_image(data->mlx, (char *)texture_files[i], &width, &height);
         if (!game->textures[i])
         {
             fprintf(stderr, "Erreur : Impossible de charger la texture %s\n", texture_files[i]);
             return (0);
         }
+		game->textures[i]->addr = mlx_get_data_addr\
+			(data->game->textures[i]->img, &data->game->textures[i]->pixel_bits, \
+				&data->game->textures[i]->line_bytes, &data->game->textures[i]->endian);
         game->tex_width[i] = width;
         game->tex_height[i] = height;
     }
@@ -165,11 +176,6 @@ void	raycasting(t_data *data, t_player *player)
 	double 	texPos;
 	int 	texY;
 	//int		texture[TEX_WIDTH][TEX_HEIGHT];
-	int		buffer[WIDTH][HEIGHT];
-	int		pixel_bits;
-	int		line_bytes;
-	int		endian;
-	char	*texture_data;
 	int		offset;
 	int		pixel_offset;
 	__uint32_t color;
@@ -310,7 +316,6 @@ void	raycasting(t_data *data, t_player *player)
 		texX = (int)(wallX * (double)texWidth);
 		if ((ray->side == 0 && ray->Dir.y > 0) || (ray->side == 1 && ray->Dir.y < 0))
 			texX = texWidth - texX - 1;
-		texture_data = mlx_get_data_addr(data->game->textures[texNum], &pixel_bits, &line_bytes, &endian);
 		step = 1.0 * texHeight / ray->lineHeight;
 		texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
 		j = ray->drawStart;
@@ -319,29 +324,29 @@ void	raycasting(t_data *data, t_player *player)
 		{
 			texY = (int)texPos & (texHeight -1);
 			texPos += step;
-			offset = (texY * line_bytes + texX * (pixel_bits / 8));
-			color = *(__uint32_t *)(texture_data + offset);
+			offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
+			color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
 			//color = texture[texNum][texHeight * texY + texX];
 			if (ray->side == 1)
 				color = (color >> 1) & 0x7F7F7F;
 			//buffer[i][j] = color;
-			pixel_offset = (j * line_bytes + i * (pixel_bits / 8));
+			pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
         	*(__uint32_t *)(data->addr + pixel_offset) = color;
 			j++;
 		}
 		i++;
 	}
 	//drawbuffer(data, buffer, ray->drawStart, ray->drawEnd);
-	i =  0;
-	while (i < WIDTH)
-	{
-		j = 0;
-		while(j < HEIGHT)
-		{
-			buffer[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
+	// i =  0;
+	// while (i < WIDTH)
+	// {
+	// 	j = 0;
+	// 	while(j < HEIGHT)
+	// 	{
+	// 		buffer[i][j] = 0;
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
 
 }
