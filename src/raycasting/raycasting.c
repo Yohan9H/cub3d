@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/17 16:04:29 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:56:17 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	drawbuffer(t_data *data, int buffer[WIDTH][HEIGHT], int drawStart, int draw
 	while (i <= WIDTH)
 	{
 		j = 0;
-		while (i <= HEIGHT)
+		while (j <= HEIGHT)
 		{
 			if (i < drawStart)
 				my_pixel_put(data, i, j, 0x3F3F3F);
@@ -156,6 +156,22 @@ int load_textures(t_data *data, t_game *game)
         game->tex_height[i] = height;
     }
     return (1);
+}
+
+void	fill_wall(t_data *data, double texPos, int texNum, double texX)
+{
+	int	texY;
+
+		texY = (int)texPos & (texHeight -1);
+	texPos += step;
+	offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
+	color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
+	//color = texture[texNum][texHeight * texY + texX];
+	if (ray->side == 1)
+		color = (color >> 1) & 0x7F7F7F;
+	//buffer[i][j] = color;
+	pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
+	*(__uint32_t *)(data->addr + pixel_offset) = color;
 }
 
 void	raycasting(t_data *data, t_player *player)
@@ -318,20 +334,28 @@ void	raycasting(t_data *data, t_player *player)
 			texX = texWidth - texX - 1;
 		step = 1.0 * texHeight / ray->lineHeight;
 		texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
-		j = ray->drawStart;
-
-		while(j < ray->drawEnd)
-		{
-			texY = (int)texPos & (texHeight -1);
-			texPos += step;
-			offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
-			color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
-			//color = texture[texNum][texHeight * texY + texX];
-			if (ray->side == 1)
-				color = (color >> 1) & 0x7F7F7F;
-			//buffer[i][j] = color;
-			pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
-        	*(__uint32_t *)(data->addr + pixel_offset) = color;
+		
+		
+		j = 0;
+		while (j < HEIGHT)
+		{	
+			if (j < ray->drawEnd && j > ray->drawStart)
+			{
+				texY = (int)texPos & (texHeight -1);
+				texPos += step;
+				offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
+				color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
+				//color = texture[texNum][texHeight * texY + texX];
+				if (ray->side == 1)
+					color = (color >> 1) & 0x7F7F7F;
+				//buffer[i][j] = color;
+				pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
+				*(__uint32_t *)(data->addr + pixel_offset) = color;
+			}
+			else if (j < ray->drawStart)
+				my_pixel_put(data, i, j, 0x3F3F3F);
+			else if (j > ray->drawEnd)
+				my_pixel_put(data, i, j, 0x7D7D7D);
 			j++;
 		}
 		i++;
