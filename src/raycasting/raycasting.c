@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/17 17:56:17 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:57:36 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,21 +158,21 @@ int load_textures(t_data *data, t_game *game)
     return (1);
 }
 
-void	fill_wall(t_data *data, double texPos, int texNum, double texX)
-{
-	int	texY;
+// void	fill_wall(t_data *data, double texPos, int texNum, double texX)
+// {
+// 	int	texY;
 
-		texY = (int)texPos & (texHeight -1);
-	texPos += step;
-	offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
-	color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
-	//color = texture[texNum][texHeight * texY + texX];
-	if (ray->side == 1)
-		color = (color >> 1) & 0x7F7F7F;
-	//buffer[i][j] = color;
-	pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
-	*(__uint32_t *)(data->addr + pixel_offset) = color;
-}
+// 		texY = (int)texPos & (texHeight -1);
+// 	texPos += step;
+// 	offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
+// 	color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
+// 	//color = texture[texNum][texHeight * texY + texX];
+// 	if (ray->side == 1)
+// 		color = (color >> 1) & 0x7F7F7F;
+// 	//buffer[i][j] = color;
+// 	pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
+// 	*(__uint32_t *)(data->addr + pixel_offset) = color;
+// }
 
 void	raycasting(t_data *data, t_player *player)
 {
