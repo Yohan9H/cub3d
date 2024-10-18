@@ -12,14 +12,6 @@
 
 #include "cub3d.h"
 
-int	check_all_found(t_pars *pars)
-{
-	if ((pars->c + pars->f + pars->no + pars->we + pars->so + pars->ea) == 6)
-		return (1);
-	else
-		return (0);
-}
-
 void	freetab(char **com)
 {
 	int	i;
@@ -83,9 +75,9 @@ int	is_player(char c)
 	return (0);
 }
 
-int	one_or_zero(char c)
+int	check_char(char c)
 {
-	if (c == '0' || c == '1')
-		return (0);
-	return (1);
+	if (c == '0' || c == '1' || c == '#')
+		return (1);
+	return (0);
 }

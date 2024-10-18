@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/17 10:57:54 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:56:58 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	clean_game(t_game *game)
 {
 	if (game->map)
 		freetab(game->map);
+	if (game->player)
+		free(game->player);
+	if (game->ray)
+		free(game->ray);
 	if (game)
 		free(game);
 }

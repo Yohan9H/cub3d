@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/17 17:38:16 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:53:43 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ void	print_data(t_data *data);
 
 int		is_player(char c);
 
-int		one_or_zero(char c);
+int		check_char(char c);
+
+void	del_pos_player(char **tab);
+
+void	reset_value_map(t_data *data);
+
+void	check_if_palyer(t_data *data, char c ,int y, int x);
 
 #endif

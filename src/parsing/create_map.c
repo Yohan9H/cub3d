@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/17 17:42:27 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:33:12 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,6 @@ void	create_linked_list_map(t_data *data)
 	len_lst = ft_lstsize(data->pars->head_map);
 }
 
-void	del_pos_player(char **tab)
-{
-	int		y;
-	int		x;
-
-	y = 0;
-	while (tab[y])
-	{
-		x = 0;
-		while (tab[y][x])
-		{
-			if (is_player(tab[y][x]) == 1)
-			{
-				tab[y][x] = '0';
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
 void	check_map(t_data *data)
 {
 	while (data->pars->line != NULL && found_map(data->pars->line) != 1)
@@ -92,7 +71,5 @@ void	check_map(t_data *data)
 	}
 	create_linked_list_map(data);
 	create_double_array(data);
-	del_pos_player(data->game->map);
-	print_data(data);
 	verif_good_map(data);
 }

@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 11:14:01 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:05:33 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	init_parsing(t_data *data)
 {
-	data->game = (t_game *)malloc(sizeof(t_game) * 1);
+	data->game = (t_game *)malloc(sizeof(t_game) * 1); // a changer plus tard
 	data->game->map = NULL;
+	data->game->player = malloc(sizeof(t_player));
+	data->game->ray = malloc(sizeof(t_ray));
 	data->addr = NULL;
 	data->img = NULL;
 	data->mlx = NULL;

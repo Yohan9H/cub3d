@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/17 17:44:45 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:53:14 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int	verif_close(t_data *data, char **tab, int y, int x)
 	if (x == 0 || x == (int)ft_strlen(tab[y]) - 1 || y == 0
 		|| y == data->pars->size_tab->y - 1)
 		return (1);
-// need fix tomorow
-	if (one_or_zero(tab[y - 1][x]) || one_or_zero(tab[y + 1][x])
-		|| one_or_zero(tab[y][x - 1]) || one_or_zero(tab[y][x + 1]))
+	if (check_char(tab[y - 1][x]) != 1 || check_char(tab[y + 1][x]) != 1
+		|| check_char(tab[y][x - 1]) != 1 || check_char(tab[y][x + 1]) != 1)
 		return (1);
 	if (tab[y - 1][x] == '0')
 		return (verif_close(data, tab, y - 1, x));
@@ -50,7 +49,7 @@ void	check_close(t_data *data, char **tab)
 			if (tab[y][x] == '0')
 				if (verif_close(data, tab, y, x) == 1)
 				{
-					ft_fprintf("Error : map not close\n");
+					ft_fprintf("Error : bad map\n");
 					freetab(tab);
 					exit_clean(data, EXIT_FAILURE);
 				}
@@ -60,68 +59,54 @@ void	check_close(t_data *data, char **tab)
 	}
 }
 
-void	take_value_and_verif(t_data *data, char c, int j, int i)
+int	take_value_and_verif(t_data *data, char c, int y, int x)
 {
-	if (c == 'N')
-	{
-		(data->pars->no)++;
-		data->pars->begin_ply->y = j;
-		data->pars->begin_ply->x = i;
-	}
-	if (c == 'S')
-	{
-		(data->pars->so)++;
-		data->pars->begin_ply->y = j;
-		data->pars->begin_ply->x = i;
-	}
-	if (c == 'E')
-	{
-		(data->pars->ea)++;
-		data->pars->begin_ply->y = j;
-		data->pars->begin_ply->x = i;
-	}
-	if (c == 'W')
-	{
-		(data->pars->we)++;
-		data->pars->begin_ply->y = j;
-		data->pars->begin_ply->x = i;
-	}
-	if ((data->pars->no + data->pars->so + data->pars->we + data->pars->ea) \
-		> 1)
+	int		res;
+
+	check_if_palyer(data, c, y, x);
+	res = (data->pars->no + data->pars->so + data->pars->we + data->pars->ea);
+	if (res > 1)
 	{
 		ft_fprintf("Error : too many N, S, E or W in your map\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 	if (c == ' ')
 		c = 1;
+	return (res);
 }
 
-void	reset_value_map(t_data *data)
+void	verif_player(t_data *data, char **map)
 {
-	data->pars->no = 0;
-	data->pars->so = 0;
-	data->pars->we = 0;
-	data->pars->ea = 0;
+	int		res;
+	int		y;
+	int		x;
+	
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			res = take_value_and_verif(data, map[y][x], y, x);
+			x++;
+		}
+		y++;
+	}
+	if (res == 0)
+	{
+		ft_fprintf("Error : miss N, S, E or W in your map\n");
+		exit_clean(data, EXIT_FAILURE);
+	}
 }
 
 void	verif_good_map(t_data *data)
 {
 	char	**cpy_map;
-	int		y;
-	int		x;
 
-	y = 0;
 	reset_value_map(data);
-	while (data->game->map[y])
-	{
-		x = 0;
-		while (data->game->map[y][x])
-		{
-			take_value_and_verif(data, data->game->map[y][x], y, x);
-			x++;
-		}
-		y++;
-	}
+	print_data(data);
+	verif_player(data, data->game->map);
+	del_pos_player(data->game->map);
 	cpy_map = ft_strdup_double_array(data, data->game->map);
 	check_close(data, cpy_map);
 	freetab(cpy_map);
