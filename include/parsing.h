@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 15:12:19 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:38:16 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct 	s_point {
 typedef struct s_pars
 {
 	t_map	*head_map;
-	t_point	*begin;
+	t_point	*begin_ply;
 	t_point	*size_tab;
 	char	*line;
 	char	*id;
@@ -65,5 +65,9 @@ void	parsing(t_data *data, int ac, char **av);
 void	check_map(t_data *data);
 
 void	print_data(t_data *data);
+
+int		is_player(char c);
+
+int		one_or_zero(char c);
 
 #endif

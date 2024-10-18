@@ -75,3 +75,17 @@ char	**ft_strdup_double_array(t_data *data, char **s1)
 	cpy[j] = NULL;
 	return (cpy);
 }
+
+int	is_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+int	one_or_zero(char c)
+{
+	if (c == '0' || c == '1')
+		return (0);
+	return (1);
+}

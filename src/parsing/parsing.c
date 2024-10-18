@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/16 18:38:53 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:14:01 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	init_parsing(t_data *data)
 	if (!data->pars)
 		exit_clean(data, EXIT_FAILURE);
 	ft_memset(data->pars, 0, sizeof(t_pars));
-	data->pars->begin = (t_point *)malloc(sizeof(t_point) * 1);
-	if (!data->pars->begin)
+	data->pars->begin_ply = (t_point *)malloc(sizeof(t_point) * 1);
+	if (!data->pars->begin_ply)
 		exit_clean(data, EXIT_FAILURE);
-	ft_memset(data->pars->begin, 0, sizeof(t_point));
+	data->pars->begin_ply->y = 0;
+	data->pars->begin_ply->x = 0;
 	data->pars->size_tab = (t_point *)malloc(sizeof(t_point) * 1);
 	if (!data->pars->size_tab)
 		exit_clean(data, EXIT_FAILURE);
@@ -64,7 +65,7 @@ void	check_args(t_data *data, int ac, char *file)
 void	parsing(t_data *data, int ac, char **av)
 {
 	init_parsing(data);
-	check_args(data, ac, av[1]);
+	check_args(data, ac, av[1]); // need handle "EA       ./name"
 	check_file(data, av[1]); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
 	check_map(data);
 }
