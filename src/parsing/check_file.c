@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:52:45 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 11:20:10 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:49:54 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,4 @@ void	check_file(t_data *data, char *file)
 		ft_fprintf("Error : miss value in your file\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
-
 }

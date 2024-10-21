@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 14:24:17 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:03:26 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	exit_clean(t_data *data, int code)
 	}
 	clean_pars(data->pars);
 	clean_game(data->game);
+	if (data->pars->fd != -1)
+		close(data->pars->fd);
 	if (code == EXIT_FAILURE)
 		exit(1);
 	if (code == EXIT_SUCCESS)

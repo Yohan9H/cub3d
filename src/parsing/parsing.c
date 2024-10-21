@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 11:32:40 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:04:19 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_parsing(t_data *data)
 	if (!data->pars)
 		exit_clean(data, EXIT_FAILURE);
 	ft_memset(data->pars, 0, sizeof(t_pars));
+	data->pars->fd = -1;
 	reset_value_map(data);
 	data->pars->begin_ply = (t_point *)malloc(sizeof(t_point) * 1);
 	if (!data->pars->begin_ply)
@@ -61,14 +62,14 @@ void	check_args(t_data *data, int ac, char *file)
 		ft_fprintf("Error : you need only one args (./filename.cub)\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
-	while (file[i] && file[i] != '.')
-		i++;
-	if (file[i] != '.')
+	data->pars->fd = open(file, O_RDONLY);
+	if (data->pars->fd == -1)
 	{
-		ft_fprintf("Error : your file is not valide (./filename.cub)\n");
+		ft_fprintf("Error : file not found\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
-	i++;
+	if (file[i] && file[i] == '.')
+		i++;
 	while (file[i] && file[i] != '.')
 		i++;
 	if (ft_strncmp(&file[i], ".cub", 5) != 0)
