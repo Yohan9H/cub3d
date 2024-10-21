@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 13:53:45 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:36:17 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_close(t_data *data, char **tab)
 	while (tab[y])
 	{
 		x = 0;
-		while (tab[y][x++])
+		while (tab[y][x])
 		{
 			if (tab[y][x] == '0')
 				if (verif_close(data, tab, y, x) == 1)
