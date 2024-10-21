@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:52:45 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 15:49:54 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:06:28 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,6 @@ void	take_id(t_data *data, char *line)
 
 void	check_file(t_data *data, char *file)
 {
-	data->pars->fd = open(file, O_RDONLY);
-	if (data->pars->fd == -1)
-	{
-		ft_fprintf("Error : file not found\n");
-		exit_clean(data, EXIT_FAILURE);
-	}
 	data->pars->line = get_next_line(data->pars->fd);
 	take_id(data, data->pars->line);
 	check_line(data, data->pars->id, data->pars->line);
