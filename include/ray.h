@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/21 11:15:40 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/21 15:16:35 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int		line_bytes;
-	int		pixel_bits;
+	int		l_by;
+	int		p_bi;
 	int		endian;
 	int		texX;
 	int		texY;
 	int		offset;
 	double	step;
-	int		tex_width;
-	int		tex_height;
+	int		t_w;
+	int		t_h;
+	double	texPos;
 }			t_img;
 
 
@@ -60,16 +61,19 @@ typedef struct s_ray
 	t_vector	Dir;
 	t_vector	sideDist;
 	t_vector	deltaDist;
-	double		perpWallDist;
+	double		pWDist;
 	int			mapX;
 	int			mapY;
 	int			stepX;
 	int			stepY;
 	int			hit;
 	int			side;
-	int			lineHeight;
-	int			drawStart;
-	int 		drawEnd;
+	int			l_Hei;
+	int			drSt;
+	int 		drEd;
+	double		wallX;
+	int			f;
+	double		fwallX;
 }				t_ray;
 
 typedef struct s_game

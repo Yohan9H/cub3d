@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/21 17:00:14 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/21 14:50:53 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void	side_dist(t_ray *ray, t_player *player)
 
 void	ray_init(int i, t_player *player, t_ray *ray)
 {
-	double	cameraX;
+	int	cameraX;
 
 	cameraX = 2 * i / (double)WIDTH -1;
 	ray->Dir.x = player->dir.x + player->plane.x * cameraX;
