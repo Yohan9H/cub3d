@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 16:04:19 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:14:29 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	check_args(t_data *data, int ac, char *file)
 	i = 0;
 	if (ac >= 2 || ac == 0)
 	{
-		ft_fprintf("Error : you need only one args (./filename.cub)\n");
+		ft_fprintf("Error : you need only one args (filename.cub)\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 	data->pars->fd = open(file, O_RDONLY);
@@ -74,7 +74,7 @@ void	check_args(t_data *data, int ac, char *file)
 		i++;
 	if (ft_strncmp(&file[i], ".cub", 5) != 0)
 	{
-		ft_fprintf("Error : your file is not valide (./filename.cub)\n");
+		ft_fprintf("Error : your file is not valide (filename.cub)\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 }
@@ -83,6 +83,6 @@ void	parsing(t_data *data, int ac, char **av)
 {
 	init_parsing(data);
 	check_args(data, ac, av[1]);
-	check_file(data, av[1]); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
+	check_file(data); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
 	check_map(data);
 }

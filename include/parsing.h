@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 14:20:50 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:12:15 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	verif_str_colors(t_data *data, char *str);
 
 int		check_all_found(t_pars *pars);
 
-void	check_file(t_data *data, char *file);
+void	check_file(t_data *data);
 
 void	parsing(t_data *data, int ac, char **av);
 

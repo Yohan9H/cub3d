@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 11:45:56 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:25:56 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_struct(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-
+// il faut tout bien mettre les data pour arthur, faire les texture et les donner a arthur
 	ac--;
 	parsing(&data, ac, av);
 	// print_data(&data);
