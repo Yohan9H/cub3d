@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/17 15:07:58 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/21 11:15:40 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_img
 	int		line_bytes;
 	int		pixel_bits;
 	int		endian;
+	int		texX;
+	int		texY;
+	int		offset;
+	double	step;
+	int		tex_width;
+	int		tex_height;
 }			t_img;
 
 
@@ -72,8 +78,6 @@ typedef struct s_game
 	t_ray		*ray;
 	char		**map;
 	t_img		*textures[8];
-	int			tex_width[8];
-	int			tex_height[8];
 }				t_game;
 
 

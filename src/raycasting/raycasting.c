@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/17 17:57:36 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/21 11:44:37 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,57 +127,74 @@ void	drawbuffer(t_data *data, int buffer[WIDTH][HEIGHT], int drawStart, int draw
 
 int load_textures(t_data *data, t_game *game)
 {
-    // Liste des chemins vers les fichiers XPM
-    const char *texture_files[8] = {
-        "textures/eagle.xpm",
-        "textures/redbrick.xpm",
-        "textures/purplestone.xpm",
-        "textures/greystone.xpm",
+	// Liste des chemins vers les fichiers XPM
+	const char *texture_files[8] = {
+		"textures/eagle.xpm",
+		"textures/redbrick.xpm",
+		"textures/purplestone.xpm",
+		"textures/greystone.xpm",
 		"textures/bluestone.xpm",
 		"textures/mossy.xpm",
 		"textures/wood.xpm",
 		"textures/colorstone.xpm"
-    };
-    
-    for (int i = 0; i < 7; i++)
-    {
+	};
+
+	for (int i = 0; i < 7; i++)
+	{
 		int width;
 		int	height;
-        game->textures[i]->img = mlx_xpm_file_to_image(data->mlx, (char *)texture_files[i], &width, &height);
-        if (!game->textures[i])
-        {
-            fprintf(stderr, "Erreur : Impossible de charger la texture %s\n", texture_files[i]);
-            return (0);
-        }
+		game->textures[i]->img = mlx_xpm_file_to_image(data->mlx, (char *)texture_files[i], &width, &height);
+		if (!game->textures[i])
+		{
+			fprintf(stderr, "Erreur : Impossible de charger la texture %s\n", texture_files[i]);
+			return (0);
+		}
 		game->textures[i]->addr = mlx_get_data_addr\
 			(data->game->textures[i]->img, &data->game->textures[i]->pixel_bits, \
 				&data->game->textures[i]->line_bytes, &data->game->textures[i]->endian);
-        game->tex_width[i] = width;
-        game->tex_height[i] = height;
-    }
-    return (1);
+		game->textures[i]->tex_width = width;
+		game->textures[i]->tex_height = height;
+	}
+	return (1);
 }
 
-// void	fill_wall(t_data *data, double texPos, int texNum, double texX)
-// {
-// 	int	texY;
+void	fill_wall(t_data *data, int i, double texPos, int texNum)
+{
+	int	j;
+	int	texY;
+	int pixel_offset;
+	int	offset;
+	__uint32_t color;
+	t_img	*tex;
 
-// 		texY = (int)texPos & (texHeight -1);
-// 	texPos += step;
-// 	offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
-// 	color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
-// 	//color = texture[texNum][texHeight * texY + texX];
-// 	if (ray->side == 1)
-// 		color = (color >> 1) & 0x7F7F7F;
-// 	//buffer[i][j] = color;
-// 	pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
-// 	*(__uint32_t *)(data->addr + pixel_offset) = color;
-// }
+	tex = data->game->textures[texNum];
+	j = 0;
+	while (j < HEIGHT)
+	{	
+		if (j < data->game->ray->drawEnd && j > data->game->ray->drawStart)
+		{
+			texY = (int)texPos & (tex->tex_height -1);
+			texPos += tex->step;
+			offset = (texY * data->game->textures[texNum]->line_bytes + tex->texX * (tex->pixel_bits / 8));
+			color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
+			//color = texture[texNum][texHeight * texY + texX];
+			if (data->game->ray->side == 1)
+				color = (color >> 1) & 0x7F7F7F;
+			//buffer[i][j] = color;
+			pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
+			*(__uint32_t *)(data->addr + pixel_offset) = color;
+		}
+		else if (j < data->game->ray->drawStart)
+			my_pixel_put(data, i, j, 0x3F3F3F);
+		else if (j > data->game->ray->drawEnd)
+			my_pixel_put(data, i, j, 0x7D7D7D);
+		j++;
+	}
+}
 
 void	raycasting(t_data *data, t_player *player)
 {
 	int		i;
-	int		j;
 	double	cameraX;
 	// int		color2;
 	t_ray	*ray;
@@ -185,16 +202,9 @@ void	raycasting(t_data *data, t_player *player)
 	int		f;
 	double	fwallX;
 	double	wallX;
-	int		texX;
 	int		texWidth = 64;
 	int		texHeight = 64;
-	double 	step;
 	double 	texPos;
-	int 	texY;
-	//int		texture[TEX_WIDTH][TEX_HEIGHT];
-	int		offset;
-	int		pixel_offset;
-	__uint32_t color;
 	// double time = 0;
 	// double old_time = 0;
 	// double moveSpeed;
@@ -305,22 +315,7 @@ void	raycasting(t_data *data, t_player *player)
 			ray->drawStart = 0;
 		ray->drawEnd = ray->lineHeight / 2 + HEIGHT / 2;
 		if (ray->drawEnd >= HEIGHT)
-			ray->drawEnd = HEIGHT - 1;
-		// //choose wall color
-		// switch(map[ray->mapX][ray->mapY])
-		// {
-		// 	case 1:  color2 = 0xFF0000; break; //red
-		// 	case 2:  color2 = 0x00FF00; break; //green
-		// 	case 3:  color2 = 0x0000FF; break; //blue
-		// 	case 4:  color2 = 0xFFFFFF; break; //white
-		// 	default: color2 = 0xFFFF00; break; //yellow
-		// }
-		// 		//give x and y sides different brightness
-		// if (ray->side == 1) 
-		// 	color2 = color2 / 2;
-		// verLine(data, i, ray->drawStart, ray->drawEnd, color2);
-		// i++;
-		
+			ray->drawEnd = HEIGHT - 1;		
 		texNum = map[ray->mapX][ray->mapY] - 1;
 		if (ray->side == 0)
 			wallX = player->pos.y + ray->perpWallDist * ray->Dir.y;
@@ -329,35 +324,13 @@ void	raycasting(t_data *data, t_player *player)
 		f = (int)wallX;
 		fwallX = (double)f;
 		wallX -= fwallX;
-		texX = (int)(wallX * (double)texWidth);
+		data->game->textures[texNum]->texX = (int)(wallX * (double)texWidth);
 		if ((ray->side == 0 && ray->Dir.y > 0) || (ray->side == 1 && ray->Dir.y < 0))
-			texX = texWidth - texX - 1;
-		step = 1.0 * texHeight / ray->lineHeight;
-		texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
+			data->game->textures[texNum]->texX = texWidth - data->game->textures[texNum]->texX - 1;
+		data->game->textures[texNum]->step = 1.0 * texHeight / ray->lineHeight;
+		texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * data->game->textures[texNum]->step;
 		
-		
-		j = 0;
-		while (j < HEIGHT)
-		{	
-			if (j < ray->drawEnd && j > ray->drawStart)
-			{
-				texY = (int)texPos & (texHeight -1);
-				texPos += step;
-				offset = (texY * data->game->textures[texNum]->line_bytes + texX * (data->game->textures[texNum]->pixel_bits / 8));
-				color = *(__uint32_t *)(data->game->textures[texNum]->addr + offset);
-				//color = texture[texNum][texHeight * texY + texX];
-				if (ray->side == 1)
-					color = (color >> 1) & 0x7F7F7F;
-				//buffer[i][j] = color;
-				pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
-				*(__uint32_t *)(data->addr + pixel_offset) = color;
-			}
-			else if (j < ray->drawStart)
-				my_pixel_put(data, i, j, 0x3F3F3F);
-			else if (j > ray->drawEnd)
-				my_pixel_put(data, i, j, 0x7D7D7D);
-			j++;
-		}
+		fill_wall(data, i, texPos, texNum);
 		i++;
 	}
 	//drawbuffer(data, buffer, ray->drawStart, ray->drawEnd);
