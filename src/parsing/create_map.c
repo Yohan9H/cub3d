@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 11:33:12 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:02:18 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	create_double_array(t_data *data)
 	if (!data->game->map)
 		exit_clean(data, EXIT_FAILURE);
 	i = 0;
-	while (lst->line != NULL)
+	while (lst && lst->line != NULL)
 	{
 		data->game->map[i] = ft_strdup(lst->line);
 		if (!data->game->map[i])
@@ -43,22 +43,22 @@ void	create_double_array(t_data *data)
 void	create_linked_list_map(t_data *data)
 {
 	t_map *node;
-	int		len_lst;
 
-	node = ft_lstnew(data->pars->line);
-	ft_lstadd_back(&data->pars->head_map, node);
 	while (data->pars->line != NULL)
 	{
-		free(data->pars->line);
-		data->pars->line = get_next_line(data->pars->fd);
 		node = ft_lstnew(data->pars->line);
 		ft_lstadd_back(&data->pars->head_map, node);
+		free(data->pars->line);
+		data->pars->line = get_next_line(data->pars->fd);
 	}
-	len_lst = ft_lstsize(data->pars->head_map);
+	node = ft_lstnew(NULL);
+	ft_lstadd_back(&data->pars->head_map, node);
 }
 
 void	check_map(t_data *data)
 {
+	free(data->pars->line);
+	data->pars->line = get_next_line(data->pars->fd);
 	while (data->pars->line != NULL && found_map(data->pars->line) != 1)
 	{
 		free(data->pars->line);

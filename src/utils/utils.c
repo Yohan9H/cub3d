@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 11:56:58 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:24:17 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void	clean_pars(t_pars *pars)
 		free(pars->line);
 	if (pars->id)
 		free(pars->id);
+	if (pars->c_data)
+		free(pars->c_data);
+	if (pars->f_data)
+		free(pars->f_data);
 	free(pars);
 }
 

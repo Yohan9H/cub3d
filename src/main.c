@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 12:04:44 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:45:56 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	main(int ac, char **av)
 
 	ac--;
 	parsing(&data, ac, av);
+	// print_data(&data);
 	init_struct(&data);
-	print_data(&data); // test
 	game(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
 	mlx_hook(data.mlx_win, 2, 1L << 0, handle_key, &data);

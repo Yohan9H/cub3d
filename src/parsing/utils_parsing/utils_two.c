@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 11:53:34 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:15:32 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,12 @@ void	check_if_palyer(t_data *data, char c ,int y, int x)
 		data->pars->begin_ply->y = y;
 		data->pars->begin_ply->x = x;
 	}
+}
+
+void	skip_virgule_space(char *str, int *i)
+{
+	while (str[*i] && str[*i] != ',')
+		(*i)++;
+	while (str[*i] && ft_isdigit((int)str[*i]) != 1)
+		(*i)++;
 }
