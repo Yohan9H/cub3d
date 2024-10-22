@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 17:16:12 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 18:20:02 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	init_data(t_data *data)
 {
-	int		i;
-
 	data->game = ft_calloc(1, sizeof(t_game));
 	if (!data->game)
 		exit_clean(data, EXIT_FAILURE);
