@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 17:28:09 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:29:38 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include "ray.h"
 # define WIDTH 900
 # define HEIGHT 900
-
-
 
 typedef struct s_data
 {
