@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_two.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:03:56 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 14:32:31 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:01:15 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	verif_digit(t_data *data, char c)
 	}
 }
 
-void	svg_nb_in_data(t_data *data, int nb1, int nb2, int nb3)
+void	svg_nb_in_data(t_data *data, int r, int v, int b)
 {
 	if (data->pars->id[0] == 'F')
 	{
-		data->pars->f_data->nb1 = nb1;
-		data->pars->f_data->nb2 = nb2;
-		data->pars->f_data->nb3 = nb3;
+		data->pars->f_rvb->r = r;
+		data->pars->f_rvb->v = v;
+		data->pars->f_rvb->b = b;
 	}
 	if (data->pars->id[0] == 'C')
 	{
-		data->pars->c_data->nb1 = nb1;
-		data->pars->c_data->nb2 = nb2;
-		data->pars->c_data->nb3 = nb3;
+		data->pars->c_rvb->r = r;
+		data->pars->c_rvb->v = v;
+		data->pars->c_rvb->b = b;
 	}
 }
 
