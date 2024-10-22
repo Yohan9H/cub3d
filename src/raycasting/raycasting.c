@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/22 11:56:53 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 14:08:21 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,23 @@ int	load_textures(t_data *data, t_game *game)
 	return (1);
 }
 
+__uint32_t		get_color(t_rvb *rvb)
+{
+	if (rvb->r < 0)
+		rvb->r = 0;
+	if (rvb->r > 255)
+		rvb->r = 255;
+	if (rvb->v < 0)
+		rvb->v = 0;
+	if (rvb->v > 255)
+		rvb->v = 255;
+	if (rvb->b < 0)
+		rvb->b = 0;
+	if (rvb->b > 255)
+		rvb->b = 255;
+	return ((rvb->r << 16) | (rvb->v << 8) | rvb->b);
+}
+
 void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 {
 	int			j;
@@ -208,9 +225,9 @@ void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 			*(__uint32_t *)(data->addr + pixel_offset) = color;
 		}
 		else if (j < data->game->ray->drSt)
-			my_pixel_put(data, i, j, 0x3F3F3F);
+			my_pixel_put(data, i, j, get_color(data->pars->f_rvb));
 		else if (j > data->game->ray->drEd)
-			my_pixel_put(data, i, j, 0x7D7D7D);
+			my_pixel_put(data, i, j, get_color(data->pars->c_rvb));
 		j++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 11:21:34 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:00:12 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	clean_pars(t_pars *pars)
 		free(pars->line);
 	if (pars->id)
 		free(pars->id);
-	if (pars->c_data)
-		free(pars->c_data);
-	if (pars->f_data)
-		free(pars->f_data);
+	if (pars->c_rvb)
+		free(pars->c_rvb);
+	if (pars->f_rvb)
+		free(pars->f_rvb);
 	free(pars);
 }
 

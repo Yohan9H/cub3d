@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 17:14:29 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:05:58 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ void	init_parsing(t_data *data)
 		exit_clean(data, EXIT_FAILURE);
 	data->pars->size_tab->x = 0;
 	data->pars->size_tab->y = 0;
-	data->pars->c_data = (t_c_data *)malloc(sizeof(t_c_data) * 1);
-	if (!data->pars->c_data)
+	data->pars->c_rvb = (t_rvb *)malloc(sizeof(t_rvb) * 1);
+	if (!data->pars->c_rvb)
 		exit_clean(data, EXIT_FAILURE);
-	data->pars->c_data->nb1 = 0;
-	data->pars->c_data->nb2 = 0;
-	data->pars->c_data->nb3 = 0;
-	data->pars->f_data = (t_f_data *)malloc(sizeof(t_f_data) * 1);
-	if (!data->pars->f_data)
+	data->pars->c_rvb->r = 120;
+	data->pars->c_rvb->v = 200;
+	data->pars->c_rvb->b = 255;
+	data->pars->f_rvb = (t_rvb *)malloc(sizeof(t_rvb) * 1);
+	if (!data->pars->f_rvb)
 		exit_clean(data, EXIT_FAILURE);
-	data->pars->f_data->nb1 = 0;
-	data->pars->f_data->nb2 = 0;
-	data->pars->f_data->nb3 = 0;
+	data->pars->f_rvb->r = 12;
+	data->pars->f_rvb->v = 80;
+	data->pars->f_rvb->b = 70;
 }
 
 void	check_args(t_data *data, int ac, char *file)
@@ -82,7 +82,9 @@ void	check_args(t_data *data, int ac, char *file)
 void	parsing(t_data *data, int ac, char **av)
 {
 	init_parsing(data);
-	check_args(data, ac, av[1]);
-	check_file(data); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
-	check_map(data);
+	(void)ac;
+	(void)av;
+	//check_args(data, ac, av[1]);
+	//check_file(data); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
+	//check_map(data);
 }
