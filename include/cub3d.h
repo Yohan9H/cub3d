@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 15:30:54 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:28:09 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 	char	*addr;
 	int		line_bytes;
 	int		pixel_bits;
+	int		key_states[65536];
 	t_game	*game;
 }			t_data;
 

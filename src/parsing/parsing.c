@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 15:42:46 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:27:50 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_data(t_data *data)
 {
+	int		i;
+	
 	data->game = ft_calloc(1, sizeof(t_game));
 	if (!data->game)
 		exit_clean(data, EXIT_FAILURE);
@@ -37,6 +39,12 @@ void	init_data(t_data *data)
 	data->pars->f_rvb = (t_rvb *)ft_calloc(1, sizeof(t_rvb));
 	if (!data->pars->f_rvb)
 		exit_clean(data, EXIT_FAILURE);
+	i = 0;
+	while (i < 65536)
+	{
+		data->key_states[i] = 0;
+		i++;
+	}
 }
 
 void	check_args(t_data *data, int ac, char *file)

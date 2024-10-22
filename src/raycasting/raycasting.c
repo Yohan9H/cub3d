@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/22 14:08:21 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 16:50:11 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,28 @@ int	is_wall(int map[24][24], t_player *player, int keycode)
 	return (0);
 }
 
-int	handle_keys(int keycode, t_data *data)
+void handle_key_event(t_data *data, int keycode, int is_pressed)
+{
+	data->key_states[keycode] = is_pressed;
+}
+
+int handle_keydown(int keycode, t_data *data)
+{
+	data->key_states[keycode] = 1;
+	return (0);
+}
+
+int handle_keyup(int keycode, t_data *data)
+{
+	data->key_states[keycode] = 0;
+	return (0);
+}
+
+int	handle_keys(t_data *data)
 {
 	t_player	*player;
+	double 		old_dir_x;
+	double 		old_plane_x;
 
 	int map[24][24] = 
 	{
@@ -89,46 +108,52 @@ int	handle_keys(int keycode, t_data *data)
 	};
 
 	player = data->game->player;
-	if (keycode == LEFT && !is_wall(map, player, LEFT))
+
+	if (data->key_states[LEFT] && !is_wall(map, player, LEFT))
 	{
 		player->pos.x = player->pos.x - player->plane.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->plane.y * MOVE_SPEED;
 	}
-	else if (keycode == RIGHT && !is_wall(map, player, RIGHT))
+	if (data->key_states[RIGHT] && !is_wall(map, player, RIGHT))
 	{
 		player->pos.x = player->pos.x + player->plane.x * MOVE_SPEED;
 		player->pos.y = player->pos.y + player->plane.y * MOVE_SPEED;
 	}
-	else if (keycode == FRONT && !is_wall(map, player, FRONT))
+	if (data->key_states[FRONT] && !is_wall(map, player, FRONT))
 	{
 		player->pos.x = player->pos.x + player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y + player->dir.y * MOVE_SPEED;
 	}
-	else if (keycode == BACK && !is_wall(map, player, BACK))
+	if (data->key_states[BACK] && !is_wall(map, player, BACK))
 	{
 		player->pos.x = player->pos.x - player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->dir.y * MOVE_SPEED;
 	}
-	else if (keycode == ROT_RIGHT)
+
+	if (data->key_states[ROT_RIGHT])
 	{
+		old_dir_x = player->dir.x;
+		old_plane_x = player->plane.x;
 		player->dir.x = player->dir.x * cos(-ROT_SPEED) - \
 			player->dir.y * sin(-ROT_SPEED);
+		player->dir.y = old_dir_x * sin(-ROT_SPEED) + \
+			player->dir.y * cos(-ROT_SPEED);
 		player->plane.x = player->plane.x * cos(-ROT_SPEED) - \
 			player->plane.y * sin(-ROT_SPEED);
-		player->dir.y = player->dir.x * sin(-ROT_SPEED) + \
-			player->dir.y * cos(-ROT_SPEED);
-		player->plane.y = player->plane.x * sin(-ROT_SPEED) + \
+		player->plane.y = old_plane_x * sin(-ROT_SPEED) + \
 			player->plane.y * cos(-ROT_SPEED);
 	}
-	else if (keycode == ROT_LEFT)
+	if (data->key_states[ROT_LEFT])
 	{
+		old_dir_x = player->dir.x;
+		old_plane_x = player->plane.x;
 		player->dir.x = player->dir.x * cos(ROT_SPEED) - \
 			player->dir.y * sin(ROT_SPEED);
 		player->plane.x = player->plane.x * cos(ROT_SPEED) - \
 			player->plane.y * sin(ROT_SPEED);
-		player->dir.y = player->dir.x * sin(ROT_SPEED) + \
+		player->dir.y = old_dir_x * sin(ROT_SPEED) + \
 			player->dir.y * cos(ROT_SPEED);
-		player->plane.y = player->plane.x * sin(ROT_SPEED) + \
+		player->plane.y = old_plane_x * sin(ROT_SPEED) + \
 			player->plane.y * cos(ROT_SPEED);
 	}
 	hook_put(data, player);
@@ -188,18 +213,6 @@ int	load_textures(t_data *data, t_game *game)
 
 __uint32_t		get_color(t_rvb *rvb)
 {
-	if (rvb->r < 0)
-		rvb->r = 0;
-	if (rvb->r > 255)
-		rvb->r = 255;
-	if (rvb->v < 0)
-		rvb->v = 0;
-	if (rvb->v > 255)
-		rvb->v = 255;
-	if (rvb->b < 0)
-		rvb->b = 0;
-	if (rvb->b > 255)
-		rvb->b = 255;
 	return ((rvb->r << 16) | (rvb->v << 8) | rvb->b);
 }
 
