@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
 /*   Updated: 2024/10/22 17:16:12 by apernot          ###   ########.fr       */
@@ -12,62 +12,31 @@
 
 #include "cub3d.h"
 
-void	init_textures(t_data *data)
-{
-//	data->game = (t_game *)malloc(sizeof(t_game) * 1); // a changer plus tard
-//	data->game->map = NULL;
-	data->game->textures[0]->addr = NULL;
-	data->game->textures[0]->img = NULL;
-	data->game->textures[0]->path = NULL;
-	data->game->textures[1]->addr = NULL;
-	data->game->textures[1]->img = NULL;
-	data->game->textures[1]->path = NULL;
-	data->game->textures[2]->addr = NULL;
-	data->game->textures[2]->img = NULL;
-	data->game->textures[2]->path = NULL;
-	data->game->textures[3]->addr = NULL;
-	data->game->textures[3]->img = NULL;
-	data->game->textures[3]->path = NULL;
-}
-
 void	init_data(t_data *data)
 {
-	data->game = malloc(sizeof(t_game));
+	int		i;
+
+	data->game = ft_calloc(1, sizeof(t_game));
 	if (!data->game)
 		exit_clean(data, EXIT_FAILURE);
-	data->game->map = malloc(sizeof(t_map));
-	data->game->player = malloc(sizeof(t_player));
-	data->game->ray = malloc(sizeof(t_ray));
+	data->game->player = ft_calloc(1, sizeof(t_player));
+	data->game->ray = ft_calloc(1, sizeof(t_ray));
 	for (int i = 0; i < 4; i++)
-		data->game->textures[i] = malloc(sizeof(t_img));
-	init_textures(data);
-	data->addr = NULL;
-	data->img = NULL;
-	data->mlx = NULL;
-	data->mlx_win = NULL;
-	data->pars = (t_pars *)malloc(sizeof(t_pars) * 1);
+		data->game->textures[i] = ft_calloc(1, sizeof(t_img));
+	data->pars = (t_pars *)ft_calloc(1, sizeof(t_pars));
 	if (!data->pars)
 		exit_clean(data, EXIT_FAILURE);
-	ft_memset(data->pars, 0, sizeof(t_pars));
 	data->pars->fd = -1;
-	reset_value_map(data);
-	data->pars->begin_ply = (t_point *)malloc(sizeof(t_point) * 1);
+	data->pars->begin_ply = (t_point *)ft_calloc(1, sizeof(t_point));
 	if (!data->pars->begin_ply)
 		exit_clean(data, EXIT_FAILURE);
-	data->pars->begin_ply->y = 0;
-	data->pars->begin_ply->x = 0;
-	data->pars->size_tab = (t_point *)malloc(sizeof(t_point) * 1);
+	data->pars->size_tab = (t_point *)ft_calloc(1, sizeof(t_point));
 	if (!data->pars->size_tab)
 		exit_clean(data, EXIT_FAILURE);
-	data->pars->size_tab->x = 0;
-	data->pars->size_tab->y = 0;
-	data->pars->c_rvb = (t_rvb *)malloc(sizeof(t_rvb) * 1);
+	data->pars->c_rvb = (t_rvb *)ft_calloc(1, sizeof(t_rvb));
 	if (!data->pars->c_rvb)
 		exit_clean(data, EXIT_FAILURE);
-	data->pars->c_rvb->r = 120;
-	data->pars->c_rvb->v = 200;
-	data->pars->c_rvb->b = 255;
-	data->pars->f_rvb = (t_rvb *)malloc(sizeof(t_rvb) * 1);
+	data->pars->f_rvb = (t_rvb *)ft_calloc(1, sizeof(t_rvb));
 	if (!data->pars->f_rvb)
 		exit_clean(data, EXIT_FAILURE);
 	data->pars->f_rvb->r = 12;

@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 16:56:39 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:40:33 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	mlx_set(t_data *data)
+{
+	data->mlx = NULL;
+	data->mlx_win = NULL;
+	data->img = NULL;
+	data->addr = NULL;
+}
 
 void	init_struct(t_data *data)
 {
@@ -37,12 +45,12 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	ac--;
+	mlx_set(&data);
 	parsing(&data, ac, av);
 	init_struct(&data);
-	print_data(&data);
+	// print_data(&data); // a enlever
 	game(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
-
 	mlx_hook(data.mlx_win, 2, 1L << 0, handle_keydown, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, handle_keyup, &data);
 	mlx_loop_hook(data.mlx, &handle_keys, &data);

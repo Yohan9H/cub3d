@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 14:00:12 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 15:20:45 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ void	clean_pars(t_pars *pars)
 
 void	clean_game(t_game *game)
 {
+	int		i;
+
+	i = 0;
+	while (i != 4) // voir avec arthur pour free les autres choses correctement
+	{
+		if (game->textures[i]->path)
+			free(game->textures[i]->path);
+		free(game->textures[i]);
+		i++;
+	}
 	if (game->map)
 		freetab(game->map);
 	if (game->player)

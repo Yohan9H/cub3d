@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 15:43:57 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:29:38 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # define WIDTH 900
 # define HEIGHT 900
 
-
-
 typedef struct s_data
 {
 	t_pars	*pars;
@@ -44,9 +42,9 @@ typedef struct s_data
 void	game(t_data *data);
 
 //	---- HOOK ----
-int		handle_key(int keycode, t_data *fcl);
+int		handle_key(int keycode, t_data *data);
 
-int		handle_close(t_data *fcl);
+int		handle_close(t_data *data);
 
 //	---- UTILS ----
 void	put_pxl(t_data *fcl, int x, int y, int color);
