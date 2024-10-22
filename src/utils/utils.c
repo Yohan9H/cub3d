@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 16:03:26 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:21:34 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	put_pxl(t_data *fcl, int x, int y, int color)
 
 void	clean_pars(t_pars *pars)
 {
+	if (pars->fd != -1)
+		close(pars->fd);
 	if (pars->begin_ply)
 		free(pars->begin_ply);
 	if (pars->size_tab)
@@ -64,6 +66,7 @@ void	clean_game(t_game *game)
 
 void	exit_clean(t_data *data, int code)
 {
+	get_next_line(-1);
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->mlx_win)
@@ -75,8 +78,6 @@ void	exit_clean(t_data *data, int code)
 	}
 	clean_pars(data->pars);
 	clean_game(data->game);
-	if (data->pars->fd != -1)
-		close(data->pars->fd);
 	if (code == EXIT_FAILURE)
 		exit(1);
 	if (code == EXIT_SUCCESS)
