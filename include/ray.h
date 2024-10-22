@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/22 12:06:14 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:51:30 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define RIGHT 100
 # define ROT_LEFT 65361
 # define ROT_RIGHT 65363
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.01
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # include "cub3d.h"
@@ -95,6 +95,8 @@ typedef struct s_color
 } 		t_color;
 
 void	raycasting(t_data *data, t_player *player);
-int		handle_keys(int keycode, t_data *data);
+int		handle_keys(t_data *data);
+int		handle_keydown(int keycode, t_data *data);
+int		handle_keyup(int keycode, t_data *data);
 
 #endif

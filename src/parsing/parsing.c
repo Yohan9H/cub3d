@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 14:05:58 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 15:43:24 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_parsing(t_data *data)
 {
+	int i;
+
 	data->game = (t_game *)malloc(sizeof(t_game) * 1); // a changer plus tard
 	data->game->map = NULL;
 	data->game->player = malloc(sizeof(t_player));
@@ -50,6 +52,12 @@ void	init_parsing(t_data *data)
 	data->pars->f_rvb->r = 12;
 	data->pars->f_rvb->v = 80;
 	data->pars->f_rvb->b = 70;
+	i = 0;
+	while (i < 65536)
+	{
+		data->key_states[i] = 0;
+		i++;
+	}
 }
 
 void	check_args(t_data *data, int ac, char *file)
