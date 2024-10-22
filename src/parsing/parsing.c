@@ -6,20 +6,43 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 15:43:24 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 16:55:31 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_parsing(t_data *data)
+void	init_textures(t_data *data)
 {
 	int i;
 
 	data->game = (t_game *)malloc(sizeof(t_game) * 1); // a changer plus tard
 	data->game->map = NULL;
+	data->game->textures[0]->addr = NULL;
+	data->game->textures[0]->img = NULL;
+	data->game->textures[0]->path = NULL;
+	data->game->textures[1]->addr = NULL;
+	data->game->textures[1]->img = NULL;
+	data->game->textures[1]->path = NULL;
+	data->game->textures[2]->addr = NULL;
+	data->game->textures[2]->img = NULL;
+	data->game->textures[2]->path = NULL;
+	data->game->textures[3]->addr = NULL;
+	data->game->textures[3]->img = NULL;
+	data->game->textures[3]->path = NULL;
+}
+
+void	init_data(t_data *data)
+{
+	data->game = malloc(sizeof(t_game));
+	if (!data->game)
+		exit_clean(data, EXIT_FAILURE);
+	data->game->map = malloc(sizeof(t_map));
 	data->game->player = malloc(sizeof(t_player));
 	data->game->ray = malloc(sizeof(t_ray));
+	for (int i = 0; i < 4; i++)
+		data->game->textures[i] = malloc(sizeof(t_img));
+	init_textures(data);
 	data->addr = NULL;
 	data->img = NULL;
 	data->mlx = NULL;
@@ -89,10 +112,8 @@ void	check_args(t_data *data, int ac, char *file)
 
 void	parsing(t_data *data, int ac, char **av)
 {
-	init_parsing(data);
-	(void)ac;
-	(void)av;
-	//check_args(data, ac, av[1]);
-	//check_file(data); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
-	//check_map(data);
+	init_data(data);
+	check_args(data, ac, av[1]);
+	check_file(data); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
+	check_map(data);
 }

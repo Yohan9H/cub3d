@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 13:52:24 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 15:00:26 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	verif_id_colors(t_data *data, char *id, char *str);
 
 void	verif_str_colors(t_data *data, char *str);
 
-int		check_all_found(t_pars *pars);
+int		check_all_found(t_data *data, t_pars *pars);
 
 void	check_file(t_data *data);
 

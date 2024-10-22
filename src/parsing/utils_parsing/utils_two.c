@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/18 14:15:32 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:18:26 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,17 @@ void	del_pos_player(char **tab)
 	}
 }
 
-int	check_all_found(t_pars *pars)
+int	check_all_found(t_data *data, t_pars *pars)
 {
 	if ((pars->c + pars->f + pars->no + pars->we + pars->so + pars->ea) == 6)
 		return (1);
+	else if ((pars->c + pars->f + pars->no + pars->we + pars->so + pars->ea)
+		> 6)
+	{
+		ft_fprintf("Error : too many texture in your file");
+		exit_clean(data, EXIT_FAILURE);
+		return (-1);
+	}
 	else
 		return (0);
 }
