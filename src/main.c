@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 17:25:56 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:04:40 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,25 @@ void	init_struct(t_data *data)
 	data->pixel_bits = pixel_bits;
 	data->line_bytes = line_bytes;
 
-}
 
+	data->game = malloc(sizeof(t_game));
+	if (!data->game)
+		exit_clean(data, EXIT_FAILURE);
+	data->game->map = malloc(sizeof(t_map));
+	data->game->player = malloc(sizeof(t_player));
+	data->game->ray = malloc(sizeof(t_ray));
+	for (int i = 0; i < 8; i++)
+	{
+		data->game->textures[i] = malloc(sizeof(t_img));
+	}
+}
 int	main(int ac, char **av)
 {
 	t_data	data;
 // il faut tout bien mettre les data pour arthur, faire les texture et les donner a arthur
 	ac--;
-	parsing(&data, ac, av);
-	// print_data(&data);
+	(void)av;
+	// parsing(&data, ac, av);
 	init_struct(&data);
 	game(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);

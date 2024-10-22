@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/16 14:14:37 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:06:14 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define ROT_RIGHT 65363
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 # include "cub3d.h"
 
 typedef struct s_data	t_data;
@@ -29,6 +31,24 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }			t_vector;
+
+typedef struct s_img
+{
+	char	*path;
+	void	*img;
+	char	*addr;
+	int		l_by;
+	int		p_bi;
+	int		endian;
+	int		texX;
+	int		texY;
+	int		offset;
+	double	step;
+	int		t_w;
+	int		t_h;
+	double	texPos;
+}			t_img;
+
 
 typedef struct s_player
 {
@@ -42,16 +62,19 @@ typedef struct s_ray
 	t_vector	Dir;
 	t_vector	sideDist;
 	t_vector	deltaDist;
-	double		perpWallDist;
+	double		pWDist;
 	int			mapX;
 	int			mapY;
 	int			stepX;
 	int			stepY;
 	int			hit;
 	int			side;
-	int			lineHeight;
-	int			drawStart;
-	int 		drawEnd;
+	int			l_Hei;
+	int			drSt;
+	int 		drEd;
+	double		wallX;
+	int			f;
+	double		fwallX;
 }				t_ray;
 
 typedef struct s_game
@@ -59,27 +82,10 @@ typedef struct s_game
 	t_player	*player;
 	t_ray		*ray;
 	char		**map;
+	t_img		*textures[8];
 }				t_game;
 
-// typedef struct s_game
-// {
-// 	t_player	*player;
-// 	t_ray		*ray;
-// 	int			**map;
-// }				t_game;
 
-
-
-
-
-
-
-// typedef struct s_map
-// {
-// 	int		witdh;
-// 	int		height;
-// 	int		**grid;
-// }			t_map;
 
 typedef struct s_color
 {
