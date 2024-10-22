@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:52:45 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 14:22:16 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:26:36 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	svg_texture_in_img(t_data *data, char *id, char *line)
 {
-	if (!line || line[0] == '\0')
-		return ;
 	if (ft_strncmp(id, "NO", 3) == 0)
 	{
 		data->game->textures[0]->path = ft_strdup(line);
@@ -56,6 +54,7 @@ void	svg_str_for_ray(t_data *data, char *line, char *id)
 	if (!str)
 		exit_clean(data, EXIT_FAILURE);
 	svg_texture_in_img(data, id, str);
+	free(str);
 }
 
 void	take_line(t_data *data, char *id, char *line)
@@ -105,8 +104,11 @@ void	take_id(t_data *data, char *line)
 void	check_file(t_data *data)
 {
 	data->pars->line = get_next_line(data->pars->fd);
-	take_id(data, data->pars->line);
-	take_line(data, data->pars->id, data->pars->line);
+	if (data->pars->line != NULL)
+	{
+		take_id(data, data->pars->line);
+		take_line(data, data->pars->id, data->pars->line);
+	}
 	while (data->pars->line != NULL && check_all_found(data, data->pars) != 1)
 	{
 		free(data->pars->line);

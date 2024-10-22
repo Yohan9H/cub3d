@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 14:59:41 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:29:04 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_data(t_data *data)
 	data->game = malloc(sizeof(t_game));
 	if (!data->game)
 		exit_clean(data, EXIT_FAILURE);
-	data->game->map = malloc(sizeof(t_map));
+	data->game->map = NULL;
 	data->game->player = malloc(sizeof(t_player));
 	data->game->ray = malloc(sizeof(t_ray));
 	for (int i = 0; i < 4; i++)
