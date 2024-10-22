@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/22 16:50:11 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:55:56 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	hook_put(t_data *data, t_player *player)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
 
-int	is_wall(int map[24][24], t_player *player, int keycode)
+int	is_wall(char **map, t_player *player, int keycode)
 {
 	int pos_map;
 	double delta;
@@ -49,7 +49,7 @@ int	is_wall(int map[24][24], t_player *player, int keycode)
 		x = player->pos.x - player->dir.x * delta;
 		y = player->pos.y - player->dir.y * delta;
 	}
-	pos_map = (int)map[(int)x][(int)y];
+	pos_map = (int)map[(int)x][(int)y] - '0';
 	//printf("%d\n", pos_map);
 	if (pos_map > 0)
 		return (1);
@@ -79,52 +79,24 @@ int	handle_keys(t_data *data)
 	double 		old_dir_x;
 	double 		old_plane_x;
 
-	int map[24][24] = 
-	{
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
-
 	player = data->game->player;
 
-	if (data->key_states[LEFT] && !is_wall(map, player, LEFT))
+	if (data->key_states[LEFT] && !is_wall(data->game->map, player, LEFT))
 	{
 		player->pos.x = player->pos.x - player->plane.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->plane.y * MOVE_SPEED;
 	}
-	if (data->key_states[RIGHT] && !is_wall(map, player, RIGHT))
+	if (data->key_states[RIGHT] && !is_wall(data->game->map, player, RIGHT))
 	{
 		player->pos.x = player->pos.x + player->plane.x * MOVE_SPEED;
 		player->pos.y = player->pos.y + player->plane.y * MOVE_SPEED;
 	}
-	if (data->key_states[FRONT] && !is_wall(map, player, FRONT))
+	if (data->key_states[FRONT] && !is_wall(data->game->map, player, FRONT))
 	{
 		player->pos.x = player->pos.x + player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y + player->dir.y * MOVE_SPEED;
 	}
-	if (data->key_states[BACK] && !is_wall(map, player, BACK))
+	if (data->key_states[BACK] && !is_wall(data->game->map, player, BACK))
 	{
 		player->pos.x = player->pos.x - player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->dir.y * MOVE_SPEED;
@@ -179,26 +151,16 @@ unsigned int	get_pixel(t_data *data, int x, int y)
 int	load_textures(t_data *data, t_game *game)
 {
 	int i;
-	// Liste des chemins vers les fichiers XPM
-	const char	*texture_files[8] = {
-		"textures/eagle.xpm",
-		"textures/redbrick.xpm",
-		"textures/purplestone.xpm",
-		"textures/greystone.xpm",
-		"textures/bluestone.xpm",
-		"textures/mossy.xpm",
-		"textures/wood.xpm",
-		"textures/colorstone.xpm"
-	};
+	
 	i = 0;
-	while (i < 7)
+	while (i < 3)
 	{
 		int width;
 		int	height;
-		game->textures[i]->img = mlx_xpm_file_to_image(data->mlx, (char *)texture_files[i], &width, &height);
+		game->textures[i]->img = mlx_xpm_file_to_image(data->mlx, data->game->textures[i]->path, &width, &height);
 		if (!game->textures[i])
 		{
-			fprintf(stderr, "Erreur : Impossible de charger la texture %s\n", texture_files[i]);
+			fprintf(stderr, "Erreur : Impossible de charger la texture %s\n", game->textures[i]->path);
 			return (0);
 		}
 		game->textures[i]->addr = mlx_get_data_addr\
@@ -254,7 +216,7 @@ void	make_wall(t_img *tex, t_player *player, t_ray *ray)
 	ray->drEd = ray->l_Hei / 2 + HEIGHT / 2;
 	if (ray->drEd >= HEIGHT)
 		ray->drEd = HEIGHT - 1;
-	if (ray->side == 0)
+	if (ray->side == 0) 
 		ray->wallX = player->pos.y + ray->pWDist * ray->Dir.y;
 	else
 		ray->wallX = player->pos.x + ray->pWDist * ray->Dir.x;
@@ -268,7 +230,7 @@ void	make_wall(t_img *tex, t_player *player, t_ray *ray)
 	tex->step = 1.0 * tex->t_h / ray->l_Hei;
 }
 
-void	hit(t_ray *ray, int map[24][24])
+void	hit(t_ray *ray, char **map)
 {
 	ray->hit = 0;
 	while (ray->hit == 0)
@@ -285,7 +247,7 @@ void	hit(t_ray *ray, int map[24][24])
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		if (map[ray->mapX][ray->mapY] > 0)
+		if ((int)map[ray->mapX][ray->mapY] - '0' > 0)
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -347,33 +309,6 @@ void	raycasting(t_data *data, t_player *player)
 	t_img	*tex;
 	int		texNum;
 	int		texPos;
-	int map[24][24] = 
-	{
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
 	
 	ray = data->game->ray;
 	i = 0;
@@ -382,8 +317,8 @@ void	raycasting(t_data *data, t_player *player)
 	{
 		ray_init(i, player, data->game->ray);
 		side_dist(ray, player);
-		hit(ray, map);
-		texNum = map[ray->mapX][ray->mapY] - 1;
+		hit(ray, data->game->map);
+		texNum = (int)data->game->map[ray->mapX][ray->mapY] - '0' - 1;
 		tex = data->game->textures[texNum];
 		make_wall(tex, player, ray);
 		texPos = (ray->drSt - HEIGHT / 2 + ray->l_Hei / 2) * tex->step;

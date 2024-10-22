@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 16:55:31 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:16:12 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	init_textures(t_data *data)
 {
-	int i;
-
-	data->game = (t_game *)malloc(sizeof(t_game) * 1); // a changer plus tard
-	data->game->map = NULL;
+//	data->game = (t_game *)malloc(sizeof(t_game) * 1); // a changer plus tard
+//	data->game->map = NULL;
 	data->game->textures[0]->addr = NULL;
 	data->game->textures[0]->img = NULL;
 	data->game->textures[0]->path = NULL;
@@ -75,12 +73,8 @@ void	init_data(t_data *data)
 	data->pars->f_rvb->r = 12;
 	data->pars->f_rvb->v = 80;
 	data->pars->f_rvb->b = 70;
-	i = 0;
-	while (i < 65536)
-	{
+	for (int i = 0; i < 65366; i++)
 		data->key_states[i] = 0;
-		i++;
-	}
 }
 
 void	check_args(t_data *data, int ac, char *file)
