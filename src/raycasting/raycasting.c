@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/22 17:55:56 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 18:06:48 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int	load_textures(t_data *data, t_game *game)
 		game->textures[i]->img = mlx_xpm_file_to_image(data->mlx, data->game->textures[i]->path, &width, &height);
 		if (!game->textures[i])
 		{
-			fprintf(stderr, "Erreur : Impossible de charger la texture %s\n", game->textures[i]->path);
+			fprintf(stderr, "Erreur: Impossible de charger la texture %s\n", game->textures[i]->path);
 			return (0);
 		}
 		game->textures[i]->addr = mlx_get_data_addr\
