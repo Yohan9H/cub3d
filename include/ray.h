@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/21 15:16:35 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 11:58:15 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_vector
 
 typedef struct s_img
 {
+	char	*path;
 	void	*img;
 	char	*addr;
 	int		l_by;

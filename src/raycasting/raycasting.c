@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/21 17:00:14 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/22 11:56:53 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,91 @@ void	hook_put(t_data *data, t_player *player)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
 
+int	is_wall(int map[24][24], t_player *player, int keycode)
+{
+	int pos_map;
+	double delta;
+	double x;
+	double y;
+
+	delta = 0.5;
+
+	if (keycode == LEFT)
+	{
+		x = player->pos.x - player->plane.x * delta;
+		y = player->pos.y - player->plane.y * delta;
+	}
+	else if (keycode == RIGHT)
+	{
+		x = player->pos.x + player->plane.x * delta;
+		y = player->pos.y + player->plane.y * delta;
+	}
+	else if (keycode == FRONT)
+	{
+		x = player->pos.x + player->dir.x * delta;
+		y = player->pos.y + player->dir.y * delta;
+	}
+	else
+	{
+		x = player->pos.x - player->dir.x * delta;
+		y = player->pos.y - player->dir.y * delta;
+	}
+	pos_map = (int)map[(int)x][(int)y];
+	//printf("%d\n", pos_map);
+	if (pos_map > 0)
+		return (1);
+	return (0);
+}
+
 int	handle_keys(int keycode, t_data *data)
 {
 	t_player	*player;
 
+	int map[24][24] = 
+	{
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	};
+
 	player = data->game->player;
-	if (keycode == LEFT)
+	if (keycode == LEFT && !is_wall(map, player, LEFT))
 	{
 		player->pos.x = player->pos.x - player->plane.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->plane.y * MOVE_SPEED;
 	}
-	else if (keycode == RIGHT)
+	else if (keycode == RIGHT && !is_wall(map, player, RIGHT))
 	{
 		player->pos.x = player->pos.x + player->plane.x * MOVE_SPEED;
 		player->pos.y = player->pos.y + player->plane.y * MOVE_SPEED;
 	}
-	else if (keycode == FRONT)
+	else if (keycode == FRONT && !is_wall(map, player, FRONT))
 	{
 		player->pos.x = player->pos.x + player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y + player->dir.y * MOVE_SPEED;
 	}
-	else if (keycode == BACK)
+	else if (keycode == BACK && !is_wall(map, player, BACK))
 	{
 		player->pos.x = player->pos.x - player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->dir.y * MOVE_SPEED;
@@ -89,6 +153,7 @@ unsigned int	get_pixel(t_data *data, int x, int y)
 
 int	load_textures(t_data *data, t_game *game)
 {
+	int i;
 	// Liste des chemins vers les fichiers XPM
 	const char	*texture_files[8] = {
 		"textures/eagle.xpm",
@@ -100,8 +165,8 @@ int	load_textures(t_data *data, t_game *game)
 		"textures/wood.xpm",
 		"textures/colorstone.xpm"
 	};
-
-	for (int i = 0; i < 7; i++)
+	i = 0;
+	while (i < 7)
 	{
 		int width;
 		int	height;
@@ -116,6 +181,7 @@ int	load_textures(t_data *data, t_game *game)
 				&data->game->textures[i]->l_by, &data->game->textures[i]->endian);
 		game->textures[i]->t_w = width;
 		game->textures[i]->t_h = height;
+		i++;
 	}
 	return (1);
 }
