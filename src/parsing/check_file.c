@@ -6,41 +6,43 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:52:45 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/21 17:12:03 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:22:16 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	verif_str(t_data *data, char *str, char *word)
+void	svg_texture_in_img(t_data *data, char *id, char *line)
 {
-	int		i;
-	int		len_word;
-
-	len_word = ft_strlen(word);
-	if (ft_strncmp(str, "./path_to_the_", 14) != 0)
+	if (!line || line[0] == '\0')
+		return ;
+	if (ft_strncmp(id, "NO", 3) == 0)
 	{
-		free(str);
-		ft_fprintf("Error 1: your path in your file is bad for -%s-\n", word);
-		exit_clean(data, EXIT_FAILURE);
+		data->game->textures[0]->path = ft_strdup(line);
+		if (!data->game->textures[0]->path)
+			exit_clean(data, EXIT_FAILURE);
 	}
-	i = 14;
-	if (ft_strncmp(&str[i], word, len_word - 1) != 0)
+	else if (ft_strncmp(id, "SO", 3) == 0)
 	{
-		free(str);
-		ft_fprintf("Error 2: your path in your file is bad for -%s-\n", word);
-		exit_clean(data, EXIT_FAILURE);
+		data->game->textures[1]->path = ft_strdup(line);
+		if (!data->game->textures[1]->path)
+			exit_clean(data, EXIT_FAILURE);
 	}
-	i += len_word;
-	if (ft_strncmp(&str[i], "_texture", 9) != 0)
+	else if (ft_strncmp(id, "WE", 3) == 0)
 	{
-		free(str);
-		ft_fprintf("Error 3: your path in your file is bad for -%s-\n", word);
-		exit_clean(data, EXIT_FAILURE);
+		data->game->textures[2]->path = ft_strdup(line);
+		if (!data->game->textures[2]->path)
+			exit_clean(data, EXIT_FAILURE);
+	}
+	else if (ft_strncmp(id, "EA", 3) == 0)
+	{
+		data->game->textures[3]->path = ft_strdup(line);
+		if (!data->game->textures[3]->path)
+			exit_clean(data, EXIT_FAILURE);
 	}
 }
 
-void	take_and_verif_str(t_data *data, char *line, char *word)
+void	svg_str_for_ray(t_data *data, char *line, char *id)
 {
 	char	*str;
 	int		i;
@@ -48,40 +50,36 @@ void	take_and_verif_str(t_data *data, char *line, char *word)
 	if (line == NULL)
 		return ;
 	i = skip_id(data, line);
-	while (line[i] && line[i] != '.')
+	while (line[i] && ft_isspace(line[i]) == 1)
 		i++;
 	str = ft_strdup_esc(&line[i]);
 	if (!str)
-	{
-		free(str);
 		exit_clean(data, EXIT_FAILURE);
-	}
-	verif_str(data, str, word);
-	free(str);
+	svg_texture_in_img(data, id, str);
 }
 
-void	check_line(t_data *data, char *id, char *line)
+void	take_line(t_data *data, char *id, char *line)
 {
 	if (line[0] == '\n')
 		return ;
 	if (ft_strncmp(id, "NO", 3) == 0)
 	{
-		take_and_verif_str(data, line, "north");
+		svg_str_for_ray(data, line, id);
 		data->pars->no = 1;
 	}
 	else if (ft_strncmp(id, "SO", 3) == 0)
 	{
-		take_and_verif_str(data, line, "south");
+		svg_str_for_ray(data, line, id);
 		data->pars->so = 1;
 	}
 	else if (ft_strncmp(id, "WE", 3) == 0)
 	{
-		take_and_verif_str(data, line, "west");
+		svg_str_for_ray(data, line, id);
 		data->pars->we = 1;
 	}
 	else if (ft_strncmp(id, "EA", 3) == 0)
 	{
-		take_and_verif_str(data, line, "east");
+		svg_str_for_ray(data, line, id);
 		data->pars->ea = 1;
 	}
 	else
@@ -108,15 +106,15 @@ void	check_file(t_data *data)
 {
 	data->pars->line = get_next_line(data->pars->fd);
 	take_id(data, data->pars->line);
-	check_line(data, data->pars->id, data->pars->line);
-	while (data->pars->line != NULL && check_all_found(data->pars) != 1)
+	take_line(data, data->pars->id, data->pars->line);
+	while (data->pars->line != NULL && check_all_found(data, data->pars) != 1)
 	{
 		free(data->pars->line);
 		data->pars->line = get_next_line(data->pars->fd);
 		if (data->pars->line == NULL)
 			break;
 		take_id(data, data->pars->line);
-		check_line(data, data->pars->id, data->pars->line);
+		take_line(data, data->pars->id, data->pars->line);
 	}
 	if (data->pars->line == NULL)
 	{
