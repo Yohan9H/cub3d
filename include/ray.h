@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/22 16:51:30 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:01:12 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # define RIGHT 100
 # define ROT_LEFT 65361
 # define ROT_RIGHT 65363
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.01
+# define MOVE_SPEED 0.005
+# define ROT_SPEED 0.005
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define DELTA 0.5
 # include "cub3d.h"
 
 typedef struct s_data	t_data;
@@ -59,22 +60,22 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	t_vector	Dir;
-	t_vector	sideDist;
-	t_vector	deltaDist;
-	double		pWDist;
-	int			mapX;
-	int			mapY;
-	int			stepX;
-	int			stepY;
+	t_vector	dir;
+	t_vector	sidedist;
+	t_vector	deltadist;
+	double		pwdist;
+	int			mapx;
+	int			mapy;
+	int			stepx;
+	int			stepy;
 	int			hit;
 	int			side;
-	int			l_Hei;
-	int			drSt;
-	int 		drEd;
-	double		wallX;
+	int			l_hei;
+	int			drst;
+	int 		dred;
+	double		wallx;
 	int			f;
-	double		fwallX;
+	double		fwallx;
 }				t_ray;
 
 typedef struct s_game

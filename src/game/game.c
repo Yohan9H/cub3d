@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 12:10:19 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/23 16:41:27 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	load_textures(t_data *data, t_game *game)
 	t_img	*tex;
 
 	i = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		tex = game->textures[i];
 		tex->img = mlx_xpm_file_to_image(data->mlx, tex->path, &width, &height);
@@ -30,7 +30,7 @@ int	load_textures(t_data *data, t_game *game)
 			return (0);
 		}
 		tex->addr = mlx_get_data_addr(tex->img, \
-			tex->p_bi, tex->l_by, tex->endian);
+			&tex->p_bi, &tex->l_by, &tex->endian);
 		tex->t_w = width;
 		tex->t_h = height;
 		i++;

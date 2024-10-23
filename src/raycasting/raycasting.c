@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/23 13:42:19 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:12:04 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,41 @@ void	hook_put(t_data *data, t_player *player)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
 
-int	is_wall(char **map, t_player *player, int keycode)
+int	wall_condition(int keycode, t_player *player, char **map)
 {
-	int		pos_map;
-	double	delta;
-	double	x;
-	double	y;
+	t_vector	p;
 
-	delta = 0.5;
 	if (keycode == LEFT)
 	{
-		x = player->pos.x - player->plane.x * delta;
-		y = player->pos.y - player->plane.y * delta;
+		p.x = player->pos.x - player->plane.x * DELTA;
+		p.y = player->pos.y - player->plane.y * DELTA;
 	}
 	else if (keycode == RIGHT)
 	{
-		x = player->pos.x + player->plane.x * delta;
-		y = player->pos.y + player->plane.y * delta;
+		p.x = player->pos.x + player->plane.x * DELTA;
+		p.y = player->pos.y + player->plane.y * DELTA;
 	}
 	else if (keycode == FRONT)
 	{
-		x = player->pos.x + player->dir.x * delta;
-		y = player->pos.y + player->dir.y * delta;
+		p.x = player->pos.x + player->dir.x * DELTA;
+		p.y = player->pos.y + player->dir.y * DELTA;
 	}
-	else
+	else if (keycode == BACK)
 	{
-		x = player->pos.x - player->dir.x * delta;
-		y = player->pos.y - player->dir.y * delta;
+		p.x = player->pos.x - player->dir.x * DELTA;
+		p.y = player->pos.y - player->dir.y * DELTA;
 	}
-	pos_map = (int)map[(int)x][(int)y] - '0';
+	return ((int)map[(int)p.x][(int)p.y] - '0');
+}
+
+int	is_wall(char **map, t_player *player, int keycode)
+{
+	int		pos_map;
+
+	pos_map = wall_condition(keycode, player, map);
 	if (pos_map > 0)
 		return (1);
 	return (0);
-}
-
-void	handle_key_event(t_data *data, int keycode, int is_pressed)
-{
-	data->key_states[keycode] = is_pressed;
 }
 
 int	handle_keydown(int keycode, t_data *data)
@@ -71,15 +69,8 @@ int	handle_keyup(int keycode, t_data *data)
 	return (0);
 }
 
-int	handle_keys(t_data *data)
+void	handle_move(t_data *data, t_player *player)
 {
-	t_player	*player;
-	double		old_dir_x;
-	double		old_plane_x;
-
-	player = data->game->player;
-	if (data->key_states[ESC])
-		exit_clean(data, EXIT_SUCCESS);
 	if (data->key_states[LEFT] && !is_wall(data->game->map, player, LEFT))
 	{
 		player->pos.x = player->pos.x - player->plane.x * MOVE_SPEED;
@@ -100,32 +91,44 @@ int	handle_keys(t_data *data)
 		player->pos.x = player->pos.x - player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->dir.y * MOVE_SPEED;
 	}
+}
+
+void	handle_rotation(t_data *data, t_player *player)
+{
+	double		old_dir_x;
+	double		old_plane_x;
+	double		rot_speed;
+
 	if (data->key_states[ROT_RIGHT])
+		rot_speed = -ROT_SPEED;
+	else if (data->key_states[ROT_LEFT])
+		rot_speed = ROT_SPEED;
+	else
+		return ;
+	old_dir_x = player->dir.x;
+	old_plane_x = player->plane.x;
+	if (data->key_states[ROT_RIGHT] || data->key_states[ROT_LEFT])
 	{
-		old_dir_x = player->dir.x;
-		old_plane_x = player->plane.x;
-		player->dir.x = player->dir.x * cos(-ROT_SPEED) - \
-			player->dir.y * sin(-ROT_SPEED);
-		player->dir.y = old_dir_x * sin(-ROT_SPEED) + \
-			player->dir.y * cos(-ROT_SPEED);
-		player->plane.x = player->plane.x * cos(-ROT_SPEED) - \
-			player->plane.y * sin(-ROT_SPEED);
-		player->plane.y = old_plane_x * sin(-ROT_SPEED) + \
-			player->plane.y * cos(-ROT_SPEED);
+		player->dir.x = old_dir_x * cos(rot_speed) - \
+			player->dir.y * sin(rot_speed);
+		player->dir.y = old_dir_x * sin(rot_speed) + \
+			player->dir.y * cos(rot_speed);
+		player->plane.x = old_plane_x * cos(rot_speed) - \
+			player->plane.y * sin(rot_speed);
+		player->plane.y = old_plane_x * sin(rot_speed) + \
+			player->plane.y * cos(rot_speed);
 	}
-	if (data->key_states[ROT_LEFT])
-	{
-		old_dir_x = player->dir.x;
-		old_plane_x = player->plane.x;
-		player->dir.x = player->dir.x * cos(ROT_SPEED) - \
-			player->dir.y * sin(ROT_SPEED);
-		player->plane.x = player->plane.x * cos(ROT_SPEED) - \
-			player->plane.y * sin(ROT_SPEED);
-		player->dir.y = old_dir_x * sin(ROT_SPEED) + \
-			player->dir.y * cos(ROT_SPEED);
-		player->plane.y = old_plane_x * sin(ROT_SPEED) + \
-			player->plane.y * cos(ROT_SPEED);
-	}
+}
+
+int	handle_keys(t_data *data)
+{
+	t_player	*player;
+
+	player = data->game->player;
+	if (data->key_states[ESC])
+		exit_clean(data, EXIT_SUCCESS);
+	handle_move(data, player);
+	handle_rotation(data, player);
 	hook_put(data, player);
 	return (0);
 }
@@ -161,7 +164,7 @@ void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 	j = 0;
 	while (j < HEIGHT)
 	{	
-		if (j < data->game->ray->drEd && j > data->game->ray->drSt)
+		if (j <= data->game->ray->dred && j >= data->game->ray->drst)
 		{
 			tex->texY = (int)texPos & (tex->t_h -1);
 			texPos += tex->step;
@@ -172,9 +175,9 @@ void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 			pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
 			*(__uint32_t *)(data->addr + pixel_offset) = color;
 		}
-		else if (j < data->game->ray->drSt)
+		else if (j < data->game->ray->drst)
 			my_pixel_put(data, i, j, get_color(data->pars->f_rvb));
-		else if (j > data->game->ray->drEd)
+		else if (j > data->game->ray->dred)
 			my_pixel_put(data, i, j, get_color(data->pars->c_rvb));
 		j++;
 	}
@@ -182,25 +185,25 @@ void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 
 void	make_wall(t_img *tex, t_player *player, t_ray *ray)
 {
-	ray->l_Hei = (int)(HEIGHT / ray->pWDist);
-	ray->drSt = -ray->l_Hei / 2 + HEIGHT / 2;
-	if (ray->drSt < 0)
-		ray->drSt = 0;
-	ray->drEd = ray->l_Hei / 2 + HEIGHT / 2;
-	if (ray->drEd >= HEIGHT)
-		ray->drEd = HEIGHT - 1;
+	ray->l_hei = (int)(HEIGHT / ray->pwdist);
+	ray->drst = -ray->l_hei / 2 + HEIGHT / 2;
+	if (ray->drst < 0)
+		ray->drst = 0;
+	ray->dred = ray->l_hei / 2 + HEIGHT / 2;
+	if (ray->dred >= HEIGHT)
+		ray->dred = HEIGHT - 1;
 	if (ray->side == 0)
-		ray->wallX = player->pos.y + ray->pWDist * ray->Dir.y;
+		ray->wallx = player->pos.y + ray->pwdist * ray->dir.y;
 	else
-		ray->wallX = player->pos.x + ray->pWDist * ray->Dir.x;
-	ray->f = (int)ray->wallX;
-	ray->fwallX = (double)ray->f;
-	ray->wallX -= ray->fwallX;
-	tex->texX = (int)(ray->wallX * (double)tex->t_w);
-	if ((ray->side == 0 && ray->Dir.y > 0) || \
-		(ray->side == 1 && ray->Dir.y < 0))
+		ray->wallx = player->pos.x + ray->pwdist * ray->dir.x;
+	ray->f = (int)ray->wallx;
+	ray->fwallx = (double)ray->f;
+	ray->wallx -= ray->fwallx;
+	tex->texX = (int)(ray->wallx * (double)tex->t_w);
+	if ((ray->side == 0 && ray->dir.x > 0) || \
+		(ray->side == 1 && ray->dir.y < 0))
 		tex->texX = tex->t_w - tex->texX - 1;
-	tex->step = 1.0 * tex->t_h / ray->l_Hei;
+	tex->step = 1.0 * tex->t_h / ray->l_hei;
 }
 
 void	hit(t_ray *ray, char **map)
@@ -208,71 +211,88 @@ void	hit(t_ray *ray, char **map)
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
-		if (ray->sideDist.x < ray->sideDist.y)
+		if (ray->sidedist.x < ray->sidedist.y)
 		{
-			ray->sideDist.x += ray->deltaDist.x;
-			ray->mapX += ray->stepX;
+			ray->sidedist.x += ray->deltadist.x;
+			ray->mapx += ray->stepx;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDist.y += ray->deltaDist.y;
-			ray->mapY += ray->stepY;
+			ray->sidedist.y += ray->deltadist.y;
+			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		if ((int)map[ray->mapX][ray->mapY] - '0' > 0)
+		if ((int)map[ray->mapx][ray->mapy] - '0' > 0)
+		{
 			ray->hit = 1;
+		}
 	}
 	if (ray->side == 0)
-		ray->pWDist = (ray->sideDist.x - ray->deltaDist.x);
+		ray->pwdist = (ray->sidedist.x - ray->deltadist.x);
 	else
-		ray->pWDist = (ray->sideDist.y - ray->deltaDist.y);
+		ray->pwdist = (ray->sidedist.y - ray->deltadist.y);
 }
 
 void	side_dist(t_ray *ray, t_player *player)
 {
-	if (ray->Dir.x < 0)
+	if (ray->dir.x < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDist.x = (player->pos.x - ray->mapX) * \
-			ray->deltaDist.x;
+		ray->stepx = -1;
+		ray->sidedist.x = (player->pos.x - ray->mapx) * ray->deltadist.x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDist.x = (ray->mapX + 1.0 - player->pos.x) * \
-			ray->deltaDist.x;
+		ray->stepx = 1;
+		ray->sidedist.x = (ray->mapx + 1.0 - player->pos.x) * ray->deltadist.x;
 	}
-	if (ray->Dir.y < 0)
+	if (ray->dir.y < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDist.y = (player->pos.y - ray->mapY) * \
-			ray->deltaDist.y;
+		ray->stepy = -1;
+		ray->sidedist.y = (player->pos.y - ray->mapy) * ray->deltadist.y;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDist.y = (ray->mapY + 1.0 - player->pos.y) * ray->deltaDist.y;
+		ray->stepy = 1;
+		ray->sidedist.y = (ray->mapy + 1.0 - player->pos.y) * ray->deltadist.y;
 	}
 }
 
 void	ray_init(int i, t_player *player, t_ray *ray)
 {
-	double	cameraX;
+	double	camerax;
 
-	cameraX = 2 * i / (double)WIDTH -1;
-	ray->Dir.x = player->dir.x + player->plane.x * cameraX;
-	ray->Dir.y = player->dir.y + player->plane.y * cameraX;
-	ray->mapX = (int)player->pos.x;
-	ray->mapY = (int)player->pos.y;
-	if (ray->Dir.x == 0)
-		ray->deltaDist.x = 1e30;
+	camerax = 2 * i / (double)WIDTH -1;
+	ray->dir.x = player->dir.x + player->plane.x * camerax;
+	ray->dir.y = player->dir.y + player->plane.y * camerax;
+	ray->mapx = (int)player->pos.x;
+	ray->mapy = (int)player->pos.y;
+	if (ray->dir.x == 0)
+		ray->deltadist.x = 1e30;
 	else
-		ray->deltaDist.x = fabs(1 / ray->Dir.x);
-	if (ray->Dir.y == 0)
-		ray->deltaDist.y = 1e30;
+		ray->deltadist.x = fabs(1 / ray->dir.x);
+	if (ray->dir.y == 0)
+		ray->deltadist.y = 1e30;
 	else
-		ray->deltaDist.y = fabs(1 / ray->Dir.y);
+		ray->deltadist.y = fabs(1 / ray->dir.y);
+}
+
+int	which_texture(t_ray *ray)
+{
+	if (ray->side == 1)
+	{
+		if (ray->dir.y > 0)
+			return (0);
+		else
+			return (1);
+	}
+	else
+	{
+		if (ray->dir.x > 0)
+			return (3);
+		else
+			return (2);
+	}
 }
 
 void	raycasting(t_data *data, t_player *player)
@@ -280,9 +300,9 @@ void	raycasting(t_data *data, t_player *player)
 	int		i;
 	t_ray	*ray;
 	t_img	*tex;
-	int		texNum;
-	int		texPos;
-	
+	int		texnum;
+	int		texpos;
+
 	ray = data->game->ray;
 	i = 0;
 	while (i < WIDTH)
@@ -290,11 +310,11 @@ void	raycasting(t_data *data, t_player *player)
 		ray_init(i, player, data->game->ray);
 		side_dist(ray, player);
 		hit(ray, data->game->map);
-		texNum = (int)data->game->map[ray->mapX][ray->mapY] - '0' - 1;
-		tex = data->game->textures[texNum];
+		texnum = which_texture(ray);
+		tex = data->game->textures[texnum];
 		make_wall(tex, player, ray);
-		texPos = (ray->drSt - HEIGHT / 2 + ray->l_Hei / 2) * tex->step;
-		fill_wall(data, data->game->textures[texNum], i, texPos);
+		texpos = (ray->drst - HEIGHT / 2 + ray->l_hei / 2) * tex->step;
+		fill_wall(data, data->game->textures[texnum], i, texpos);
 		i++;
 	}
 }
