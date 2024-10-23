@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 14:18:26 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:15:39 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	reset_value_map(t_data *data)
 	data->pars->ea = 0;
 }
 
-void	check_if_palyer(t_data *data, char c ,int y, int x)
+void	check_if_palyer(t_data *data, char c, int y, int x)
 {
 	if (c == 'N')
 	{

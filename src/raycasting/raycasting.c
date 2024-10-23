@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/22 18:06:48 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/23 13:42:19 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ void	hook_put(t_data *data, t_player *player)
 
 int	is_wall(char **map, t_player *player, int keycode)
 {
-	int pos_map;
-	double delta;
-	double x;
-	double y;
+	int		pos_map;
+	double	delta;
+	double	x;
+	double	y;
 
 	delta = 0.5;
-
 	if (keycode == LEFT)
 	{
 		x = player->pos.x - player->plane.x * delta;
@@ -50,24 +49,23 @@ int	is_wall(char **map, t_player *player, int keycode)
 		y = player->pos.y - player->dir.y * delta;
 	}
 	pos_map = (int)map[(int)x][(int)y] - '0';
-	//printf("%d\n", pos_map);
 	if (pos_map > 0)
 		return (1);
 	return (0);
 }
 
-void handle_key_event(t_data *data, int keycode, int is_pressed)
+void	handle_key_event(t_data *data, int keycode, int is_pressed)
 {
 	data->key_states[keycode] = is_pressed;
 }
 
-int handle_keydown(int keycode, t_data *data)
+int	handle_keydown(int keycode, t_data *data)
 {
 	data->key_states[keycode] = 1;
 	return (0);
 }
 
-int handle_keyup(int keycode, t_data *data)
+int	handle_keyup(int keycode, t_data *data)
 {
 	data->key_states[keycode] = 0;
 	return (0);
@@ -76,11 +74,12 @@ int handle_keyup(int keycode, t_data *data)
 int	handle_keys(t_data *data)
 {
 	t_player	*player;
-	double 		old_dir_x;
-	double 		old_plane_x;
+	double		old_dir_x;
+	double		old_plane_x;
 
 	player = data->game->player;
-
+	if (data->key_states[ESC])
+		exit_clean(data, EXIT_SUCCESS);
 	if (data->key_states[LEFT] && !is_wall(data->game->map, player, LEFT))
 	{
 		player->pos.x = player->pos.x - player->plane.x * MOVE_SPEED;
@@ -101,7 +100,6 @@ int	handle_keys(t_data *data)
 		player->pos.x = player->pos.x - player->dir.x * MOVE_SPEED;
 		player->pos.y = player->pos.y - player->dir.y * MOVE_SPEED;
 	}
-
 	if (data->key_states[ROT_RIGHT])
 	{
 		old_dir_x = player->dir.x;
@@ -148,32 +146,7 @@ unsigned int	get_pixel(t_data *data, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-int	load_textures(t_data *data, t_game *game)
-{
-	int i;
-	
-	i = 0;
-	while (i < 3)
-	{
-		int width;
-		int	height;
-		game->textures[i]->img = mlx_xpm_file_to_image(data->mlx, data->game->textures[i]->path, &width, &height);
-		if (!game->textures[i])
-		{
-			fprintf(stderr, "Erreur: Impossible de charger la texture %s\n", game->textures[i]->path);
-			return (0);
-		}
-		game->textures[i]->addr = mlx_get_data_addr\
-			(data->game->textures[i]->img, &data->game->textures[i]->p_bi, \
-				&data->game->textures[i]->l_by, &data->game->textures[i]->endian);
-		game->textures[i]->t_w = width;
-		game->textures[i]->t_h = height;
-		i++;
-	}
-	return (1);
-}
-
-__uint32_t		get_color(t_rvb *rvb)
+__uint32_t	get_color(t_rvb *rvb)
 {
 	return ((rvb->r << 16) | (rvb->v << 8) | rvb->b);
 }
@@ -216,7 +189,7 @@ void	make_wall(t_img *tex, t_player *player, t_ray *ray)
 	ray->drEd = ray->l_Hei / 2 + HEIGHT / 2;
 	if (ray->drEd >= HEIGHT)
 		ray->drEd = HEIGHT - 1;
-	if (ray->side == 0) 
+	if (ray->side == 0)
 		ray->wallX = player->pos.y + ray->pWDist * ray->Dir.y;
 	else
 		ray->wallX = player->pos.x + ray->pWDist * ray->Dir.x;
@@ -312,7 +285,6 @@ void	raycasting(t_data *data, t_player *player)
 	
 	ray = data->game->ray;
 	i = 0;
-	load_textures(data, data->game);
 	while (i < WIDTH)
 	{
 		ray_init(i, player, data->game->ray);

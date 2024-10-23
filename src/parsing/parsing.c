@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 18:20:02 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:13:39 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void	init_data(t_data *data)
 	data->pars->f_rvb = (t_rvb *)ft_calloc(1, sizeof(t_rvb));
 	if (!data->pars->f_rvb)
 		exit_clean(data, EXIT_FAILURE);
-	data->pars->f_rvb->r = 12;
-	data->pars->f_rvb->v = 80;
-	data->pars->f_rvb->b = 70;
 	for (int i = 0; i < 65366; i++)
 		data->key_states[i] = 0;
 }

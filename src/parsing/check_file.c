@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:52:45 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 15:26:36 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:12:58 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	check_file(t_data *data)
 		free(data->pars->line);
 		data->pars->line = get_next_line(data->pars->fd);
 		if (data->pars->line == NULL)
-			break;
+			break ;
 		take_id(data, data->pars->line);
 		take_line(data, data->pars->id, data->pars->line);
 	}

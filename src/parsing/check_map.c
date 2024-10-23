@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 12:03:40 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:12:39 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ void	check_close(t_data *data, char **tab)
 		while (tab[y][x])
 		{
 			if (tab[y][x] == '0')
+			{
 				if (verif_close(data, tab, y, x) == 1)
 				{
 					ft_fprintf("Error : bad map\n");
 					freetab(tab);
 					exit_clean(data, EXIT_FAILURE);
 				}
+			}
 			x++;
 		}
 		y++;
@@ -80,7 +82,7 @@ void	verif_player(t_data *data, char **map)
 	int		res;
 	int		y;
 	int		x;
-	
+
 	y = 0;
 	while (map[y])
 	{

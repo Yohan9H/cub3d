@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 15:20:45 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:11:55 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,19 @@ void	clean_pars(t_pars *pars)
 	free(pars);
 }
 
-void	clean_game(t_game *game)
+void	clean_game(t_data *data, t_game *game)
 {
 	int		i;
 
 	i = 0;
-	while (i != 4) // voir avec arthur pour free les autres choses correctement
+	while (i != 4)
 	{
 		if (game->textures[i]->path)
 			free(game->textures[i]->path);
-		free(game->textures[i]);
+		if (game->textures[i]->img)
+			mlx_destroy_image(data->mlx, game->textures[i]->img);
+		if (game->textures[i])
+			free(game->textures[i]);
 		i++;
 	}
 	if (game->map)
@@ -77,6 +80,8 @@ void	clean_game(t_game *game)
 void	exit_clean(t_data *data, int code)
 {
 	get_next_line(-1);
+	clean_pars(data->pars);
+	clean_game(data, data->game);
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->mlx_win)
@@ -86,8 +91,6 @@ void	exit_clean(t_data *data, int code)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	clean_pars(data->pars);
-	clean_game(data->game);
 	if (code == EXIT_FAILURE)
 		exit(1);
 	if (code == EXIT_SUCCESS)
