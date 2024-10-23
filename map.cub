@@ -1,10 +1,10 @@
-NO	textures/eagle.xpm
-SO	textures/redbrick.xpm
-WE	textures/bluestone.xpm
-EA	textures/baril.xpm
+SO	textures/fuck_wall.xpm
+WE	textures/blood_wall.xpm
+NO	textures/bloc_wall.xpm
+EA	textures/base.xpm
 
-F 220,100,0
-C 225,30,0
+F 56,56,56
+C 112,112,112
 
 1111111111111111111111111
 1000000000110000000000001

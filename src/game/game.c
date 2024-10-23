@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 12:10:19 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:59:27 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	load_textures(t_data *data, t_game *game)
 			return (0);
 		}
 		tex->addr = mlx_get_data_addr(tex->img, \
-			tex->p_bi, tex->l_by, tex->endian);
+			&tex->p_bi, &tex->l_by, &tex->endian);
 		tex->t_w = width;
 		tex->t_h = height;
 		i++;
