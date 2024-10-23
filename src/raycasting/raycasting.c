@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/23 18:12:04 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:17:30 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,14 @@ void	handle_rotation(t_data *data, t_player *player)
 		rot_speed = ROT_SPEED;
 	else
 		return ;
-	old_dir_x = player->dir.x;
-	old_plane_x = player->plane.x;
 	if (data->key_states[ROT_RIGHT] || data->key_states[ROT_LEFT])
 	{
+		old_dir_x = player->dir.x;
 		player->dir.x = old_dir_x * cos(rot_speed) - \
 			player->dir.y * sin(rot_speed);
 		player->dir.y = old_dir_x * sin(rot_speed) + \
 			player->dir.y * cos(rot_speed);
+		old_plane_x = player->plane.x;
 		player->plane.x = old_plane_x * cos(rot_speed) - \
 			player->plane.y * sin(rot_speed);
 		player->plane.y = old_plane_x * sin(rot_speed) + \
@@ -166,7 +166,7 @@ void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 	{	
 		if (j <= data->game->ray->dred && j >= data->game->ray->drst)
 		{
-			tex->texY = (int)texPos & (tex->t_h -1);
+			tex->texY = (int)texPos & (tex->t_h - 1);
 			texPos += tex->step;
 			offset = (tex->texY * tex->l_by + tex->texX * (tex->p_bi / 8));
 			color = *(__uint32_t *)(tex->addr + offset);

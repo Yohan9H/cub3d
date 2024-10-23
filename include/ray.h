@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/23 17:01:12 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:07:25 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 # define RIGHT 100
 # define ROT_LEFT 65361
 # define ROT_RIGHT 65363
-# define MOVE_SPEED 0.005
-# define ROT_SPEED 0.005
+# define MOVE_SPEED 0.01
+# define ROT_SPEED 0.01
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define DELTA 0.5
+# define FOV 0.66
 # include "cub3d.h"
 
 typedef struct s_data	t_data;
