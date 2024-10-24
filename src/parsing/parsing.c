@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 10:44:10 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:23:50 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_data_two(t_data *data)
+{
+	data->key_states = (t_state *)ft_calloc(1, sizeof(t_state));
+	if (!data->key_states)
+		exit_clean(data, EXIT_FAILURE);
+}
 
 void	init_data(t_data *data)
 {
@@ -37,7 +44,7 @@ void	init_data(t_data *data)
 	data->pars->f_rvb = (t_rvb *)ft_calloc(1, sizeof(t_rvb));
 	if (!data->pars->f_rvb)
 		exit_clean(data, EXIT_FAILURE);
-	// faire initialisation de data->keystates mon yoyo
+	init_data_two(data);
 }
 
 void	check_args(t_data *data, int ac, char *file)
@@ -71,6 +78,6 @@ void	parsing(t_data *data, int ac, char **av)
 {
 	init_data(data);
 	check_args(data, ac, av[1]);
-	check_file(data); // voir si ./path_to_the_....._texture doit etre verifier si il n'existe pas
+	check_file(data);
 	check_map(data);
 }

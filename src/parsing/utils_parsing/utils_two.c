@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 12:15:39 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:06:07 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	del_pos_player(char **tab)
+void	del_pos_player(t_data *data, char **tab)
 {
 	int		y;
 	int		x;
@@ -23,7 +23,7 @@ void	del_pos_player(char **tab)
 		x = 0;
 		while (tab[y][x])
 		{
-			if (is_player(tab[y][x]) == 1)
+			if (is_player(data, tab[y][x]) == 1)
 			{
 				tab[y][x] = '0';
 			}

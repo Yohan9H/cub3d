@@ -68,10 +68,28 @@ char	**ft_strdup_double_array(t_data *data, char **s1)
 	return (cpy);
 }
 
-int	is_player(char c)
+int	is_player(t_data *data, char c)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == 'N')
+	{
+		data->game->dir = NO;
 		return (1);
+	}
+	if (c == 'S')
+	{
+		data->game->dir = SO;
+		return (1);
+	}
+	if (c == 'W')
+	{
+		data->game->dir = WE;
+		return (1);
+	}
+	if (c == 'E')
+	{
+		data->game->dir = EA;
+		return (1);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 15:00:26 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:06:33 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	check_map(t_data *data);
 
 void	print_data(t_data *data);
 
-int		is_player(char c);
+int		is_player(t_data *data, char c);
 
 int		check_char(char c);
 
-void	del_pos_player(char **tab);
+void	del_pos_player(t_data *data, char **tab);
 
 void	reset_value_map(t_data *data);
 
