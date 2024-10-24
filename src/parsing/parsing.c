@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:23:50 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:41:36 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	init_data(t_data *data)
 	data->game->ray = ft_calloc(1, sizeof(t_ray));
 	for (int i = 0; i < 4; i++)
 		data->game->textures[i] = ft_calloc(1, sizeof(t_img));
+	data->game->begin_ply = (t_point *)ft_calloc(1, sizeof(t_point));
+	if (!data->game->begin_ply)
+		exit_clean(data, EXIT_FAILURE);
 	data->pars = (t_pars *)ft_calloc(1, sizeof(t_pars));
 	if (!data->pars)
 		exit_clean(data, EXIT_FAILURE);
 	data->pars->fd = -1;
-	data->pars->begin_ply = (t_point *)ft_calloc(1, sizeof(t_point));
-	if (!data->pars->begin_ply)
-		exit_clean(data, EXIT_FAILURE);
 	data->pars->size_tab = (t_point *)ft_calloc(1, sizeof(t_point));
 	if (!data->pars->size_tab)
 		exit_clean(data, EXIT_FAILURE);

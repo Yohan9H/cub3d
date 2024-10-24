@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:06:07 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:42:41 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,26 @@ void	check_if_palyer(t_data *data, char c, int y, int x)
 	if (c == 'N')
 	{
 		(data->pars->no)++;
-		data->pars->begin_ply->y = y;
-		data->pars->begin_ply->x = x;
+		data->game->begin_ply->y = y;
+		data->game->begin_ply->x = x;
 	}
 	if (c == 'S')
 	{
 		(data->pars->so)++;
-		data->pars->begin_ply->y = y;
-		data->pars->begin_ply->x = x;
+		data->game->begin_ply->y = y;
+		data->game->begin_ply->x = x;
 	}
 	if (c == 'E')
 	{
 		(data->pars->ea)++;
-		data->pars->begin_ply->y = y;
-		data->pars->begin_ply->x = x;
+		data->game->begin_ply->y = y;
+		data->game->begin_ply->x = x;
 	}
 	if (c == 'W')
 	{
 		(data->pars->we)++;
-		data->pars->begin_ply->y = y;
-		data->pars->begin_ply->x = x;
+		data->game->begin_ply->y = y;
+		data->game->begin_ply->x = x;
 	}
 }
 

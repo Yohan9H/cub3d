@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:34:24 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:45:53 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,26 @@ int	load_textures(t_data *data, t_game *game)
 	return (1);
 }
 
-// void	init_dir(t_data *data)
-// {
-// 	int		dir;
-// 	int		angle;
-// 	float	radian;
-// 	t_player *player;
+void	init_dir(int dir, t_player *player)
+{
+	int		angle;
+	float	radian;
 
-// 	dir = data->game->dir;
-// 	angle = 0;
-// 	if (dir == W)
-// 		angle = 0;
-// 	else if (dir == S)
-// 		angle = 90;
-// 	else if (dir == E)
-// 		angle = 180;
-// 	else if (dir == N)
-// 		angle = 270;
-// 	radian = angle * M_PI / 180.0f;
-// 	player = data->game->player;
-// 	player->dir.x = cos(radian);
-// 	player->dir.y = sin(radian);
-// 	player->plane.x = -FOV * sin(radian);
-// 	player->plane.y = FOV * cos(radian);
-// }
+	angle = 0;
+	if (dir == WE)
+		angle = 0;
+	else if (dir == SO)
+		angle = 90;
+	else if (dir == EA)
+		angle = 180;
+	else if (dir == NO)
+		angle = 270;
+	radian = angle * M_PI / 180.0f;
+	player->dir.x = cos(radian);
+	player->dir.y = sin(radian);
+	player->plane.x = -FOV * sin(radian);
+	player->plane.y = FOV * cos(radian);
+}
 
 
 void	game(t_data *data)
@@ -75,8 +71,7 @@ void	game(t_data *data)
 	player->dir.y = 0;
 	player->plane.x = 0;
 	player->plane.y = FOV;
-	player->pos.x = 1;
-	player->pos.y = 2;
+	init_dir(data->game->dir, player);
 	load_textures(data, data->game);
 	raycasting(data, player);
 }
