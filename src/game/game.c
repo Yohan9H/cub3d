@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:45:53 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:51:05 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ void	game(t_data *data)
 	t_player	*player;
 
 	player = data->game->player;
-	player->dir.x = -1;
-	player->dir.y = 0;
-	player->dir.x = -1;
-	player->dir.y = 0;
-	player->plane.x = 0;
-	player->plane.y = FOV;
 	init_dir(data->game->dir, player);
 	load_textures(data, data->game);
 	raycasting(data, player);
