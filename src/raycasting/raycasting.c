@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 13:26:46 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 13:43:48 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,9 +181,9 @@ void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 			*(__uint32_t *)(data->addr + pixel_offset) = color;
 		}
 		else if (j < data->game->ray->drst)
-			my_pixel_put(data, i, j, get_color(data->pars->f_rvb));
-		else if (j > data->game->ray->dred)
 			my_pixel_put(data, i, j, get_color(data->pars->c_rvb));
+		else if (j > data->game->ray->dred)
+			my_pixel_put(data, i, j, get_color(data->pars->f_rvb));
 		j++;
 	}
 }

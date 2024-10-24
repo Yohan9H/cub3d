@@ -1,11 +1,10 @@
 SO	textures/fuck.xpm
 WE	textures/blood.xpm
-
 NO	textures/bloc_wall.xpm
 EA	textures/base.xpm
 
-F 56,56,56
-C 112,112,112
+F 112,112,112
+C 136,121,66
 
 1111111111111111111111111
 1000000000110000000000001
