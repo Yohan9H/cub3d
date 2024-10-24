@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:41:36 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:00:39 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 
 void	init_data_two(t_data *data)
 {
-	data->key_states = (t_state *)ft_calloc(1, sizeof(t_state));
-	if (!data->key_states)
-		exit_clean(data, EXIT_FAILURE);
-}
-
-void	init_data(t_data *data)
-{
-	data->game = ft_calloc(1, sizeof(t_game));
-	if (!data->game)
-		exit_clean(data, EXIT_FAILURE);
-	data->game->player = ft_calloc(1, sizeof(t_player));
-	data->game->ray = ft_calloc(1, sizeof(t_ray));
-	for (int i = 0; i < 4; i++)
-		data->game->textures[i] = ft_calloc(1, sizeof(t_img));
-	data->game->begin_ply = (t_point *)ft_calloc(1, sizeof(t_point));
-	if (!data->game->begin_ply)
-		exit_clean(data, EXIT_FAILURE);
-	data->pars = (t_pars *)ft_calloc(1, sizeof(t_pars));
-	if (!data->pars)
-		exit_clean(data, EXIT_FAILURE);
-	data->pars->fd = -1;
 	data->pars->size_tab = (t_point *)ft_calloc(1, sizeof(t_point));
 	if (!data->pars->size_tab)
 		exit_clean(data, EXIT_FAILURE);
@@ -44,6 +23,30 @@ void	init_data(t_data *data)
 	data->pars->f_rvb = (t_rvb *)ft_calloc(1, sizeof(t_rvb));
 	if (!data->pars->f_rvb)
 		exit_clean(data, EXIT_FAILURE);
+	data->key_states = (t_state *)ft_calloc(1, sizeof(t_state));
+	if (!data->key_states)
+		exit_clean(data, EXIT_FAILURE);
+}
+
+void	init_data(t_data *data)
+{
+	int		i;
+
+	i = 0;
+	data->game = ft_calloc(1, sizeof(t_game));
+	if (!data->game)
+		exit_clean(data, EXIT_FAILURE);
+	data->game->player = ft_calloc(1, sizeof(t_player));
+	data->game->ray = ft_calloc(1, sizeof(t_ray));
+	while (i < 4)
+	{
+		data->game->textures[i] = ft_calloc(1, sizeof(t_img));
+		i++;
+	}
+	data->pars = (t_pars *)ft_calloc(1, sizeof(t_pars));
+	if (!data->pars)
+		exit_clean(data, EXIT_FAILURE);
+	data->pars->fd = -1;
 	init_data_two(data);
 }
 

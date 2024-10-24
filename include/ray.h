@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 11:42:04 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:58:22 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct s_game
 	int			dir;
 	t_ray		*ray;
 	char		**map;
-	t_point		*begin_ply;
 	t_img		*textures[8];
 }				t_game;
 
