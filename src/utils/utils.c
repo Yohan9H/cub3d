@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:58:49 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:19:17 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	exit_clean(t_data *data, int code)
 	get_next_line(-1);
 	clean_pars(data->pars);
 	clean_game(data, data->game);
+	if (data->key_states)
+		free(data->key_states);
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->mlx_win)
