@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 10:38:36 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 13:26:46 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	is_wall(char **map, t_player *player, int keycode)
 
 int	handle_keytoogle(int keycode, t_data *data)
 {
+	if (keycode == XK_Escape)
+		exit_clean(data, EXIT_SUCCESS);
 	if (keycode == XK_w || keycode == XK_W)
 		data->key_states->front ^= 1;
 	if (keycode == XK_s || keycode == XK_S)
@@ -130,8 +132,6 @@ int	handle_keys(t_data *data)
 	t_player	*player;
 
 	player = data->game->player;
-	if (data->key_states->esc)
-		exit_clean(data, EXIT_SUCCESS);
 	handle_move(data, player);
 	handle_rotation(data, player);
 	hook_put(data, player);
