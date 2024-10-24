@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:51:05 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 13:46:25 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void	init_dir(int dir, t_player *player)
 	float	radian;
 
 	angle = 0;
-	if (dir == WE)
+	if (dir == EA)
 		angle = 0;
 	else if (dir == SO)
-		angle = 90;
-	else if (dir == EA)
-		angle = 180;
-	else if (dir == NO)
 		angle = 270;
+	else if (dir == NO)
+		angle = 90;
+	else if (dir == WE)
+		angle = 180;
 	radian = angle * M_PI / 180.0f;
 	player->dir.x = cos(radian);
 	player->dir.y = sin(radian);
-	player->plane.x = -FOV * sin(radian);
-	player->plane.y = FOV * cos(radian);
+	player->plane.x = FOV * sin(radian);
+	player->plane.y = FOV * -cos(radian);
 }
 
 
