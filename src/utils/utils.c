@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:43:10 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:58:49 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	clean_game(t_data *data, t_game *game)
 			free(game->textures[i]);
 		i++;
 	}
-	if (game->begin_ply)
-		free(game->begin_ply);
 	if (game->map)
 		freetab(game->map);
 	if (game->player)

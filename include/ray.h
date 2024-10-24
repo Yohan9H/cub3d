@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 11:51:45 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 12:04:24 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_game
 	int			dir;
 	t_ray		*ray;
 	char		**map;
-	t_point		*begin_ply;
 	t_img		*textures[8];
 }				t_game;
 
