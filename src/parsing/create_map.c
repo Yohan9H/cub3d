@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 12:12:48 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 14:06:04 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	create_double_array(t_data *data)
 
 	lst = data->pars->head_map;
 	size = ft_lstsize(lst);
-	data->pars->size_tab->y = size - 1;
+	data->pars->size_tab->x = size - 1;
 	data->game->map = (char **)malloc(sizeof(char *) * size);
 	if (!data->game->map)
 		exit_clean(data, EXIT_FAILURE);
@@ -32,8 +32,8 @@ void	create_double_array(t_data *data)
 		if (!data->game->map[i])
 			exit_clean(data, EXIT_FAILURE);
 		len_str = ft_strlen(data->game->map[i]);
-		if (data->pars->size_tab->x < len_str)
-			data->pars->size_tab->x = len_str - 1;
+		if (data->pars->size_tab->y < len_str)
+			data->pars->size_tab->y = len_str - 1;
 		i++;
 		lst = lst->next;
 	}

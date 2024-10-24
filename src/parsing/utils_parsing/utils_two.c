@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:57:53 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:04:46 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,31 @@ void	reset_value_map(t_data *data)
 	data->pars->ea = 0;
 }
 
-void	check_if_palyer(t_data *data, char c, int y, int x)
+void	check_if_palyer(t_data *data, char c, int x, int y)
 {
 	if (c == 'N')
 	{
 		(data->pars->no)++;
-		data->game->player->pos.y = y;
 		data->game->player->pos.x = x;
+		data->game->player->pos.y = y;
 	}
 	if (c == 'S')
 	{
 		(data->pars->so)++;
-		data->game->player->pos.y = y;
 		data->game->player->pos.x = x;
+		data->game->player->pos.y = y;
 	}
 	if (c == 'E')
 	{
 		(data->pars->ea)++;
-		data->game->player->pos.y = y;
 		data->game->player->pos.x = x;
+		data->game->player->pos.y = y;
 	}
 	if (c == 'W')
 	{
 		(data->pars->we)++;
-		data->game->player->pos.y = y;
 		data->game->player->pos.x = x;
+		data->game->player->pos.y = y;
 	}
 }
 

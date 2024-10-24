@@ -6,66 +6,66 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:06:16 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:09:47 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	verif_close(t_data *data, char **tab, int y, int x)
+int	verif_close(t_data *data, char **tab, int x, int y)
 {
-	if (tab[y][x] == '#')
+	if (tab[x][y] == '#')
 		return (0);
-	tab[y][x] = '#';
-	if (x == 0 || x == (int)ft_strlen(tab[y]) - 1 || y == 0
-		|| y == data->pars->size_tab->y - 1)
+	tab[x][y] = '#';
+	if (y == 0 || y == (int)ft_strlen(tab[x]) - 1 || x == 0
+		|| x == data->pars->size_tab->x - 1)
 		return (1);
-	if (check_char(tab[y - 1][x]) != 1 || check_char(tab[y + 1][x]) != 1
-		|| check_char(tab[y][x - 1]) != 1 || check_char(tab[y][x + 1]) != 1)
+	if (check_char(tab[x - 1][y]) != 1 || check_char(tab[x + 1][y]) != 1
+		|| check_char(tab[x][y - 1]) != 1 || check_char(tab[x][y + 1]) != 1)
 		return (1);
-	if (tab[y - 1][x] == '0')
-		return (verif_close(data, tab, y - 1, x));
-	if (tab[y + 1][x] == '0')
-		return (verif_close(data, tab, y + 1, x));
-	if (tab[y][x - 1] == '0')
-		return (verif_close(data, tab, y, x - 1));
-	if (tab[y][x + 1] == '0')
-		return (verif_close(data, tab, y, x + 1));
-	tab[y][x] = '0';
+	if (tab[x - 1][y] == '0')
+		return (verif_close(data, tab, x - 1, y));
+	if (tab[x + 1][y] == '0')
+		return (verif_close(data, tab, x + 1, y));
+	if (tab[x][y - 1] == '0')
+		return (verif_close(data, tab, x, y - 1));
+	if (tab[x][y + 1] == '0')
+		return (verif_close(data, tab, x, y + 1));
+	tab[x][y] = '0';
 	return (0);
 }
 
 void	check_close(t_data *data, char **tab)
 {
-	int		y;
 	int		x;
+	int		y;
 
-	y = 0;
-	while (tab[y])
+	x = 0;
+	while (tab[x])
 	{
-		x = 0;
-		while (tab[y][x])
+		y = 0;
+		while (tab[x][y])
 		{
-			if (tab[y][x] == '0')
+			if (tab[x][y] == '0')
 			{
-				if (verif_close(data, tab, y, x) == 1)
+				if (verif_close(data, tab, x, y) == 1)
 				{
 					ft_fprintf("Error : bad map\n");
 					freetab(tab);
 					exit_clean(data, EXIT_FAILURE);
 				}
 			}
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 
-int	take_value_and_verif(t_data *data, char c, int y, int x)
+int	take_value_and_verif(t_data *data, char c, int x, int y)
 {
 	int		res;
 
-	check_if_palyer(data, c, y, x);
+	check_if_palyer(data, c, x, y);
 	res = (data->pars->no + data->pars->so + data->pars->we + data->pars->ea);
 	if (res > 1)
 	{
@@ -80,19 +80,19 @@ int	take_value_and_verif(t_data *data, char c, int y, int x)
 void	verif_player(t_data *data, char **map)
 {
 	int		res;
-	int		y;
 	int		x;
+	int		y;
 
-	y = 0;
-	while (map[y])
+	x = 0;
+	while (map[x])
 	{
-		x = 0;
-		while (map[y][x])
+		y = 0;
+		while (map[x][y])
 		{
-			res = take_value_and_verif(data, map[y][x], y, x);
-			x++;
+			res = take_value_and_verif(data, map[x][y], x, y);
+			y++;
 		}
-		y++;
+		x++;
 	}
 	if (res == 0)
 	{
