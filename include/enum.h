@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:06:52 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/09 11:19:24 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:07:26 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,13 @@ typedef enum s_keycode
 	LEFT = 65361,
 	RIGHT = 65363,
 }	t_keycode;
+
+typedef enum s_dir
+{
+	NO = 78,
+	SO = 83,
+	WE = 87,
+	EA = 69,
+}	t_dir;
 
 #endif

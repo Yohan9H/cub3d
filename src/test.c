@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:02:34 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 16:01:25 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:12:56 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	print_data(t_data *data)
 	printf("C = %d,%d,%d\n", data->pars->c_rvb->r, data->pars->c_rvb->v, data->pars->c_rvb->b);
 	printf("\n---> MAP\n");
 	printf("pos player : [%d] [%d]\n", data->pars->begin_ply->y, data->pars->begin_ply->x);
+	printf("dir player : %d", data->game->dir);
 	printf("size map : y = %d  x = %d\n\n", data->pars->size_tab->y, data->pars->size_tab->x);
 	while (data->game->map[i])
 		printf("%s", data->game->map[i++]);

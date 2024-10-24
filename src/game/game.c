@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:31:36 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:34:24 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	game(t_data *data)
 	t_player	*player;
 
 	player = data->game->player;
+	player->dir.x = -1;
+	player->dir.y = 0;
 	player->dir.x = -1;
 	player->dir.y = 0;
 	player->plane.x = 0;

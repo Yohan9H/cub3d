@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 12:12:39 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:06:16 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	verif_good_map(t_data *data)
 
 	reset_value_map(data);
 	verif_player(data, data->game->map);
-	del_pos_player(data->game->map);
+	del_pos_player(data, data->game->map);
 	cpy_map = ft_strdup_double_array(data, data->game->map);
 	check_close(data, cpy_map);
 	freetab(cpy_map);
