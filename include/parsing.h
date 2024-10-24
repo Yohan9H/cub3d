@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:06:33 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:41:47 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_rvb
 typedef struct s_pars
 {
 	t_map		*head_map;
-	t_point		*begin_ply;
 	t_point		*size_tab;
 	t_rvb		*c_rvb;
 	t_rvb		*f_rvb;

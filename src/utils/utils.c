@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:44:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 12:11:55 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:43:10 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	clean_pars(t_pars *pars)
 {
 	if (pars->fd != -1)
 		close(pars->fd);
-	if (pars->begin_ply)
-		free(pars->begin_ply);
 	if (pars->size_tab)
 		free(pars->size_tab);
 	if (pars->head_map)
@@ -67,6 +65,8 @@ void	clean_game(t_data *data, t_game *game)
 			free(game->textures[i]);
 		i++;
 	}
+	if (game->begin_ply)
+		free(game->begin_ply);
 	if (game->map)
 		freetab(game->map);
 	if (game->player)
