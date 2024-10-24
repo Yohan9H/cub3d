@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:02:40 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 10:46:02 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 13:54:48 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int ac, char **av)
 	ac--;
 	mlx_set(&data);
 	parsing(&data, ac, av);
+	// print_data(&data);
 	init_struct(&data);
 	game(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
