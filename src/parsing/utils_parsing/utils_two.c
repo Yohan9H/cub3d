@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 14:04:46 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:58:37 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	del_pos_player(t_data *data, char **tab)
 {
-	int		y;
 	int		x;
+	int		y;
 
-	y = 0;
-	while (tab[y])
+	x = 0;
+	while (tab[x])
 	{
-		x = 0;
-		while (tab[y][x])
+		y = 0;
+		while (tab[x][y])
 		{
-			if (is_player(data, tab[y][x]) == 1)
+			if (is_player(data, tab[x][y]) == 1)
 			{
-				tab[y][x] = '0';
+				tab[x][y] = '0';
 			}
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 

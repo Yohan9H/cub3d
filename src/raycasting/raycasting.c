@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 13:58:33 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:12:00 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void	hit(t_ray *ray, char **map)
 			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		if ((int)map[ray->mapy][ray->mapx] - '0' > 0)
+		if ((int)map[ray->mapx][ray->mapy] - '0' > 0)
 		{
 			ray->hit = 1;
 		}
