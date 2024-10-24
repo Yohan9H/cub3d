@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/22 17:29:38 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/24 10:32:42 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,22 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
+# include "X11/X.h"
+# include "X11/keysym.h"
 # include "ray.h"
 # define WIDTH 900
 # define HEIGHT 900
+
+typedef	struct s_states
+{
+	int front;
+	int	back;
+	int right;
+	int left;
+	int	rot_l;
+	int rot_r;
+	int	esc;
+}		t_state;
 
 typedef struct s_data
 {
@@ -34,7 +47,7 @@ typedef struct s_data
 	char	*addr;
 	int		line_bytes;
 	int		pixel_bits;
-	int		key_states[65536];
+	t_state	*key_states;
 	t_game	*game;
 }			t_data;
 

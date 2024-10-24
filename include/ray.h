@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/23 19:07:25 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 10:45:28 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct s_color
 
 void	raycasting(t_data *data, t_player *player);
 int		handle_keys(t_data *data);
-int		handle_keydown(int keycode, t_data *data);
-int		handle_keyup(int keycode, t_data *data);
+int		handle_keytoogle(int keycode, t_data *data);
 
 #endif

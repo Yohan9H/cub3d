@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 19:18:33 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 10:24:48 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@ int	load_textures(t_data *data, t_game *game)
 	return (1);
 }
 
+
+
 void	game(t_data *data)
 {
 	t_player	*player;
 
 	player = data->game->player;
-	player->dir.x = -1;
-	player->dir.y = 0;
+	player->dir.x = 0;
+	player->dir.y = 1;
 	player->plane.x = 0;
 	player->plane.y = FOV;
 	player->pos.x = 1;

@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/23 12:13:39 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 10:44:10 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	init_data(t_data *data)
 	data->pars->f_rvb = (t_rvb *)ft_calloc(1, sizeof(t_rvb));
 	if (!data->pars->f_rvb)
 		exit_clean(data, EXIT_FAILURE);
-	for (int i = 0; i < 65366; i++)
-		data->key_states[i] = 0;
+	// faire initialisation de data->keystates mon yoyo
 }
 
 void	check_args(t_data *data, int ac, char *file)
