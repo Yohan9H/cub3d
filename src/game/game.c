@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 10:24:48 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:31:36 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	load_textures(t_data *data, t_game *game)
 	{
 		tex = game->textures[i];
 		tex->img = mlx_xpm_file_to_image(data->mlx, tex->path, &width, &height);
-		if (!tex)
+		if (!tex->img)
 		{
 			fprintf(stderr, "Erreur texture %s\n", game->textures[i]->path);
 			return (0);
@@ -38,6 +38,30 @@ int	load_textures(t_data *data, t_game *game)
 	return (1);
 }
 
+// void	init_dir(t_data *data)
+// {
+// 	int		dir;
+// 	int		angle;
+// 	float	radian;
+// 	t_player *player;
+
+// 	dir = data->game->dir;
+// 	angle = 0;
+// 	if (dir == W)
+// 		angle = 0;
+// 	else if (dir == S)
+// 		angle = 90;
+// 	else if (dir == E)
+// 		angle = 180;
+// 	else if (dir == N)
+// 		angle = 270;
+// 	radian = angle * M_PI / 180.0f;
+// 	player = data->game->player;
+// 	player->dir.x = cos(radian);
+// 	player->dir.y = sin(radian);
+// 	player->plane.x = -FOV * sin(radian);
+// 	player->plane.y = FOV * cos(radian);
+// }
 
 
 void	game(t_data *data)
@@ -45,8 +69,8 @@ void	game(t_data *data)
 	t_player	*player;
 
 	player = data->game->player;
-	player->dir.x = 0;
-	player->dir.y = 1;
+	player->dir.x = -1;
+	player->dir.y = 0;
 	player->plane.x = 0;
 	player->plane.y = FOV;
 	player->pos.x = 1;

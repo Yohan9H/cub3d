@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 10:45:28 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:13:17 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define DELTA 0.5
-# define FOV 0.66
+# define FOV 0.66f
+# define M_PI 3.14159265358979323846
+
 # include "cub3d.h"
 
 typedef struct s_data	t_data;
