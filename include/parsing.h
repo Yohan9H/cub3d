@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 11:41:47 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/25 11:05:25 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ void	check_if_palyer(t_data *data, char c ,int y, int x);
 int		skip_id(t_data *data, char *line);
 
 void	skip_virgule_space(char *str, int *i);
+
+void	check_if_char_no_accept(t_data *data, char **map);
 
 #endif

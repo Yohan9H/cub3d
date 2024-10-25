@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/18 11:32:28 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/25 11:05:13 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = src/main.c \
 	src/parsing/check_map.c \
 	src/parsing/utils_parsing/utils.c \
 	src/parsing/utils_parsing/utils_two.c \
+	src/parsing/utils_parsing/utils_three.c \
 	src/raycasting/raycasting.c \
 	src/test.c
 
