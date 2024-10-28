@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/28 10:55:30 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:59:39 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # define ESC 65307
 # define ROT_LEFT 65361
 # define ROT_RIGHT 65363
-# define MOVE_SPEED 0.01
-# define ROT_SPEED 0.01
+# define MOVE_SPEED 0.02
+# define ROT_SPEED 0.015
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define DELTA 0.5

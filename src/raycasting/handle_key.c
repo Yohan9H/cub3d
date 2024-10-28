@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:41:08 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/28 11:29:51 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/28 12:05:02 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,43 @@ int	handle_keytoogle(int keycode, t_data *data)
 	return (0);
 }
 
-void	handle_move(t_data *data, t_player *player)
+double	calc_move_speed(t_state *ks)
 {
-	if (data->key_states->left && !is_wall(data->game->map, player, LEFT))
+	double	move_speed;
+
+	move_speed = MOVE_SPEED;
+	if ((ks->front && (ks->left || ks->right)) || \
+		(ks->back && (ks->left || ks->right)))
 	{
-		player->pos.x = player->pos.x - player->plane.x * MOVE_SPEED;
-		player->pos.y = player->pos.y - player->plane.y * MOVE_SPEED;
+		move_speed = MOVE_SPEED / sqrt(2);
 	}
-	if (data->key_states->right && !is_wall(data->game->map, player, RIGHT))
+	return (move_speed);
+}
+
+void	handle_move(t_state *ks, char **map, t_player *player)
+{
+	double	move_speed;
+
+	move_speed = calc_move_speed(ks);
+	if (ks->left && !is_wall(map, player, LEFT))
 	{
-		player->pos.x = player->pos.x + player->plane.x * MOVE_SPEED;
-		player->pos.y = player->pos.y + player->plane.y * MOVE_SPEED;
+		player->pos.x = player->pos.x - player->plane.x * move_speed;
+		player->pos.y = player->pos.y - player->plane.y * move_speed;
 	}
-	if (data->key_states->front && !is_wall(data->game->map, player, FRONT))
+	if (ks->right && !is_wall(map, player, RIGHT))
 	{
-		player->pos.x = player->pos.x + player->dir.x * MOVE_SPEED;
-		player->pos.y = player->pos.y + player->dir.y * MOVE_SPEED;
+		player->pos.x = player->pos.x + player->plane.x * move_speed;
+		player->pos.y = player->pos.y + player->plane.y * move_speed;
 	}
-	if (data->key_states->back && !is_wall(data->game->map, player, BACK))
+	if (ks->front && !is_wall(map, player, FRONT))
 	{
-		player->pos.x = player->pos.x - player->dir.x * MOVE_SPEED;
-		player->pos.y = player->pos.y - player->dir.y * MOVE_SPEED;
+		player->pos.x = player->pos.x + player->dir.x * move_speed;
+		player->pos.y = player->pos.y + player->dir.y * move_speed;
+	}
+	if (ks->back && !is_wall(map, player, BACK))
+	{
+		player->pos.x = player->pos.x - player->dir.x * move_speed;
+		player->pos.y = player->pos.y - player->dir.y * move_speed;
 	}
 }
 
@@ -87,7 +103,7 @@ int	handle_keys(t_data *data)
 	t_player	*player;
 
 	player = data->game->player;
-	handle_move(data, player);
+	handle_move(data->key_states, data->game->map, player);
 	handle_rotation(data, player);
 	hook_put(data, player);
 	return (0);

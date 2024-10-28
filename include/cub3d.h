@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/28 10:55:35 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:52:44 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
-# include "../mlx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "X11/X.h"
 # include "X11/keysym.h"
 # include "ray.h"
@@ -29,7 +29,7 @@
 
 typedef struct s_game	t_game;
 
-typedef	struct s_states
+typedef	struct s_state
 {
 	int front;
 	int	back;
