@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 17:29:34 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:55:35 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include "ray.h"
 # define WIDTH 1200
 # define HEIGHT 1200
+
+typedef struct s_game	t_game;
 
 typedef	struct s_states
 {

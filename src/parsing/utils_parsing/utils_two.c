@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 14:58:37 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:16:30 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	reset_value_map(t_data *data)
 	data->pars->ea = 0;
 }
 
-void	check_if_palyer(t_data *data, char c, int x, int y)
+void	check_if_player(t_data *data, char c, int x, int y)
 {
 	if (c == 'N')
 	{

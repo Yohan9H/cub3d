@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 12:04:24 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/28 10:55:30 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define BACK 115
 # define LEFT 97
 # define RIGHT 100
+# define ESC 65307
 # define ROT_LEFT 65361
 # define ROT_RIGHT 65363
 # define MOVE_SPEED 0.01
@@ -97,8 +98,16 @@ typedef struct s_color
     int b;
 } 		t_color;
 
-void	raycasting(t_data *data, t_player *player);
-int		handle_keys(t_data *data);
-int		handle_keytoogle(int keycode, t_data *data);
+void			raycasting(t_data *data, t_player *player);
+int				handle_keys(t_data *data);
+int				handle_keytoogle(int keycode, t_data *data);
+int				which_texture(t_ray *ray);
+__uint32_t		get_color(t_rvb *rvb);
+unsigned int	get_pixel(t_data *data, int x, int y);
+void			my_pixel_put(t_data *data, int x, int y, int color);
+void			hook_put(t_data *data, t_player *player);
+int				which_texture(t_ray *ray);
+void			fill_wall(t_data *data, t_img *tex, int i, double texPos);
+int				is_wall(char **map, t_player *player, int keycode);
 
 #endif

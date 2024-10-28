@@ -3,190 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/24 15:12:00 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:29:38 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ray.h"
 #include "cub3d.h"
-
-void	hook_put(t_data *data, t_player *player)
-{
-	if (!data)
-		return ;
-	raycasting(data, player);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-}
-
-int	wall_condition(int keycode, t_player *player, char **map)
-{
-	t_vector	p;
-
-	if (keycode == LEFT)
-	{
-		p.x = player->pos.x - player->plane.x * DELTA;
-		p.y = player->pos.y - player->plane.y * DELTA;
-	}
-	else if (keycode == RIGHT)
-	{
-		p.x = player->pos.x + player->plane.x * DELTA;
-		p.y = player->pos.y + player->plane.y * DELTA;
-	}
-	else if (keycode == FRONT)
-	{
-		p.x = player->pos.x + player->dir.x * DELTA;
-		p.y = player->pos.y + player->dir.y * DELTA;
-	}
-	else if (keycode == BACK)
-	{
-		p.x = player->pos.x - player->dir.x * DELTA;
-		p.y = player->pos.y - player->dir.y * DELTA;
-	}
-	return ((int)map[(int)p.x][(int)p.y] - '0');
-}
-
-int	is_wall(char **map, t_player *player, int keycode)
-{
-	int		pos_map;
-
-	pos_map = wall_condition(keycode, player, map);
-	if (pos_map > 0)
-		return (1);
-	return (0);
-}
-
-int	handle_keytoogle(int keycode, t_data *data)
-{
-	if (keycode == XK_Escape)
-		exit_clean(data, EXIT_SUCCESS);
-	if (keycode == XK_w || keycode == XK_W)
-		data->key_states->front ^= 1;
-	if (keycode == XK_s || keycode == XK_S)
-		data->key_states->back ^= 1;
-	if (keycode == XK_a || keycode == XK_A)
-		data->key_states->left ^= 1;
-	if (keycode == XK_d || keycode == XK_D)
-		data->key_states->right ^= 1;
-	if (keycode == XK_Left)
-		data->key_states->rot_l ^= 1;
-	if (keycode == XK_Right)
-		data->key_states->rot_r ^= 1;
-	return (0);
-}
-
-void	handle_move(t_data *data, t_player *player)
-{
-	if (data->key_states->left && !is_wall(data->game->map, player, LEFT))
-	{
-		player->pos.x = player->pos.x - player->plane.x * MOVE_SPEED;
-		player->pos.y = player->pos.y - player->plane.y * MOVE_SPEED;
-	}
-	if (data->key_states->right && !is_wall(data->game->map, player, RIGHT))
-	{
-		player->pos.x = player->pos.x + player->plane.x * MOVE_SPEED;
-		player->pos.y = player->pos.y + player->plane.y * MOVE_SPEED;
-	}
-	if (data->key_states->front && !is_wall(data->game->map, player, FRONT))
-	{
-		player->pos.x = player->pos.x + player->dir.x * MOVE_SPEED;
-		player->pos.y = player->pos.y + player->dir.y * MOVE_SPEED;
-	}
-	if (data->key_states->back && !is_wall(data->game->map, player, BACK))
-	{
-		player->pos.x = player->pos.x - player->dir.x * MOVE_SPEED;
-		player->pos.y = player->pos.y - player->dir.y * MOVE_SPEED;
-	}
-}
-
-void	handle_rotation(t_data *data, t_player *player)
-{
-	double		old_dir_x;
-	double		old_plane_x;
-	double		rot_speed;
-
-	if (data->key_states->rot_r)
-		rot_speed = -ROT_SPEED;
-	else if (data->key_states->rot_l)
-		rot_speed = ROT_SPEED;
-	else
-		return ;
-	if (data->key_states->rot_r || data->key_states->rot_l)
-	{
-		old_dir_x = player->dir.x;
-		player->dir.x = old_dir_x * cos(rot_speed) - \
-			player->dir.y * sin(rot_speed);
-		player->dir.y = old_dir_x * sin(rot_speed) + \
-			player->dir.y * cos(rot_speed);
-		old_plane_x = player->plane.x;
-		player->plane.x = old_plane_x * cos(rot_speed) - \
-			player->plane.y * sin(rot_speed);
-		player->plane.y = old_plane_x * sin(rot_speed) + \
-			player->plane.y * cos(rot_speed);
-	}
-}
-
-int	handle_keys(t_data *data)
-{
-	t_player	*player;
-
-	player = data->game->player;
-	handle_move(data, player);
-	handle_rotation(data, player);
-	hook_put(data, player);
-	return (0);
-}
-
-void	my_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_bytes + x * (data->pixel_bits / 8));
-	*(unsigned int *)dst = color;
-}
-
-unsigned int	get_pixel(t_data *data, int x, int y)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_bytes + x * (data->pixel_bits / 8));
-	return (*(unsigned int *)dst);
-}
-
-__uint32_t	get_color(t_rvb *rvb)
-{
-	return ((rvb->r << 16) | (rvb->v << 8) | rvb->b);
-}
-
-void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
-{
-	int			j;
-	int			pixel_offset;
-	int			offset;
-	__uint32_t	color;
-
-	j = 0;
-	while (j < HEIGHT)
-	{	
-		if (j <= data->game->ray->dred && j >= data->game->ray->drst)
-		{
-			tex->texY = (int)texPos & (tex->t_h - 1);
-			texPos += tex->step;
-			offset = (tex->texY * tex->l_by + tex->texX * (tex->p_bi / 8));
-			color = *(__uint32_t *)(tex->addr + offset);
-			if (data->game->ray->side == 1)
-				color = (color >> 1) & 0x7F7F7F;
-			pixel_offset = (j * data->line_bytes + i * (data->pixel_bits / 8));
-			*(__uint32_t *)(data->addr + pixel_offset) = color;
-		}
-		else if (j < data->game->ray->drst)
-			my_pixel_put(data, i, j, get_color(data->pars->c_rvb));
-		else if (j > data->game->ray->dred)
-			my_pixel_put(data, i, j, get_color(data->pars->f_rvb));
-		j++;
-	}
-}
 
 void	make_wall(t_img *tex, t_player *player, t_ray *ray)
 {
@@ -280,24 +105,6 @@ void	ray_init(int i, t_player *player, t_ray *ray)
 		ray->deltadist.y = 1e30;
 	else
 		ray->deltadist.y = fabs(1 / ray->dir.y);
-}
-
-int	which_texture(t_ray *ray)
-{
-	if (ray->side == 1)
-	{
-		if (ray->dir.y > 0)
-			return (0);
-		else
-			return (1);
-	}
-	else
-	{
-		if (ray->dir.x > 0)
-			return (3);
-		else
-			return (2);
-	}
 }
 
 void	raycasting(t_data *data, t_player *player)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/25 11:10:56 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:16:30 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	take_value_and_verif(t_data *data, char c, int x, int y)
 {
 	int		res;
 
-	check_if_palyer(data, c, x, y);
+	check_if_player(data, c, x, y);
 	res = (data->pars->no + data->pars->so + data->pars->we + data->pars->ea);
 	if (res > 1)
 	{

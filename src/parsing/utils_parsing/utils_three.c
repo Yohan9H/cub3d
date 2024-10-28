@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:56:16 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/25 11:09:37 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:29:30 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		verif_char_no_accept(char c)
+int	verif_char_no_accept(char c)
 {
 	if (c == '1' || c == '0' || ft_isspace(c) == 1)
 		return (1);

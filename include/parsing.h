@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/25 11:05:25 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:16:30 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	del_pos_player(t_data *data, char **tab);
 
 void	reset_value_map(t_data *data);
 
-void	check_if_palyer(t_data *data, char c ,int y, int x);
+void	check_if_player(t_data *data, char c ,int y, int x);
 
 int		skip_id(t_data *data, char *line);
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
+#    By: apernot <apernot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/25 11:05:13 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/28 11:38:29 by apernot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = cc
 
 INCLUDES = include
 
-MLX = mlx
+MLX = minilibx-linux
 
 LIBFT = libft
 
@@ -39,7 +39,9 @@ SRC = src/main.c \
 	src/parsing/utils_parsing/utils_two.c \
 	src/parsing/utils_parsing/utils_three.c \
 	src/raycasting/raycasting.c \
-	src/test.c
+	src/raycasting/handle_key.c \
+	src/raycasting/ray_utils.c \
+	src/raycasting/make_wall.c
 
 OBJ_DIR = .obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
