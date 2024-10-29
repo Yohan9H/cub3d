@@ -6,12 +6,12 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/29 10:16:12 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/29 16:00:11 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = cub3d
+NAME = cub3D
 
 CC = cc
 
@@ -23,7 +23,7 @@ LIBFT = libft
 
 LIBS = -L libft -lft -I libft/includes/
 
-CFLAGS = -Wall -Werror -Wextra -I$(MLX) -I$(INCLUDES) -g
+CFLAGS = -Wall -Werror -Wextra -I$(MLX) -I$(INCLUDES)
 MLXFLAGS = -L$(MLX) -lmlx -lmlx_Linux -lXext -lm -lbsd -lX11
 
 SRC = src/main.c \
@@ -63,6 +63,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	$(MAKE) -C $(LIBFT) fclean
 	$(MAKE) -C $(MLX) clean
 
 re: fclean all

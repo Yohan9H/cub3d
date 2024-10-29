@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:02 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/28 11:30:00 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/29 14:22:25 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ int	which_texture(t_ray *ray)
 	if (ray->side == 1)
 	{
 		if (ray->dir.y > 0)
-			return (0);
+			return (3);
 		else
-			return (1);
+			return (2);
 	}
 	else
 	{
 		if (ray->dir.x > 0)
-			return (3);
+			return (1);
 		else
-			return (2);
+			return (0);
 	}
 }
