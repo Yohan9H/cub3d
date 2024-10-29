@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apernot <apernot@student.42.fr>            +#+  +:+       +#+         #
+#    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/28 11:38:29 by apernot          ###   ########.fr        #
+#    Updated: 2024/10/29 10:16:12 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,11 +59,11 @@ $(OBJ_DIR)/%.o: %.c
 
 clean:
 	rm -rf $(OBJ_DIR)
-	$(MAKE) -C $(MLX) clean
 	$(MAKE) -C $(LIBFT) clean
 
 fclean: clean
 	rm -rf $(NAME)
+	$(MAKE) -C $(MLX) clean
 
 re: fclean all
 
