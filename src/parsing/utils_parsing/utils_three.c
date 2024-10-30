@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   utils_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:56:16 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/28 11:29:30 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/30 14:51:57 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	**malloc_ptr(t_data *data, int skip_endl)
+{
+	char	**cpy;
+	int		x;
+	int		nb_malloc;
+
+	nb_malloc = 0;
+	x = skip_endl;
+	while (data->game->map[x])
+	{
+		nb_malloc++;
+		x++;
+	}
+	cpy = (char **)malloc(sizeof(char *) * (nb_malloc + 1));
+	if (!cpy)
+		exit_clean(data, EXIT_FAILURE);
+	return (cpy);
+}
 
 int	verif_char_no_accept(char c)
 {
@@ -32,7 +51,7 @@ void	check_if_char_no_accept(t_data *data, char **map)
 		{
 			if (verif_char_no_accept(map[x][y]) != 1)
 			{
-				ft_fprintf("Error : char no accepted in your map\n");
+				ft_fprintf("Error\nchar no accepted in your map\n");
 				exit_clean(data, EXIT_FAILURE);
 			}
 			y++;

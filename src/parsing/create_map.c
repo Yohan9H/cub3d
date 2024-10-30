@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 14:06:04 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:48:26 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,6 @@ void	create_linked_list_map(t_data *data)
 
 void	check_map(t_data *data)
 {
-	free(data->pars->line);
-	data->pars->line = get_next_line(data->pars->fd);
-	while (data->pars->line != NULL && found_map(data->pars->line) != 1)
-	{
-		free(data->pars->line);
-		data->pars->line = get_next_line(data->pars->fd);
-	}
-	if (data->pars->line == NULL)
-	{
-		ft_fprintf("Error : map not found in your file\n");
-		exit_clean(data, EXIT_FAILURE);
-	}
 	create_linked_list_map(data);
 	create_double_array(data);
 	verif_good_map(data);

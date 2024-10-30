@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/28 11:16:30 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/30 14:47:36 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_pars
 	int			ea;
 	int			f;
 	int			c;
+	int			skip_endl;
+	int			end_map;
 }	t_pars;
 
 char	**ft_strdup_double_array(t_data *data, char **s1);
@@ -74,7 +76,11 @@ void	parsing(t_data *data, int ac, char **av);
 
 void	check_map(t_data *data);
 
-void	print_data(t_data *data);
+void 	endl_become_zero_in_endmap(t_data *data, char ** map);
+
+void	verif_endl_in_map(t_data *data, char **map);
+
+void	skip_endl(t_data *data, char **map);
 
 int		is_player(t_data *data, char c);
 
@@ -91,5 +97,7 @@ int		skip_id(t_data *data, char *line);
 void	skip_virgule_space(char *str, int *i);
 
 void	check_if_char_no_accept(t_data *data, char **map);
+
+char	**malloc_ptr(t_data *data, int skip_endl);
 
 #endif

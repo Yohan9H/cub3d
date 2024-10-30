@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/28 11:24:47 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/30 14:24:29 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	load_textures(t_data *data, t_game *game)
 		if (!tex->img)
 		{
 			fprintf(stderr, "Erreur texture %s\n", game->textures[i]->path);
-			return (0);
+			exit_clean(data, EXIT_FAILURE);
 		}
 		tex->addr = mlx_get_data_addr(tex->img, \
 			&tex->p_bi, &tex->l_by, &tex->endian);

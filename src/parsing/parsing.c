@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 12:00:39 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:33:12 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	check_args(t_data *data, int ac, char *file)
 	i = 0;
 	if (ac >= 2 || ac == 0)
 	{
-		ft_fprintf("Error : you need only one args (filename.cub)\n");
+		ft_fprintf("Error\nyou need only one args (filename.cub)\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 	data->pars->fd = open(file, O_RDONLY);
 	if (data->pars->fd == -1)
 	{
-		ft_fprintf("Error : file not found\n");
+		ft_fprintf("Error\nfile not found\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 	if (file[i] && file[i] == '.')
@@ -72,7 +72,7 @@ void	check_args(t_data *data, int ac, char *file)
 		i++;
 	if (ft_strncmp(&file[i], ".cub", 5) != 0)
 	{
-		ft_fprintf("Error : your file is not valide (filename.cub)\n");
+		ft_fprintf("Error\nyour file is not valide (filename.cub)\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 }

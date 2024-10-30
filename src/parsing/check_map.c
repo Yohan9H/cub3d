@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/28 11:16:30 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/30 14:19:45 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_close(t_data *data, char **tab)
 			{
 				if (verif_close(data, tab, x, y) == 1)
 				{
-					ft_fprintf("Error : bad map\n");
+					ft_fprintf("Error\nbad map\n");
 					freetab(tab);
 					exit_clean(data, EXIT_FAILURE);
 				}
@@ -69,7 +69,7 @@ int	take_value_and_verif(t_data *data, char c, int x, int y)
 	res = (data->pars->no + data->pars->so + data->pars->we + data->pars->ea);
 	if (res > 1)
 	{
-		ft_fprintf("Error : too many N, S, E or W in your map\n");
+		ft_fprintf("Error\ntoo many N, S, E or W OR char no accepted\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 	if (c == ' ')
@@ -96,7 +96,7 @@ void	verif_player(t_data *data, char **map)
 	}
 	if (res == 0)
 	{
-		ft_fprintf("Error : miss N, S, E or W in your map\n");
+		ft_fprintf("Error\nmiss N, S, E or W\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
 }
@@ -106,10 +106,13 @@ void	verif_good_map(t_data *data)
 	char	**cpy_map;
 
 	reset_value_map(data);
+	skip_endl(data, data->game->map);
+	endl_become_zero_in_endmap(data, data->game->map);
 	verif_player(data, data->game->map);
 	del_pos_player(data, data->game->map);
-	cpy_map = ft_strdup_double_array(data, data->game->map);
-	check_close(data, cpy_map);
 	check_if_char_no_accept(data, data->game->map);
+	cpy_map = ft_strdup_double_array(data, data->game->map);
+	verif_endl_in_map(data, cpy_map);
+	check_close(data, cpy_map);
 	freetab(cpy_map);
 }

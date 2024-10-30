@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:34:19 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/24 17:31:59 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/30 14:51:46 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,41 +30,32 @@ int	found_map(char *line)
 	int		i;
 
 	i = 0;
-	if (line[0] == '\n')
-		return (0);
-	while (line[i])
-	{
-		if (line[i] == '0' || line[i] == '1' || line[i] == 'N'
-			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
-			return (1);
-		i++;
-	}
+	if (line[0] != '\n')
+		return (1);
 	return (0);
 }
 
 char	**ft_strdup_double_array(t_data *data, char **s1)
 {
 	char	**cpy;
-	int		j;
+	int		x;
+	int		x_cpy;
 
-	j = 0;
-	while (s1[j])
-		j++;
-	cpy = (char **)malloc(sizeof(char *) * (j + 1));
-	if (!cpy)
-		exit_clean(data, EXIT_FAILURE);
-	j = 0;
-	while (s1[j])
+	cpy = malloc_ptr(data, data->pars->skip_endl);
+	x = data->pars->skip_endl;
+	x_cpy = 0;
+	while (s1[x])
 	{
-		cpy[j] = ft_strdup(s1[j]);
-		if (!cpy[j])
+		cpy[x_cpy] = ft_strdup(s1[x]);
+		if (!cpy[x_cpy])
 		{
 			freetab(cpy);
 			exit_clean(data, EXIT_FAILURE);
 		}
-		j++;
+		x_cpy++;
+		x++;
 	}
-	cpy[j] = NULL;
+	cpy[x_cpy] = NULL;
 	return (cpy);
 }
 

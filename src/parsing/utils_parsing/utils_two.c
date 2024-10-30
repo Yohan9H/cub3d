@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:31:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/28 11:16:30 by apernot          ###   ########.fr       */
+/*   Updated: 2024/10/30 13:33:27 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	del_pos_player(t_data *data, char **tab)
 		while (tab[x][y])
 		{
 			if (is_player(data, tab[x][y]) == 1)
-			{
 				tab[x][y] = '0';
-			}
 			y++;
 		}
 		x++;
@@ -40,7 +38,7 @@ int	check_all_found(t_data *data, t_pars *pars)
 	else if ((pars->c + pars->f + pars->no + pars->we + pars->so + pars->ea)
 		> 6)
 	{
-		ft_fprintf("Error : too many texture in your file");
+		ft_fprintf("Error\ntoo many texture in your file");
 		exit_clean(data, EXIT_FAILURE);
 		return (-1);
 	}

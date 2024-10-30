@@ -6,7 +6,7 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/29 16:00:11 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/10/30 14:52:08 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC = src/main.c \
 	src/parsing/check_file_two.c \
 	src/parsing/create_map.c \
 	src/parsing/check_map.c \
+	src/parsing/skip_no_map.c \
 	src/parsing/utils_parsing/utils.c \
 	src/parsing/utils_parsing/utils_two.c \
 	src/parsing/utils_parsing/utils_three.c \
