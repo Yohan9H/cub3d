@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/30 14:47:36 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:55:17 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ void	skip_virgule_space(char *str, int *i);
 void	check_if_char_no_accept(t_data *data, char **map);
 
 char	**malloc_ptr(t_data *data, int skip_endl);
+
+void	print_error(t_data *data);
 
 #endif

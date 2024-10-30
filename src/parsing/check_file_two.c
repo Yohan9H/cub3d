@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:03:56 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/30 14:33:00 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:51:51 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	verif_id_colors(t_data *data, char *id, char *str)
 		verif_str_colors(data, str);
 		data->pars->c = 1;
 	}
+	else
+		print_error(data);
 }
 
 void	verif_digit(t_data *data, char c)

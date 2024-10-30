@@ -6,11 +6,17 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:56:16 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/30 14:51:57 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:56:39 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	print_error(t_data *data)
+{
+	ft_fprintf("Error\nbad ID\n");
+	exit_clean(data, EXIT_FAILURE);
+}
 
 char	**malloc_ptr(t_data *data, int skip_endl)
 {
