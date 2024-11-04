@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:27:33 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/28 11:59:39 by apernot          ###   ########.fr       */
+/*   Updated: 2024/11/04 10:38:33 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,14 @@ typedef struct s_img
 	int		l_by;
 	int		p_bi;
 	int		endian;
-	int		texX;
-	int		texY;
+	int		texx;
+	int		texy;
 	int		offset;
 	double	step;
 	int		t_w;
 	int		t_h;
-	double	texPos;
+	double	texpos;
 }			t_img;
-
 
 typedef struct s_player
 {
@@ -76,7 +75,7 @@ typedef struct s_ray
 	int			side;
 	int			l_hei;
 	int			drst;
-	int 		dred;
+	int			dred;
 	double		wallx;
 	int			f;
 	double		fwallx;
@@ -93,10 +92,10 @@ typedef struct s_game
 
 typedef struct s_color
 {
-    int r;
-    int g;
-    int b;
-} 		t_color;
+	int	r;
+	int	g;
+	int	b;
+}		t_color;
 
 void			raycasting(t_data *data, t_player *player);
 int				handle_keys(t_data *data);

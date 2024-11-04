@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:20:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/28 11:29:38 by apernot          ###   ########.fr       */
+/*   Updated: 2024/11/04 10:37:04 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	make_wall(t_img *tex, t_player *player, t_ray *ray)
 	ray->f = (int)ray->wallx;
 	ray->fwallx = (double)ray->f;
 	ray->wallx -= ray->fwallx;
-	tex->texX = (int)(ray->wallx * (double)tex->t_w);
+	tex->texx = (int)(ray->wallx * (double)tex->t_w);
 	if ((ray->side == 0 && ray->dir.x > 0) || \
 		(ray->side == 1 && ray->dir.y < 0))
-		tex->texX = tex->t_w - tex->texX - 1;
+		tex->texx = tex->t_w - tex->texx - 1;
 	tex->step = 1.0 * tex->t_h / ray->l_hei;
 }
 

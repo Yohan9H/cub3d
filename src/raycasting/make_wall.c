@@ -6,7 +6,7 @@
 /*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:48:14 by apernot           #+#    #+#             */
-/*   Updated: 2024/10/28 11:29:57 by apernot          ###   ########.fr       */
+/*   Updated: 2024/11/04 10:37:13 by apernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	fill_wall(t_data *data, t_img *tex, int i, double texPos)
 	{	
 		if (j <= data->game->ray->dred && j >= data->game->ray->drst)
 		{
-			tex->texY = (int)texPos & (tex->t_h - 1);
+			tex->texy = (int)texPos & (tex->t_h - 1);
 			texPos += tex->step;
-			offset = (tex->texY * tex->l_by + tex->texX * (tex->p_bi / 8));
+			offset = (tex->texy * tex->l_by + tex->texx * (tex->p_bi / 8));
 			color = *(__uint32_t *)(tex->addr + offset);
 			if (data->game->ray->side == 1)
 				color = (color >> 1) & 0x7F7F7F;
