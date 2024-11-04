@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:42:24 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/30 14:24:29 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:26:35 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	load_textures(t_data *data, t_game *game)
 		tex->img = mlx_xpm_file_to_image(data->mlx, tex->path, &width, &height);
 		if (!tex->img)
 		{
-			fprintf(stderr, "Erreur texture %s\n", game->textures[i]->path);
+			fprintf(stderr, "Erreur\n%s is not good\n", game->textures[i]->path);
 			exit_clean(data, EXIT_FAILURE);
 		}
 		tex->addr = mlx_get_data_addr(tex->img, \

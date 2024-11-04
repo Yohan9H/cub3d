@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apernot <apernot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:03:38 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/28 11:52:44 by apernot          ###   ########.fr       */
+/*   Updated: 2024/11/04 10:32:10 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
 
 typedef struct s_game	t_game;
 
-typedef	struct s_state
+typedef struct s_state
 {
-	int front;
+	int	front;
 	int	back;
-	int right;
-	int left;
+	int	right;
+	int	left;
 	int	rot_l;
-	int rot_r;
+	int	rot_r;
 	int	esc;
 }		t_state;
 
