@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/04 10:34:36 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:57:01 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_pars
 	int			ea;
 	int			f;
 	int			c;
-	int			skip_endl;
 	int			end_map;
 }	t_pars;
 
@@ -79,8 +78,6 @@ void	endl_become_zero_in_endmap(t_data *data, char **map);
 
 void	verif_endl_in_map(t_data *data, char **map);
 
-void	skip_endl(t_data *data, char **map);
-
 int		is_player(t_data *data, char c);
 
 int		check_char(char c);
@@ -96,8 +93,6 @@ int		skip_id(t_data *data, char *line);
 void	skip_virgule_space(char *str, int *i);
 
 void	check_if_char_no_accept(t_data *data, char **map);
-
-char	**malloc_ptr(t_data *data, int skip_endl);
 
 void	print_error(t_data *data);
 

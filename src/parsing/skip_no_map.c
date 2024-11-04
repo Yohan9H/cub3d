@@ -6,29 +6,11 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 10:36:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/30 14:36:33 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:54:51 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	skip_endl(t_data *data, char **map)
-{
-	int		x;
-
-	x = 0;
-	while (map[x])
-	{
-		if (map[x][0] == '\n')
-			x++;
-		else
-		{
-			data->pars->skip_endl = x;
-			break ;
-		}
-		data->pars->skip_endl = x;
-	}
-}
 
 void	endl_become_zero_in_endmap(t_data *data, char **map)
 {
@@ -37,13 +19,13 @@ void	endl_become_zero_in_endmap(t_data *data, char **map)
 	end = 0;
 	while (map[end])
 		end++;
-	end--;
-	while (map[end] && end > data->pars->skip_endl)
+	end -= 2;
+	while (map[end])
 	{
 		if (map[end][0] == '\n')
 			map[end][0] = '\0';
 		else
-			return ;
+			break ;
 		end--;
 	}
 	data->pars->end_map = end;

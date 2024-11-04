@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/30 14:19:45 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:44:41 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	verif_good_map(t_data *data)
 	char	**cpy_map;
 
 	reset_value_map(data);
-	skip_endl(data, data->game->map);
 	endl_become_zero_in_endmap(data, data->game->map);
 	verif_player(data, data->game->map);
 	del_pos_player(data, data->game->map);

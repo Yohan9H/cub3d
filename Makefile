@@ -6,14 +6,14 @@
 #    By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 13:24:18 by yohurteb          #+#    #+#              #
-#    Updated: 2024/10/30 14:52:08 by yohurteb         ###   ########.fr        #
+#    Updated: 2024/11/04 13:58:14 by yohurteb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = cub3D
 
-CC = cc
+CC = cc -g
 
 INCLUDES = include
 
