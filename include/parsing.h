@@ -6,16 +6,16 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/10/30 17:55:17 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:34:36 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-#include "cub3d.h"
+# include "cub3d.h"
 
-typedef struct s_data t_data;
-typedef struct s_map t_map;
+typedef struct s_data	t_data;
+typedef struct s_map	t_map;
 
 typedef struct s_map
 {
@@ -23,19 +23,18 @@ typedef struct s_map
 	t_map	*next;
 }	t_map;
 
-typedef struct 	s_point
+typedef struct s_point
 {
-	int 		x;
-	int 		y;
+	int	x;
+	int	y;
 }	t_point;
 
 typedef struct s_rvb
 {
 	int	r;
 	int	v;
-	int b;
-} t_rvb;
-
+	int	b;
+}	t_rvb;
 
 typedef struct s_pars
 {
@@ -76,7 +75,7 @@ void	parsing(t_data *data, int ac, char **av);
 
 void	check_map(t_data *data);
 
-void 	endl_become_zero_in_endmap(t_data *data, char ** map);
+void	endl_become_zero_in_endmap(t_data *data, char **map);
 
 void	verif_endl_in_map(t_data *data, char **map);
 
@@ -90,7 +89,7 @@ void	del_pos_player(t_data *data, char **tab);
 
 void	reset_value_map(t_data *data);
 
-void	check_if_player(t_data *data, char c ,int y, int x);
+void	check_if_player(t_data *data, char c, int y, int x);
 
 int		skip_id(t_data *data, char *line);
 
