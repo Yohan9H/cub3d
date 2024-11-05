@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:56:16 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/04 17:32:36 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:06:26 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ void	check_if_char_no_accept(t_data *data, char **map)
 				ft_fprintf("Error\nchar no accepted in your map\n");
 				exit_clean(data, EXIT_FAILURE);
 			}
+			y++;
+		}
+		x++;
+	}
+}
+
+void	all_space_become_one(t_data *data, char **map)
+{
+	int		x;
+	int		y;
+
+	x = 0;
+	while (map[x])
+	{
+		y = 0;
+		while (y < data->pars->size_tab->y)
+		{
+			if (ft_isspace(map[x][y]) == 1 || map[x][y] == '\0')
+				map[x][y] = '1';
 			y++;
 		}
 		x++;

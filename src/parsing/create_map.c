@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/04 17:55:13 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:02:06 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	check_map(t_data *data)
 	create_linked_list_map(data);
 	create_double_array(data);
 	verif_good_map(data);
+	all_space_become_one(data, data->game->map);
 }
