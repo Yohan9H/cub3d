@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:50:35 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/05 12:06:11 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:26:56 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,4 @@ void	parsing(t_data *data, int ac, char **av)
 	check_args(data, ac, av[1]);
 	check_file(data);
 	check_map(data);
-	for (int i = 0; data->game->map[i]; i++)
-		ft_fprintf("%s\n", data->game->map[i]);
 }
