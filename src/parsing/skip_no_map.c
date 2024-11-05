@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 10:36:57 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/05 14:07:43 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:39:59 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	endl_become_zero_in_endmap(t_data *data, char **map)
 	}
 	while (map[end])
 	{
-		if (map[end][0] == '\n')
+		if (map[end][0] == '\n' || ft_isspace(map[end][0]) == 1)
 			map[end][0] = '\0';
 		else
 			break ;
