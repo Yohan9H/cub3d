@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:46:36 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/05 12:02:15 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:08:25 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ typedef struct s_pars
 	int			c;
 	int			end_map;
 }	t_pars;
-
-char	**ft_strdup_double_array(t_data *data, char **s1);
 
 void	verif_good_map(t_data *data);
 

@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:34:19 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/04 17:32:24 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:08:18 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,6 @@ int	found_map(char *line)
 	if (line[0] != '\n')
 		return (1);
 	return (0);
-}
-
-char	**ft_strdup_double_array(t_data *data, char **s1)
-{
-	char	**cpy;
-	int		j;
-
-	j = 0;
-	while (s1[j])
-		j++;
-	cpy = (char **)malloc(sizeof(char *) * (j + 1));
-	if (!cpy)
-		exit_clean(data, EXIT_FAILURE);
-	j = 0;
-	while (s1[j])
-	{
-		cpy[j] = ft_strdup(s1[j]);
-		if (!cpy[j])
-		{
-			freetab(cpy);
-			exit_clean(data, EXIT_FAILURE);
-		}
-		j++;
-	}
-	cpy[j] = NULL;
-	return (cpy);
 }
 
 int	is_player(t_data *data, char c)

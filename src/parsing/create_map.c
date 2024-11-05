@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/05 12:02:06 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:24:56 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	take_lenght_max(t_data *data, t_map *lst)
 
 void	init_create(t_data *data, size_t *size, t_map **lst)
 {
-	while (*lst && (*lst)->line[0] == '\n')
-	*lst = (*lst)->next;
+	while (*lst && (*lst)->line && (*lst)->line[0] == '\n')
+		*lst = (*lst)->next;
 	*size = ft_lstsize(*lst);
 	data->pars->size_tab->x = *size - 1;
 	data->game->map = (char **)malloc(sizeof(char *) * (*size + 1));
