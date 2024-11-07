@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/07 11:43:33 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:17:51 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void	check_map(t_data *data)
 		ft_fprintf("Error\nmiss map\n");
 		exit_clean(data, EXIT_FAILURE);
 	}
-	all_space_become_one(data, data->game->map);
 	verif_good_map(data);
+	all_space_become_one(data, data->game->map);
 }
