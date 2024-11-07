@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/05 12:24:56 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:43:33 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ void	init_create(t_data *data, size_t *size, t_map **lst)
 		*lst = (*lst)->next;
 	*size = ft_lstsize(*lst);
 	data->pars->size_tab->x = *size - 1;
-	data->game->map = (char **)malloc(sizeof(char *) * (*size + 1));
-	if (!data->game->map)
-		exit_clean(data, EXIT_FAILURE);
+	if (data->pars->size_tab->x > 0)
+	{
+		data->game->map = (char **)malloc(sizeof(char *) * (*size + 1));
+		if (!data->game->map)
+			exit_clean(data, EXIT_FAILURE);
+	}
 }
 
-void	create_double_array(t_data *data)
+int		create_double_array(t_data *data)
 {
 	t_map	*lst;
 	size_t	size;
@@ -57,8 +60,11 @@ void	create_double_array(t_data *data)
 		i++;
 		lst = lst->next;
 	}
+	if (i == 0)
+		return (EXIT_FAILURE);
 	data->game->map[i++] = ft_calloc(data->pars->size_tab->y + 1, sizeof(char));
 	data->game->map[i] = NULL;
+	return (EXIT_SUCCESS);
 }
 
 void	create_linked_list_map(t_data *data)
@@ -79,7 +85,11 @@ void	create_linked_list_map(t_data *data)
 void	check_map(t_data *data)
 {
 	create_linked_list_map(data);
-	create_double_array(data);
-	verif_good_map(data);
+	if (create_double_array(data) == EXIT_FAILURE)
+	{
+		ft_fprintf("Error\nmiss map\n");
+		exit_clean(data, EXIT_FAILURE);
+	}
 	all_space_become_one(data, data->game->map);
+	verif_good_map(data);
 }
