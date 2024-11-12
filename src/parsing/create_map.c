@@ -6,7 +6,7 @@
 /*   By: yohurteb <yohurteb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:41:22 by yohurteb          #+#    #+#             */
-/*   Updated: 2024/11/07 12:17:51 by yohurteb         ###   ########.fr       */
+/*   Updated: 2024/11/12 10:59:43 by yohurteb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_create(t_data *data, size_t *size, t_map **lst)
 	}
 }
 
-int		create_double_array(t_data *data)
+int	create_double_array(t_data *data)
 {
 	t_map	*lst;
 	size_t	size;
